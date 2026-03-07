@@ -1,6 +1,7 @@
 ﻿
 var EditorCore = (function () {
     var cfg, currentKey, originalLines, originalName, allowBrokenParty;
+    var lastFullText = "";
 
 
     function init(chapterKey) {
@@ -34,14 +35,14 @@ var EditorCore = (function () {
         ["dragover", "dragenter"].forEach(function (evt) {
             label.addEventListener(evt, function (e) {
                 e.preventDefault();
-                textDiv.textContent = "Drop to load";
+                textDiv.textContent = "Перетащите для загрузки";
             });
         });
 
         ["dragleave", "dragend", "drop"].forEach(function (evt) {
             label.addEventListener(evt, function (e) {
                 e.preventDefault();
-                textDiv.textContent = originalName || "Click or drag your save here";
+                textDiv.textContent = originalName || "Нажмите или перетащите сюда файл сохранения";
             });
         });
 
@@ -57,7 +58,7 @@ var EditorCore = (function () {
     function onLoadClick() {
         var f = document.getElementById("saveFile").files[0];
         if (!f) {
-            alert("Please select your save file first.");
+            alert("Пожалуйста, сначала выберите файл сохранения.");
             return;
         }
         var reader = new FileReader();
@@ -65,8 +66,8 @@ var EditorCore = (function () {
             var fullText = ev.target.result.replace(/\r?\n/g, "\r\n");
             originalLines = fullText.split("\r\n");
             if (originalLines.length !== cfg.length) {
-                alert("Invalid save: expected " + cfg.length +
-                    " lines, got " + originalLines.length);
+                alert("Неверное сохранение: ожидалось " + cfg.length +
+                    " строк, получено " + originalLines.length);
                 return;
             }
             openEditor(fullText);
@@ -75,6 +76,7 @@ var EditorCore = (function () {
     }
 
     function openEditor(fullText) {
+        lastFullText = fullText;
         document.getElementById("uploadView").style.display = "none";
         document.getElementById("editorView").style.display = "block";
 
@@ -87,8 +89,20 @@ var EditorCore = (function () {
 
         var tabsDiv = document.getElementById("page_tabs"),
             html = "";
+        var tabDict = { 
+            "main": getUITranslation('tab_labels', 'main', 'Основное'), 
+            "party": getUITranslation('tab_labels', 'party', 'Команда'), 
+            "items": getUITranslation('tab_labels', 'items', 'Предметы'), 
+            "creations": getUITranslation('tab_labels', 'creations', 'Творения'), 
+            "hometown": getUITranslation('tab_labels', 'hometown', 'Город'), 
+            "other": getUITranslation('tab_labels', 'other', 'Прочее'), 
+            "recruits": getUITranslation('tab_labels', 'recruits', 'Новобранцы'), 
+            "chapter1": getUITranslation('tab_labels', 'chapter1', 'Глава 1'), 
+            "chapter2": getUITranslation('tab_labels', 'chapter2', 'Глава 2'), 
+            "all": getUITranslation('tab_labels', 'all', 'Всё') 
+        };
         cfg.tabs.forEach(function (t) {
-            var label = t.charAt(0).toUpperCase() + t.slice(1);
+            var label = tabDict[t] || (t.charAt(0).toUpperCase() + t.slice(1));
             html += '<div class="tab_click" tab="tab_' + t + '">' + label + "</div>";
         });
         tabsDiv.innerHTML = html;
@@ -122,7 +136,51 @@ var EditorCore = (function () {
     }
 
     function wireAfterRender() {
+        
         var saveDataDiv = document.getElementById("saveData");
+
+        // --- ADDED FOR HIGHLIGHTING CHANGED DATA ---
+        function syncChangedState(el) {
+            var isChanged = false;
+            if (el.type === "checkbox") {
+                isChanged = (String(el.checked) !== el.getAttribute("data-original"));
+            } else {
+                isChanged = (el.value !== el.getAttribute("data-original"));
+            }
+
+            var wrapper = el.closest('.lineItem') || el.parentElement;
+            el.classList.toggle("val-changed", isChanged);
+            if (wrapper) wrapper.classList.toggle("val-changed", isChanged);
+        }
+
+        function syncCheckboxSelectedState(el) {
+            if (el.type !== "checkbox") return;
+            var wrapper = el.closest('.lineItem') || el.parentElement;
+            el.classList.toggle("is-checked", el.checked);
+            if (wrapper) wrapper.classList.toggle("is-checked", el.checked);
+        }
+
+        saveDataDiv.querySelectorAll("select, input").forEach(function(el) {
+            if (el.type === "checkbox") {
+                el.setAttribute("data-original", el.checked);
+                syncCheckboxSelectedState(el);
+            } else {
+                el.setAttribute("data-original", el.value);
+            }
+            syncChangedState(el);
+        });
+
+        function onFieldUpdated(e) {
+            var el = e.target;
+            if (el.tagName !== "SELECT" && el.tagName !== "INPUT") return;
+            syncCheckboxSelectedState(el);
+            syncChangedState(el);
+        }
+
+        saveDataDiv.addEventListener("change", onFieldUpdated);
+        saveDataDiv.addEventListener("input", onFieldUpdated);
+        // --- END OF ADDED CODE ---
+
 
         saveDataDiv.querySelectorAll("select").forEach(function (sel) {
             sel.addEventListener("change", function () {
@@ -153,6 +211,9 @@ var EditorCore = (function () {
                         +document.querySelector('select[name="_10"]').value
                     );
                 }
+                if (this.name === "show_all_rooms") {
+                    updateRoomSelect(this.checked);
+                }
                 var gkeys = cfg.gonerIndices.map(function (i) { return "_" + i; });
                 if (gkeys.indexOf(this.name) >= 0) {
                     updateGoner(cfg.gonerIndices[0],
@@ -168,32 +229,36 @@ var EditorCore = (function () {
                     var w = this.parentElement.querySelector(".spell_wrapper");
                     if (w.style.display === "flex") {
                         w.style.display = "none";
-                        this.innerHTML = "<center>v Spells v</center>";
+                        this.innerHTML = "<center>v Заклинания v</center>";
                     } else {
                         w.style.display = "flex";
-                        this.innerHTML = "<center>^ Spells ^</center>";
+                        this.innerHTML = "<center>^ Заклинания ^</center>";
                     }
                 });
             });
 
         var parts = ["head", "body", "feet"];
-        parts.forEach(function (part, i) {
-            $("#thrash_" + part + "_c_slider").slider({
-                min: 0, max: 31,
-                value: +document.querySelector('input[name="_'
-                    + cfg.thrash[i] + '"]').value,
-                slide: function (e, ui) {
-                    document.querySelector('input[name="_'
-                        + cfg.thrash[i] + '"]').value = ui.value;
-                    updateThrasher();
-                }
+        try {
+            parts.forEach(function (part, i) {
+                $("#thrash_" + part + "_c_slider").slider({
+                    min: 0, max: 31,
+                    value: +document.querySelector('input[name="_'
+                        + cfg.thrash[i] + '"]').value,
+                    slide: function (e, ui) {
+                        document.querySelector('input[name="_'
+                            + cfg.thrash[i] + '"]').value = ui.value;
+                        updateThrasher();
+                    }
+                });
             });
-        });
+        } catch(e) { console.warn("Slider init error:", e); }
 
-        updateThrasher();
-        updateGoner(cfg.gonerIndices[0],
-            cfg.gonerIndices[1],
-            cfg.gonerIndices[2]);
+        try { updateThrasher(); } catch(e) { console.warn("Thrasher error:", e); }
+        try {
+            updateGoner(cfg.gonerIndices[0],
+                cfg.gonerIndices[1],
+                cfg.gonerIndices[2]);
+        } catch(e) { console.warn("Goner error:", e); }
         SetValidParty(
             +document.querySelector('select[name="_8"]').value,
             +document.querySelector('select[name="_9"]').value,
@@ -224,8 +289,43 @@ var EditorCore = (function () {
                 });
 
                 var out = originalLines.join("\r\n");
-                saveAs(new Blob([out], { type: "text/plain" }), originalName);
+                saveAs(new Blob([out], { type: "application/octet-stream" }), originalName);
             });
+    }
+
+    function updateRoomSelect(showAll) {
+        var roomSelectName = "_10317";
+        if (currentKey.indexOf("2") === currentKey.length - 1 || 
+            currentKey.indexOf("3") === currentKey.length - 1 || 
+            currentKey.indexOf("4") === currentKey.length - 1) {
+            roomSelectName = "_3054";
+        }
+
+        var select = document.querySelector('select[name="' + roomSelectName + '"]');
+        if (!select) return;
+
+        var currentValue = select.value;
+        var roomList = showAll ? window.rooms_all : (roomSelectName === "_10317" ? (window.roomsCh1 || window.rooms) : window.rooms);
+
+        var selected_option = null;
+        for (var i = 0; i < roomList.length; i++) {
+            if (roomList[i].value == currentValue) {
+                selected_option = roomList[i];
+                break;
+            }
+        }
+
+        select.innerHTML = '';
+
+        for (var i = 0; i < roomList.length; i++) {
+            var option = document.createElement('option');
+            option.value = roomList[i].value;
+            option.textContent = roomList[i].text;
+            if (roomList[i].value == currentValue) {
+                option.selected = true;
+            }
+            select.appendChild(option);
+        }
     }
 
     function SetValidParty(a, b, c) {
@@ -291,7 +391,39 @@ var EditorCore = (function () {
         document.getElementById("thrash_feet_c").style.backgroundColor = `rgb(${cols[2].join(",")})`;
     }
 
+    function refreshEditor() {
+        if (!lastFullText) return;
+        // Save current form values
+        var saveDataDiv = document.getElementById("saveData");
+        var savedValues = {};
+        if (saveDataDiv) {
+            saveDataDiv.querySelectorAll("select,input").forEach(function (el) {
+                if (!el.name) return;
+                if (el.type === "checkbox") {
+                    savedValues[el.name] = el.checked;
+                } else {
+                    savedValues[el.name] = el.value;
+                }
+            });
+        }
+        // Re-render the editor
+        openEditor(lastFullText);
+        // Restore saved values
+        saveDataDiv = document.getElementById("saveData");
+        if (saveDataDiv) {
+            saveDataDiv.querySelectorAll("select,input").forEach(function (el) {
+                if (!el.name || !(el.name in savedValues)) return;
+                if (el.type === "checkbox") {
+                    el.checked = savedValues[el.name];
+                } else {
+                    el.value = savedValues[el.name];
+                }
+            });
+        }
+    }
+
     return {
-    init: init
+        init: init,
+        refreshEditor: refreshEditor
     };
 })();

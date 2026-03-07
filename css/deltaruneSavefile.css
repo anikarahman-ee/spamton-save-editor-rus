@@ -12,7 +12,7 @@ body{
   padding:12px 0 0 12px;
   margin:0;
   vertical-align: top;
-  font-family: DeterminationMonoWebRegular;
+  font-family: 'DeterminationCyrillic', DeterminationMonoWebRegular;
   min-width:500px;
 }
 
@@ -485,7 +485,7 @@ select, input{
   padding:6px;
   font-size:1em;
 
-  font-family: DeterminationMonoWebRegular;
+  font-family: 'DeterminationCyrillic', DeterminationMonoWebRegular;
 }
 
 
@@ -538,4 +538,86 @@ a, a:visited, a:hover, a:active{
         display: block;
         opacity: 1;
     }
+}
+
+
+/* Custom Checkboxes */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #fff;
+    background-color: #000;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 8px;
+    position: relative;
+    top: -2px;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #00A2E8; /* Changed to match screen default nice blue / white tick if preferred, wait, screenshot has blue check! Let's make it #0078d7 like Windows or simple #fff */
+    border-color: #00A2E8;
+}
+
+input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+/* Changed data highlights */
+.val-changed, span.val-changed {
+    color: #FFFF00 !important;
+}
+
+input.val-changed, select.val-changed {
+    color: #FFFF00 !important;
+    border-color: #FFFF00 !important;
+}
+
+input[type="checkbox"].val-changed {
+    border-color: #FFFF00 !important;
+}
+
+input[type="checkbox"].val-changed:checked {
+    background-color: #FFFF00 !important;
+}
+
+input[type="checkbox"].val-changed:checked::after {
+    border-color: #000 !important;
+}
+
+/* Recruits grey color fix */
+label.lineItem input[type="checkbox"]:not(:checked) ~ span.selectTitle {
+    color: #777777;
+}
+
+label.lineItem input[type="checkbox"]:checked ~ span.selectTitle {
+    color: #ffffff;
+}
+
+label.lineItem.is-checked input[type="checkbox"] ~ span.selectTitle {
+  color: #ffffff;
+}
+
+label.lineItem.val-changed input[type="checkbox"]:not(:checked) ~ span.selectTitle,
+label.lineItem.val-changed input[type="checkbox"]:checked ~ span.selectTitle {
+    color: #FFFF00 !important;
+}
+
+.lineItem.val-changed .selectTitle,
+.lineItem.val-changed input[type="text"],
+.lineItem.val-changed input[type="number"],
+.lineItem.val-changed select {
+  color: #FFFF00 !important;
+  border-color: #FFFF00 !important;
 }

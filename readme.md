@@ -6,7 +6,7 @@ A standalone, client-side HTML and JavaScript port of the Deltarune Save Editor
 
 ## How to Use
 
-1. Visit the URL at https://saveeditor.spamton.com/
+1. Откройте HTML-файл нужной главы в браузере.
 
 ---
 

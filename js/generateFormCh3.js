@@ -8,16 +8,18 @@ function generateForm(data){
   formString += `<div id='tab_main' class='tab'>`;
 
   formString += "<div id='main_box'>";
-  formString += "Main<br>";
-  formString += generateTextInput(`_1`,"Filename",data[`_1`],[{length:10}],'filename');
+  formString += "Основное<br>";
+  formString += generateTextInput(`_1`,"Имя файла",data[`_1`],[{length:10}],'filename');
   formString += generateNumberInput(`_11`,"D$",data[`_11`],{min:0,max:99999},'flag');
   formString += generateNumberInput(`_1597`,"PTs",data[`_1597`],{min:0,max:99999},'flag');
-  formString += generateSelectCh2(`_3054`,"Room ID",data[`_3054`],rooms,'room_id');
-  formString += `<label class='lineItem'><input type="checkbox" name="show_all_rooms" noinput="true"> Show all rooms</label><br>`
+  formString += generateSelectCh2(`_3054`,"Комната",data[`_3054`],rooms,'room_id');
+  formString += `<label class='lineItem'><input type="checkbox" name="show_all_rooms" noinput="true">Показать все комнаты</label><br>`
 
-  formString += generateNumberInput(`_3053`,"Story Flag",data[`_3053`],{min:0,max:211},'flag');
+    formString += generateSelectCh2(`_1726`,"Раунд 1 Ранг",data[`_1726`],ch3_ranks,'rank');
+  formString += generateSelectCh2(`_1727`,"Раунд 2 Ранг",data[`_1727`],ch3_ranks,'rank');
+  formString += generateNumberInput(`_3053`,"Флаг сюжета",data[`_3053`],{min:0,max:211},'flag');
 
-  formString += generateTextboxInput(`_16`,`Dark World Flag`,data[`_16`],{min:0,max:1},``);
+  formString += generateTextboxInput(`_16`,`Флаг Тёмного мира`,data[`_16`],{min:0,max:1},``);
 
 
   formString += "</div>";
@@ -31,7 +33,7 @@ function generateForm(data){
 
   //Lightworld Kris stats
   formString += "<div id='lightworld_box'>";
-  formString += `<img src='images/KrisLight.png'> Lightworld "Kris"<br>`;
+  formString += `<img src='images/KrisLight.png'>Светлый мир "Крис"<br>`;
   formString += generateNumberInput(`_530`,"$",data[`_530`],{min:0,max:99999},'flag');
   formString += "<br>";
   formString += generateNumberInput(`_531`,"HP",data[`_531`],{min:-99999,max:99999},'character_hp');
@@ -52,9 +54,9 @@ function generateForm(data){
   formString += `</div>`
 
 
-  formString += generateSelectCh2(`_526`,"WEAPON: ",data[`_526`],lightworld_weapons,'grey_disable');
+  formString += generateSelectCh2(`_526`,"ОРУЖИЕ: ",data[`_526`],lightworld_weapons,'grey_disable');
   formString += "<br>";
-  formString += generateSelectCh2(`_527`,"ARMOR: ",data[`_527`],lightworld_armor,'grey_disable');
+  formString += generateSelectCh2(`_527`,"БРОНЯ: ",data[`_527`],lightworld_armor,'grey_disable');
 
   formString += "</div>";
 
@@ -70,19 +72,19 @@ function generateForm(data){
 
     
     formString += "<div id='party_box'>";
-    formString += `Party (Mostly Unused)<br>`;
+    formString += `Команда (не используется)<br>`;
     formString += `<div id='party_display'></div>`
 
 
 
-    formString += generateSelectCh2(`_8`,"Member 1: ",data[`_8`],party_members,'party_member_1 grey_disable');
+    formString += generateSelectCh2(`_8`,"Участник 1: ",data[`_8`],party_members,'party_member_1 grey_disable');
     formString += "<br>";
-    formString += generateSelectCh2(`_9`,"Member 2: ",data[`_9`],party_members,'party_member_2 grey_disable');
+    formString += generateSelectCh2(`_9`,"Участник 2: ",data[`_9`],party_members,'party_member_2 grey_disable');
     formString += "<br>";
-    formString += generateSelectCh2(`_10`,"Member 3: ",data[`_10`],party_members,'party_member_3 grey_disable');
+    formString += generateSelectCh2(`_10`,"Участник 3: ",data[`_10`],party_members,'party_member_3 grey_disable');
     formString += "<br>";
 
-    formString += `<label class='lineItem'><input type="checkbox" name="allow_broken_party" noinput="true"> Allow broken party</label><br>`
+    formString += `<label class='lineItem'><input type="checkbox" name="allow_broken_party" noinput="true">Разрешить неверную команду</label><br>`
     formString += "</div>";
 
 
@@ -117,7 +119,7 @@ function generateForm(data){
     formString += "<br>";
     formString += generateSelectCh2(`_87`,"<img src='images/Armor2.png'>",data[`_87`],armor,'grey_disable');
     formString += "<br><hr>";
-    formString += "<div class='spells_title'><center>v  Spells  v</center></div>";
+    formString += "<div class='spells_title'><center>v Заклинания v</center></div>";
 
     formString += "<div class='spell_wrapper'>"
     for(var i = 0; i < 6; i++){
@@ -155,7 +157,7 @@ function generateForm(data){
     formString += "<br>";
     formString += generateSelectCh2(`_149`,"<img src='images/Armor2.png'>",data[`_149`],armor,'grey_disable');
     formString += "<br><hr>";
-    formString += "<div class='spells_title'><center>v  Spells  v</center></div>";
+    formString += "<div class='spells_title'><center>v Заклинания v</center></div>";
 
     formString += "<div class='spell_wrapper'>"
     for(var i = 0; i < 6; i++){
@@ -192,7 +194,7 @@ function generateForm(data){
     formString += "<br>";
     formString += generateSelectCh2(`_211`,"<img src='images/Armor2.png'>",data[`_211`],armor,'grey_disable');
     formString += "<br><hr>";
-    formString += "<div class='spells_title'><center>v  Spells  v</center></div>";
+    formString += "<div class='spells_title'><center>v Заклинания v</center></div>";
 
     formString += "<div class='spell_wrapper'>"
     for(var i = 0; i < 6; i++){
@@ -230,7 +232,7 @@ function generateForm(data){
     formString += "<br>";
     formString += generateSelectCh2(`_273`,"<img src='images/Armor2.png'>",data[`_273`],armor,'grey_disable');
     formString += "<br><hr>";
-    formString += "<div class='spells_title'><center>v  Spells  v</center></div>";
+    formString += "<div class='spells_title'><center>v Заклинания v</center></div>";
 
     formString += "<div class='spell_wrapper'>"
     for(var i = 0; i < 6; i++){
@@ -252,7 +254,7 @@ function generateForm(data){
 
     //Items
     formString += "<div class='item_box'>";
-    formString += "Items<br>";
+    formString += "Предметы<br>";
     formString += "<div id='item_wrapper'>";
 
     for(var i = 0; i < 12; i++){
@@ -264,7 +266,7 @@ function generateForm(data){
 
     //Key Items
     formString += "<div class='item_box'>";
-    formString += "Key Items<br>";
+    formString += "Ключ. предметы<br>";
     formString += "<div id='item_wrapper'>";
     for(var i = 0; i < 12; i++){
       formString += generateSelectCh2(`_${(i*2)+331}`,`Slot ${i+1}<br>`,data[`_${(i*2)+331}`],key_items,'item_slot grey_disable');
@@ -278,7 +280,7 @@ function generateForm(data){
 
     //Weapon Slots
     formString += "<div class='item_box'>";
-    formString += "Weapons<br>";
+    formString += "Оружие<br>";
     formString += "<div id='item_wrapper'>";
     for(var i = 0; i < 48; i++){
       formString += generateSelectCh2(`_${(i*2)+356}`,`Slot ${i+1}<br>`,data[`_${(i*2)+356}`],weapons,'item_slot grey_disable');
@@ -289,7 +291,7 @@ function generateForm(data){
 
     //Armor Slots
     formString += "<div class='item_box'>";
-    formString += "Armor<br>";
+    formString += "Броня<br>";
     formString += "<div id='item_wrapper'>";
     for(var i = 0; i < 48; i++){
       formString += generateSelectCh2(`_${(i*2)+357}`,`Slot ${i+1}<br>`,data[`_${(i*2)+357}`],armor,'item_slot grey_disable');
@@ -302,10 +304,10 @@ function generateForm(data){
 
     //Item Storage
     formString += "<div class='item_box'>";
-    formString += "Item Storage<br>";
+    formString += "Хранилище предметов<br>";
     formString += "<div id='item_wrapper'>";
     for(var i = 0; i < 24; i++){
-      formString += generateSelectCh2(`_${i+452}`,`Slot ${i+1}<br>`,data[`_${i+452}`],items,'item_slot grey_disable');
+      formString += generateSelectCh2(`_${i+452}`,`Слот ${i+1}<br>`,data[`_${i+452}`],items,'item_slot grey_disable');
     }
     formString += "</div>";
     formString += "</div>";
@@ -313,10 +315,10 @@ function generateForm(data){
 
     //Lightworld Items
     formString += "<div class='item_box'>";
-    formString += "Lightworld Items<br>";
+    formString += "Светлый мир - Предметы<br>";
     formString += "<div id='item_wrapper'>";
     for(var i = 0; i < 8; i++){
-      formString += generateSelectCh2(`_${(i*2)+537}`,`Slot ${i+1}<br>`,data[`_${(i*2)+537}`],lightworld_items,'item_slot grey_disable');
+      formString += generateSelectCh2(`_${(i*2)+537}`,`Слот ${i+1}<br>`,data[`_${(i*2)+537}`],lightworld_items,'item_slot grey_disable');
     }
     formString += "</div>";
     formString += "</div>";
@@ -327,10 +329,10 @@ function generateForm(data){
 
     //Phone Numbers
     formString += "<div class='item_box'>";
-    formString += "Cell Phone<br>";
+    formString += "Телефон<br>";
     formString += "<div id='item_wrapper'>";
     for(var i = 0; i < 8; i++){
-      formString += generateSelectCh2(`_${(i*2)+538}`,`Slot ${i+1}<br>`,data[`_${(i*2)+538}`],phone_numbers,'item_slot grey_disable');
+      formString += generateSelectCh2(`_${(i*2)+538}`,`Слот ${i+1}<br>`,data[`_${(i*2)+538}`],phone_numbers,'item_slot grey_disable');
     }
     formString += "</div>";
     formString += "</div>";
@@ -348,8 +350,8 @@ function generateForm(data){
 
     //Recruits
     formString += "<div id='recruit_box'>";
-    formString += "Recruits<br>";
-    formString += `<label class='lineItem'><input type="checkbox" name="show_all_recruits" noinput="true"> Show all recruits</label><br>`
+    formString += "Новобранцы<br>";
+    formString += `<label class='lineItem'><input type="checkbox" name="show_all_recruits" noinput="true"> Показать всех новобранцев</label><br>`
     formString += "<div id='recruit_wrapper'>";
     for(var i = 0; i < recruits.length; i++){
 
@@ -367,8 +369,8 @@ function generateForm(data){
 
     //Recruits in the cafe
     formString += "<div id='recruit_cafe_box'>";
-    formString += "Recruits in Cafe<br>";
-    formString += `<label class='lineItem'><input type="checkbox" name="show_all_recruits_cafe" noinput="true"> Show all recruits</label><br>`
+    formString += "Новобранцы в кафе<br>";
+    formString += `<label class='lineItem'><input type="checkbox" name="show_all_recruits_cafe" noinput="true"> Показать всех новобранцев</label><br>`
     formString += "<div id='recruit_cafe_wrapper'>";
     for(var i = 0; i < 4; i++){
         formString += generateSelectCh2(`_${i+1353}`,`Recruit ${i+1}`,data[`_${i+1353}`],recruits,'recruit_cafe');
@@ -389,40 +391,40 @@ function generateForm(data){
     formString += `<div id="tab_hometown" class='tab'>`;
     //chapter 1 hometown flags
     formString += "<div id='flags_box'>";
-    formString += "Spoken to Characters<br>";
-    formString += generateSelectCh2(`_890`,"Talked to Alvin",data[`_890`],[{value:0,text:`No`},{value:1,text:`About Gerson or Hammer`},{value:2,text:`About Gerson and Hammer`},{value:3,text:`Heard talking to himself`}],'');
-    formString += generateSelectCh2(`_975`,"Talked to Mettaton",data[`_975`],[{value:0,text:`No`},{value:1,text:`About Entertainment`}],'');
-    formString += generateSelectCh2(`_1014`,"Rudy's Hospital Sink",data[`_1014`],[{value:0,text:`Not interacted`},{value:1,text:`Interacted`}],'');
+    formString += "Разговоры с персонажами<br>";
+    formString += generateSelectCh2(`_890`,"Разговаривал с Элвином",data[`_890`],[{value:0,text:`Нет`},{value:1,text:`О Герсоне или Молоте`},{value:2,text:`О Герсоне и Молоте`},{value:3,text:`Услышал, как говорит сам с собой`}],'');
+    formString += generateSelectCh2(`_975`,"Разговаривал с Меттатоном",data[`_975`],[{value:0,text:`Нет`},{value:1,text:`О развлечениях`}],'');
+    formString += generateSelectCh2(`_1014`,"Раковина в палате Руди",data[`_1014`],[{value:0,text:`Не взаимодействовал`},{value:1,text:`Взаимодействовал`}],'');
     formString += "</div>";
     
     
     
     formString += "<div id='flags_box'>";
-    formString += "Cutscenes<br>";
-    formString += generateSelectCh2(`_861`,"Sans & Toriel Cutscene",data[`_861`],[{value:0,text:`Haven't seen`},{value:1,text:`Watched Cutscene`}],'');
-    formString += generateSelectCh2(`_868`,"Bunker Cutscene",data[`_868`],[{value:0,text:`Haven't seen`},{value:1,text:`Watched Cutscene`}],'');
-    formString += generateSelectCh2(`_869`,"Noelle Hospital Cutscene",data[`_869`],[{value:0,text:`Haven't seen`},{value:1,text:`Watched Cutscene`}],'');
-    formString += generateSelectCh2(`_870`,"Dog Jail Break",data[`_870`],[{value:0,text:`Haven't seen`},{value:1,text:`Watched Cutscene`},{value:2,text:`Jailbreak Tunes`}],'');
-    formString += generateSelectCh2(`_894`,"Susie Refuses to go into Diner",data[`_894`],[{value:0,text:`Haven't seen`},{value:1,text:`Watched Cutscene`}],'');
-    formString += generateSelectCh2(`_933`,"Called Home",data[`_933`],[{value:0,text:`Haven't seen`},{value:1,text:`Watched Cutscene`}],'');
+    formString += "Катсцены<br>";
+    formString += generateSelectCh2(`_861`,"Катсцена Санса и Ториэль",data[`_861`],[{value:0,text:`Не видел`},{value:1,text:`Видел катсцену`}],'');
+    formString += generateSelectCh2(`_868`,"Катсцена бункера",data[`_868`],[{value:0,text:`Не видел`},{value:1,text:`Видел катсцену`}],'');
+    formString += generateSelectCh2(`_869`,"Катсцена в больнице (Ноэль)",data[`_869`],[{value:0,text:`Не видел`},{value:1,text:`Видел катсцену`}],'');
+    formString += generateSelectCh2(`_870`,"Побег пса из тюрьмы",data[`_870`],[{value:0,text:`Не видел`},{value:1,text:`Видел катсцену`},{value:2,text:`Мелодии побега`}],'');
+    formString += generateSelectCh2(`_894`,"Сьюзи отказывается зайти в закусочную",data[`_894`],[{value:0,text:`Не видел`},{value:1,text:`Видел катсцену`}],'');
+    formString += generateSelectCh2(`_933`,"Позвонил домой",data[`_933`],[{value:0,text:`Не видел`},{value:1,text:`Видел катсцену`}],'');
     formString += "</div>";
     
     
     
     formString += "<div id='flags_box'>";
-    formString += "Onion<br>";
-    formString += generateSelectCh2(`_978`,"Did you miss Onion",data[`_978`],[{value:0,text:`No Answer`},{value:1,text:`Yes`},{value:2,text:`No`}],'');
-    formString += generateSelectCh2(`_977`,"Talked to Onion",data[`_977`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
+    formString += "Онион<br>";
+    formString += generateSelectCh2(`_978`,"Скучали по Ониону?",data[`_978`],[{value:0,text:`Нет ответа`},{value:1,text:`Да`},{value:2,text:`Нет`}],'');
+    formString += generateSelectCh2(`_977`,"Разговаривал с Онионом",data[`_977`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
     formString += "</div>";
     
     
     
     formString += "<div id='flags_box'>";
-    formString += "Other<br>";
-    formString += generateSelectCh2(`_855`,"Ball of Junk",data[`_855`],[{value:0,text:`Not Gathered`},{value:1,text:`On Head`},{value:2,text:`In Dark World`}],'');
-    formString += generateSelectCh2(`_895`,"Box of Chocolate Quest",data[`_895`],[{value:0,text:`Not Recieved`},{value:1,text:`Destroyed`},{value:2,text:`Ate with Susie`},{value:3,text:`Gave to Alphys`}],'');
-    formString += generateSelectCh2(`_983`,"Stole Asriel's money",data[`_983`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-    formString += generateSelectCh2(`_992`,"Reverse Steal Egg",data[`_992`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
+    formString += "Прочее<br>";
+    formString += generateSelectCh2(`_855`,"Клубок барахла",data[`_855`],[{value:0,text:`Не собран`},{value:1,text:`На голове`},{value:2,text:`В Тёмном мире`}],'');
+    formString += generateSelectCh2(`_895`,"Квест коробки шоколада",data[`_895`],[{value:0,text:`Не получена`},{value:1,text:`Уничтожена`},{value:2,text:`Съели с Сьюзи`},{value:3,text:`Отдали Альфис`}],'');
+    formString += generateSelectCh2(`_983`,"Украл деньги Азриэля",data[`_983`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+    formString += generateSelectCh2(`_992`,"Обратная кража яйца",data[`_992`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
 
     formString += "</div>";
     
@@ -458,7 +460,7 @@ function generateForm(data){
 
     formString += `<div id='thrash_box'>`;
 
-    formString += `<center>Modify the Machine that<br>Thrashed Your Ass</center><br><br>`;
+    formString += `<center>Машина Лансера</center><br><br>`;
     formString += `<div id='thrash_flex'>`;
     formString += `<div id='thrash_left'>`;
 
@@ -477,14 +479,14 @@ function generateForm(data){
     formString += `<div id='thrash_right'>`;
 
 
-    formString += generateSelectCh2(`_773`,"",data[`_773`],thrasher_head_parts,'thrasher_select');
-    formString += generateSelectCh2(`_774`,"",data[`_774`],thrasher_body_parts,'thrasher_select');
-    formString += generateSelectCh2(`_775`,"",data[`_775`],thrasher_feet_parts,'thrasher_select');
+    formString += generateSelectCh2(`_773`,"Голова:",data[`_773`],thrasher_head_parts,'thrasher_select');
+    formString += generateSelectCh2(`_774`,"Тело:",data[`_774`],thrasher_body_parts,'thrasher_select');
+    formString += generateSelectCh2(`_775`,"Ноги:",data[`_775`],thrasher_feet_parts,'thrasher_select');
 
 
-    formString += generateRangeInput(`_776`,"H C",data[`_776`],{min:0,max:31},'hidden');
-    formString += generateRangeInput(`_777`,"B C",data[`_777`],{min:0,max:31},'hidden');
-    formString += generateRangeInput(`_778`,"F C",data[`_778`],{min:0,max:31},'hidden');
+    formString += generateRangeInput(`_776`,"Цвет головы:",data[`_776`],{min:0,max:31},'hidden');
+    formString += generateRangeInput(`_777`,"Цвет тела:",data[`_777`],{min:0,max:31},'hidden');
+    formString += generateRangeInput(`_778`,"Цвет ног:",data[`_778`],{min:0,max:31},'hidden');
 
     formString += `</div>`;
 
@@ -505,7 +507,7 @@ function generateForm(data){
       formString += `<div id='goner_flex'>`;
       formString += `<div id='goner_left'>`;
 
-      formString += `<center>Vessel Name<center>`;
+      formString += `<center>Название сосуда</center>`;
       formString += generateTextInput(`_2`,"",data[`_2`],[{length:10}],'filename');
       formString += `<div id='goner_wrapper'>`;
       formString += `<div id='goner_head'></div>`;
@@ -515,24 +517,24 @@ function generateForm(data){
       formString += `</div>`;
 
       formString += `<div id='goner_vessel_input'>`;
-      formString += generateNumberInput(`_1453`,"HEAD ",data[`_1453`],{min:0,max:7},'flag');
-      formString += generateNumberInput(`_1454`,"BODY ",data[`_1454`],{min:0,max:5},'flag');
-      formString += generateNumberInput(`_1455`,"LEGS ",data[`_1455`],{min:0,max:4},'flag');
+      formString += generateNumberInput(`_1453`,"ГОЛОВА ",data[`_1453`],{min:0,max:7},'flag');
+      formString += generateNumberInput(`_1454`,"ТЕЛО ",data[`_1454`],{min:0,max:5},'flag');
+      formString += generateNumberInput(`_1455`,"НОГИ ",data[`_1455`],{min:0,max:4},'flag');
       formString += `</div>`;
       formString += `</div>`;
 
       formString += `<div id='goner_right'>`;
 
 
-      formString += generateSelectCh2(`_1456`,"What is its favorite food?<br>",data[`_1456`],goner_food);
-      formString += generateSelectCh2(`_1457`,"Your favorite blood type?<br>",data[`_1457`],goner_blood);
-      formString += generateSelectCh2(`_1458`,"What color does it like most?<br>",data[`_1458`],goner_color);
-      formString += generateSelectCh2(`_1462`,"Please give it a gift.<br>",data[`_1462`],goner_gift);
-      formString += generateSelectCh2(`_1459`,"How do you feel about your creation? (it will not hear.)<br>",data[`_1459`],goner_feel);
+      formString += generateSelectCh2(`_1456`,"Какая его любимая еда?<br>",data[`_1456`],goner_food);
+      formString += generateSelectCh2(`_1457`,"Ваша любимая группа крови?<br>",data[`_1457`],goner_blood);
+      formString += generateSelectCh2(`_1458`,"Какой цвет ему нравится больше?<br>",data[`_1458`],goner_color);
+      formString += generateSelectCh2(`_1462`,"Пожалуйста, дайте ему подарок.<br>",data[`_1462`],goner_gift);
+      formString += generateSelectCh2(`_1459`,"Что вы думаете о своём творении? (оно не услышит)<br>",data[`_1459`],goner_feel);
 
 
-      formString += generateSelectCh2(`_1460`,"Have you answered honestly?<br>",data[`_1460`],[{value:0,text:`YES`},{value:1,text:`NO`}]);
-      formString += generateSelectCh2(`_1461`,"You acknowledge the possibility of pain and seizure.<br>",data[`_1461`],[{value:0,text:`YES`},{value:1,text:`NO`}]);
+      formString += generateSelectCh2(`_1460`,"Вы ответили честно?<br>",data[`_1460`],[{value:0,text:`ДА`},{value:1,text:`НЕТ`}]);
+      formString += generateSelectCh2(`_1461`,"Вы признаёте возможность боли и судорог.<br>",data[`_1461`],[{value:0,text:`ДА`},{value:1,text:`НЕТ`}]);
 
       formString += `</div>`;
       formString += `</div>`;
@@ -543,25 +545,25 @@ function generateForm(data){
 
       //chapter 1 hometown flags
       formString += "<div id='flags_box'>";
-      formString += "Hometown<br>";
-      formString += generateSelectCh2(`_808`,"Noelle Hospital Cutscene",data[`_808`],[{value:0,text:`Haven't seen`},{value:1,text:`Watched Cutscene`},{value:2,text:`Talked to Rudy`}],'');
-      formString += generateSelectCh2(`_809`,"Talked to Berdly",data[`_809`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-      formString += generateSelectCh2(`_810`,"Stuck fingers in Picnic Table",data[`_810`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-      formString += generateSelectCh2(`_811`,"Talked to Onion",data[`_811`],[{value:0,text:`No`},{value:1,text:`Yes`},{value:2,text:`Became Friend`},{value:3,text:`Refused Friendship`}],'');
-      formString += generateSelectCh2(`_812`,"Your Name (Onion)",data[`_812`],[{value:0,text:`None`},{value:1,text:`Kris`},{value:2,text:`Hippopotamus`}],'grey_disable');
-      formString += generateSelectCh2(`_813`,"Onion's Name",data[`_813`],[{value:0,text:`None`},{value:1,text:`Onion`},{value:2,text:`Beauty`},{value:3,text:`Asriel II`},{value:4,text:`Disgusting`}],'grey_disable');
-      formString += generateSelectCh2(`_814`,"Free Hot Chocolate",data[`_814`],[{value:0,text:`Unclaimed`},{value:1,text:`Claimed`}],'');
-      formString += generateSelectCh2(`_815`,"Asgore flower cutscene",data[`_815`],[{value:0,text:`Haven't seen`},{value:1,text:`Entered Flower Shop`},{value:2,text:`Recieved Bouquet`},{value:3,text:`Given Bouquet to Toriel`},{value:4,text:`Toriel threw Bouquet away`}],'');
-      formString += generateSelectCh2(`_818`,"Talked to Catty",data[`_818`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-      formString += generateSelectCh2(`_822`,"Alphys Alleyway Cutscene",data[`_822`],[{value:0,text:`Haven't seen`},{value:1,text:`Watched Cutscene`}],'');
-      formString += generateSelectCh2(`_823`,"Talked to Undyne",data[`_823`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-      formString += generateSelectCh2(`_824`,"Talked to Burgerpants",data[`_824`],[{value:0,text:`No`},{value:1,text:`Yes`},{value:2,text:`Seen dialogue`}],'');
-      formString += generateSelectCh2(`_825`,"Phonecall with Toriel",data[`_825`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-      formString += generateSelectCh2(`_826`,"Talked to Sans",data[`_826`],[{value:0,text:`No`},{value:1,text:`Yes`},{value:2,text:`Talked about his brother`}],'');
-      formString += generateSelectCh2(`_827`,"Got Sans's Phone number",data[`_827`],[{value:0,text:`No`},{value:1,text:`Yes`},{value:1,text:`Called it`}],'');
-      formString += generateSelectCh2(`_828`,"Rudy's Hospital Sink",data[`_828`],[{value:0,text:`Not interacted`},{value:1,text:`Interacted`}],'');
-      formString += generateSelectCh2(`_829`,"Talked to Noelle",data[`_829`],[{value:0,text:`No`},{value:1,text:`Yes`},{value:2,text:`Talked about Susie`}],'');
-      formString += generateNumberInput(`_830`,"Times entered house",data[`_830`],{min:0,max:8},'flag');
+      formString += "Город<br>";
+      formString += generateSelectCh2(`_808`,"Катсцена в больнице (Ноэль)",data[`_808`],[{value:0,text:`Не видел`},{value:1,text:`Видел катсцену`},{value:2,text:`Поговорил с Руди`}],'');
+      formString += generateSelectCh2(`_809`,"Разговаривал с Бёрдли",data[`_809`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+      formString += generateSelectCh2(`_810`,"Засунул пальцы в скамейку",data[`_810`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+      formString += generateSelectCh2(`_811`,"Разговаривал с Онионом",data[`_811`],[{value:0,text:`Нет`},{value:1,text:`Да`},{value:2,text:`Стали друзьями`},{value:3,text:`Отказался дружить`}],'');
+      formString += generateSelectCh2(`_812`,"Ваше имя (Онион)",data[`_812`],[{value:0,text:`Нет`},{value:1,text:`Крис`},{value:2,text:`Гиппопотам`}],'grey_disable');
+      formString += generateSelectCh2(`_813`,"Имя Ониона",data[`_813`],[{value:0,text:`Нет`},{value:1,text:`Онион`},{value:2,text:`Красотка`},{value:3,text:`Азриэль II`},{value:4,text:`Отвратительно`}],'grey_disable');
+      formString += generateSelectCh2(`_814`,"Бесплатный горячий шоколад",data[`_814`],[{value:0,text:`Не забрано`},{value:1,text:`Забрано`}],'');
+      formString += generateSelectCh2(`_815`,"Катсцена с цветами Азгора",data[`_815`],[{value:0,text:`Не видел`},{value:1,text:`Зашёл в цветочный`},{value:2,text:`Получил букет`},{value:3,text:`Отдал букет Ториэль`},{value:4,text:`Ториэль выбросила букет`}],'');
+      formString += generateSelectCh2(`_818`,"Разговаривал с Кэтти",data[`_818`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+      formString += generateSelectCh2(`_822`,"Катсцена Альфис в переулке",data[`_822`],[{value:0,text:`Не видел`},{value:1,text:`Видел катсцену`}],'');
+      formString += generateSelectCh2(`_823`,"Разговаривал с Андайн",data[`_823`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+      formString += generateSelectCh2(`_824`,"Разговаривал с Бургерпэнцем",data[`_824`],[{value:0,text:`Нет`},{value:1,text:`Да`},{value:2,text:`Видел диалог`}],'');
+      formString += generateSelectCh2(`_825`,"Звонок Ториэль",data[`_825`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+      formString += generateSelectCh2(`_826`,"Разговаривал с Сансом",data[`_826`],[{value:0,text:`Нет`},{value:1,text:`Да`},{value:2,text:`Говорил о своём брате`}],'');
+      formString += generateSelectCh2(`_827`,"Получил номер Санса",data[`_827`],[{value:0,text:`Нет`},{value:1,text:`Да`},{value:1,text:`Позвонил`}],'');
+      formString += generateSelectCh2(`_828`,"Раковина в палате Руди",data[`_828`],[{value:0,text:`Не взаимодействовал`},{value:1,text:`Взаимодействовал`}],'');
+      formString += generateSelectCh2(`_829`,"Разговаривал с Ноэль",data[`_829`],[{value:0,text:`Нет`},{value:1,text:`Да`},{value:2,text:`Говорила о Сьюзи`}],'');
+      formString += generateNumberInput(`_830`,"Раз заходил в дом",data[`_830`],{min:0,max:8},'flag');
       formString += "</div>";
 
 
@@ -569,14 +571,14 @@ function generateForm(data){
       //Misc chapter 1 flags
 
       formString += "<div class='flags_box'>";
-      formString += "Other Flags<br>";
-      formString += generateSelectCh2(`_659`,"Eaten Prison Moss",data[`_659`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-      formString += generateNumberInput(`_794`,"Jevil Quest (?)",data[`_794`],{min:0,max:7},'flag');
-      formString += generateSelectCh2(`_807`,"The Original Starwalker",data[`_807`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-      formString += generateNumberInput(`_1464`,"Chapter 1 Eggs",data[`_1464`],{min:-99999,max:99999},'flag');
-      formString += generateSelectCh2(`_805`,"Kris Inspected the Beds",data[`_805`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-      formString += generateSelectCh2(`_806`,"Spin Cake Received",data[`_806`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-      formString += generateSelectCh2(`_760`,"Thrown Away Manual",data[`_760`],[{value:0,text:`No`},{value:1,text:`Dropped once`},{value:2,text:`Thrown Away`}],'');
+      formString += "Прочие флаги<br>";
+      formString += generateSelectCh2(`_659`,"Съел мох в тюрьме",data[`_659`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+      formString += generateNumberInput(`_794`,"Квест Джевила (?)",data[`_794`],{min:0,max:7},'flag');
+      formString += generateSelectCh2(`_807`,"The Original Starwalker",data[`_807`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+      formString += generateNumberInput(`_1464`,"Яйца главы 1",data[`_1464`],{min:-99999,max:99999},'flag');
+      formString += generateSelectCh2(`_805`,"Крис осмотрел кровати",data[`_805`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+      formString += generateSelectCh2(`_806`,"Получен Спин-Кейк",data[`_806`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+      formString += generateSelectCh2(`_760`,"Выбросил инструкцию",data[`_760`],[{value:0,text:`Нет`},{value:1,text:`Уронил раз`},{value:2,text:`Выброшена`}],'');
       formString += "</div>";
 
 
@@ -596,19 +598,19 @@ formString += `<div id="tab_chapter2" class='tab'>`;
 
     //Other Flags
     formString += "<div id='flags_box'>";
-    formString += "Other Flags<br>";
-    formString += generateSelectCh2(`_587`,"Party Members can ACT",data[`_587`],[{value:1,text:`No`},{value:0,text:`Yes`}],'');
-    formString += generateNumberInput(`_862`,"Spamton Progress",data[`_862`],{min:0,max:9},'flag');
-    formString += generateNumberInput(`_1468`,"SnowGrave Progress",data[`_1468`],{min:0,max:9},'flag');
-    formString += generateNumberInput(`_1478`,"Monsters Frozen",data[`_1478`],{min:0,max:45},'flag');
-    formString += generateNumberInput(`_1015`,"Cars Killed",data[`_1015`],{min:0,max:99999},'flag');
-    formString += generateNumberInput(`_1471`,"Chapter 2 Eggs",data[`_1471`],{min:-99999,max:99999},'flag');
-    formString += generateSelectCh2(`_1010`,"Berdly's Arm",data[`_1010`],[{value:1,text:`Healthy`},{value:0,text:`Not doing too great`}],'flag');
-    formString += generateSelectCh2(`_1473`,"Kris ate Moss",data[`_1473`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-    formString += generateSelectCh2(`_1475`,"Susie ate Moss",data[`_1475`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-    formString += generateSelectCh2(`_1474`,"Noelle saw Moss get eaten",data[`_1474`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
-    formString += generateSelectCh2(`_878`,"Ralsei's Photo",data[`_878`],[{value:0,text:`None`},{value:1,text:`Hug Prince`},{value:2,text:`Pose Prince`},{value:3,text:`Rude Prince`},{value:4,text:`Blank Prince`}],'');
-    formString += generateSelectCh2(`_910`,"Recruited Hacker",data[`_910`],[{value:0,text:`No`},{value:1,text:`Yes`}],'');
+    formString += "Прочие флаги<br>";
+    formString += generateSelectCh2(`_587`,"Участники могут ДЕЙСТ.",data[`_587`],[{value:1,text:`Нет`},{value:0,text:`Да`}],'');
+    formString += generateNumberInput(`_862`,"Прогресс Спамтона",data[`_862`],{min:0,max:9},'flag');
+    formString += generateNumberInput(`_1468`,"Прогресс СноуГрейва",data[`_1468`],{min:0,max:9},'flag');
+    formString += generateNumberInput(`_1478`,"Заморожено монстров",data[`_1478`],{min:0,max:45},'flag');
+    formString += generateNumberInput(`_1015`,"Убито машин",data[`_1015`],{min:0,max:99999},'flag');
+    formString += generateNumberInput(`_1471`,"Яйца главы 2",data[`_1471`],{min:-99999,max:99999},'flag');
+    formString += generateSelectCh2(`_1010`,"Рука Бёрдли",data[`_1010`],[{value:1,text:`Здорова`},{value:0,text:`Не очень хорошо`}],'flag');
+    formString += generateSelectCh2(`_1473`,"Крис ел мох",data[`_1473`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+    formString += generateSelectCh2(`_1475`,"Сьюзи ела мох",data[`_1475`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+    formString += generateSelectCh2(`_1474`,"Ноэль видела поедание мха",data[`_1474`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
+    formString += generateSelectCh2(`_878`,"Фото Ралсея",data[`_878`],[{value:0,text:`Нет`},{value:1,text:`Обнял принца`},{value:2,text:`Принц позирует`},{value:3,text:`Грубый принц`},{value:4,text:`Пустой принц`}],'');
+    formString += generateSelectCh2(`_910`,"Завербован хакер",data[`_910`],[{value:0,text:`Нет`},{value:1,text:`Да`}],'');
     formString += "</div>";
     
 
@@ -620,5 +622,5 @@ formString += `<div id="tab_chapter2" class='tab'>`;
 
 
 
-  return formString;
+  return window.localizeGeneratedForm ? window.localizeGeneratedForm('ch3', formString) : formString;
 }

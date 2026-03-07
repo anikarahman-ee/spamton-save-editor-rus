@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <style>
+
         @font-face {
-            font-family: DeterminationMonoWebRegular;
+            font-family: 'DeterminationCyrillic';
+            src: url('fonts/determinationmonorusbylyajk.otf');
+        }
+        @font-face {
+            font-family: 'DeterminationCyrillic', DeterminationMonoWebRegular,;
             src: url('fonts/determination-mono-web-font/DeterminationMonoWebRegular-Z5oq.ttf');
         }
 
@@ -85,11 +90,12 @@
         <h1>Spamton Save Editor - Chapter 1 Demo</h1>
         <p>Upload your Deltarune Chapter 1 Demo save file.</p>
         <label id="saveFileLabel">
-            <div id="saveFileText">Click or drag your save here</div>
+            <div id="saveFileText">Нажмите или перетащите сюда файл сохранения</div>
             <input type="file" id="saveFile"
                    style="opacity:0; width:100%; height:100%; position:absolute; top:0; left:0">
         </label>
-        <div class="submitButton" id="toEditor">Load & Edit</div>
+        <div class="submitButton" id="toEditor">Загрузить и редактировать</div>
+        <div class="submitButton" style="margin-left: 10px;"><a href="defaultSaves/demo/filech1_0" download style="color: white; text-decoration: none;">Скачать пример сохранения</a></div>
     </div>
 
 
@@ -97,7 +103,7 @@
         <h1>Edit Chapter 1 Demo Save</h1>
         <div id="page_tabs"></div>
         <div id="saveData"></div>
-        <div class="submitButton" id="downloadSave">Download Modified Save</div>
+        <div class="submitButton" id="downloadSave">Скачать изменённое сохранение</div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -118,8 +124,16 @@
     <script src="js/thrasher.js"></script>
     <script src="js/goner.js"></script>
 
+    <script src="js/translations/DumpyCats/translation_ch1Demo.js"></script>
+    <script src="js/translations/LazyDesman/translation_ch1Demo.js"></script>
+    <script src="js/translations/LazyDesman/translateMenu.js"></script>
+    <script src="js/translations/uiFormLabels.js"></script>
+    <script src="js/translations/DumpyCats/translation_ch1Demo.js"></script>
+    <script src="js/translations/LazyDesman/translation_ch1Demo.js"></script>
+    <script src="js/translations/translationManager.js"></script>
     <script src="js/editorCore.js"></script>
 
-    <script>EditorCore.init("ch1Demo");</script>
+    <script>EditorCore.init("ch1Demo");
+        if (typeof TranslationManager !== "undefined") TranslationManager.init("ch1Demo");</script>
 </body>
 </html>

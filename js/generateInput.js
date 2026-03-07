@@ -196,7 +196,7 @@ function generateTextboxInput(_id,_title,_default,_data,_class){
     checked = false;
   }
   var _class = _class || ``;
-  var range = `<label class='lineItem ${_class}' ${(checked ? `` : `style="color:${disabledColor}"`)}><input off="${_off}" on="${_on}" type="checkbox" name="${_id}" ${(checked ? "checked" : "")}> <span class='selectTitle'>${_title}</span></label>`
+  var range = `<label class='lineItem ${_class}'><input off="${_off}" on="${_on}" type="checkbox" name="${_id}" ${(checked ? "checked" : "")}> <span class='selectTitle'>${_title}</span></label>`
 
   return range;
 }
