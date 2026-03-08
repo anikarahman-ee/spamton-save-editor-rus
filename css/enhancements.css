@@ -949,71 +949,89 @@ body {
     color: var(--accent);
 }
 
-/* Changelog section --------------------------------------- */
-.changelog-section {
+/* Credits / Благодарность --------------------------------- */
+.credits-section {
     margin-top: 52px;
 }
 
-.changelog-entries {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border-left: 2px solid var(--border-strong);
-    padding-left: 20px;
-    margin-left: 8px;
+.credits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
 }
 
-.changelog-entry {
-    position: relative;
-    padding: 0 0 24px 0;
-}
-
-/* Dot on timeline */
-.changelog-entry::before {
-    content: '';
-    position: absolute;
-    left: -26px;
-    top: 5px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--bg);
-    flex-shrink: 0;
-}
-
-.changelog-entry:first-child::before {
-    background: var(--gradient);
-    box-shadow: 0 0 8px rgba(155, 89, 244, 0.5);
-}
-
-.changelog-entry-meta {
+.credit-card {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 4px;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
 }
 
-.changelog-version {
+.credit-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
     background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 700;
-    font-size: 13px;
-    white-space: nowrap;
+    opacity: 0;
+    transition: opacity var(--transition);
 }
 
-.changelog-date {
+.credit-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.credit-card:hover::before {
+    opacity: 0.05;
+}
+
+.credit-card.credit-dev {
+    border-top: 2px solid var(--accent);
+}
+
+.credit-icon {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    background: rgba(155, 89, 244, 0.1);
+    border: 1px solid rgba(155, 89, 244, 0.25);
+    border-radius: 6px;
+    padding: 6px 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-family: 'DeterminationCyrillic', monospace;
+    position: relative;
+    z-index: 1;
+}
+
+.credit-info {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+}
+
+.credit-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.credit-role {
     font-size: 11px;
     color: var(--text-3);
-    white-space: nowrap;
-}
-
-.changelog-text {
-    font-size: 13px;
-    color: var(--text-2);
-    line-height: 1.5;
+    margin-top: 2px;
 }
 
 /* Stats counter ------------------------------------------- */
