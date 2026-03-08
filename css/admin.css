@@ -5,6 +5,7 @@
     margin: 0 auto;
     padding: 20px;
     min-height: 100vh;
+    animation: fadeUp 0.45s 0.05s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 .admin-header {
@@ -33,8 +34,11 @@
 .admin-title {
     font-size: 22px;
     margin: 0 0 4px;
-    color: var(--text);
     font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .admin-subtitle {
@@ -89,9 +93,10 @@
     color: var(--text);
 }
 .admin-tab.active {
-    background: var(--accent-dim);
-    color: var(--accent);
-    border-color: var(--accent);
+    background: var(--gradient);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 0 12px rgba(155,89,244,0.25);
 }
 
 .admin-tab-badge {
@@ -116,7 +121,7 @@
 /* ─── Panel ────────────────────────────────── */
 
 .admin-panel {
-    animation: fadeIn 0.15s;
+    animation: fadeUp 0.2s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 .admin-panel-header {

@@ -13,6 +13,8 @@ body{
   margin:0;
   vertical-align: top;
   min-width:500px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #page_tabs{
@@ -45,9 +47,10 @@ body{
 
 .tab_selected{
   height:56px;
-  background: var(--accent-dim);
-  color: var(--accent);
-  border-color: var(--accent);
+  background: var(--gradient);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 12px rgba(155,89,244,0.3);
 }
 
 .tab{
@@ -79,19 +82,24 @@ body{
 
 .submitButton{
   text-align: center;
-  border: 1px solid var(--accent);
+  border: 1px solid transparent;
   border-radius: var(--radius-sm);
-  background: var(--accent-dim);
-  color: var(--accent);
+  background: var(--gradient);
+  color: #fff;
   cursor:pointer;
   display:inline-block;
   padding:10px 20px;
-  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+  font-weight: 600;
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+  box-shadow: 0 0 16px rgba(155,89,244,0.3);
 }
 .submitButton:hover {
-  background: var(--accent);
-  color: #fff;
-  box-shadow: var(--accent-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 0 28px rgba(155,89,244,0.5), 0 4px 16px rgba(0,0,0,0.3);
+  opacity: 0.95;
+}
+.submitButton:active {
+  transform: scale(0.97) translateY(0);
 }
 
 .broken_party{
@@ -102,10 +110,12 @@ body{
     padding:20px;
     margin:10px;
     border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
+    border-top: 2px solid var(--accent);
+    border-radius: var(--radius-lg);
     background: var(--surface);
     display:inline-block;
     vertical-align: top;
+    box-shadow: var(--shadow-card);
 }
 
 
@@ -115,10 +125,12 @@ body{
     margin:10px;
     width:600px;
     border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
+    border-top: 2px solid var(--accent);
+    border-radius: var(--radius-lg);
     background: var(--surface);
     display:inline-block;
     vertical-align: top;
+    box-shadow: var(--shadow-card);
 }
 
 #goner_left{
@@ -175,9 +187,11 @@ body{
     margin:10px;
     width:425px;
     border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
+    border-top: 2px solid var(--accent);
+    border-radius: var(--radius-lg);
     background: var(--surface);
     display:inline-block;
+    box-shadow: var(--shadow-card);
     vertical-align: top;
 }
 
@@ -196,10 +210,12 @@ body{
     padding:20px;
     margin:10px;
     border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
+    border-top: 2px solid var(--accent);
+    border-radius: var(--radius-lg);
     background: var(--surface);
     display: inline-block;
     position:relative;
+    box-shadow: var(--shadow-card);
 }
 #lightworld_box img{
   height:40px;
@@ -215,10 +231,12 @@ body{
     padding:20px;
     margin:10px;
     border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
+    border-top: 2px solid var(--accent);
+    border-radius: var(--radius-lg);
     background: var(--surface);
     display: inline-block;
     position:relative;
+    box-shadow: var(--shadow-card);
 }
 #party_box img{
   height:40px;
@@ -333,10 +351,12 @@ body{
     padding:20px;
     margin:10px;
     border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
+    border-top: 2px solid var(--accent);
+    border-radius: var(--radius-lg);
     background: var(--surface);
     display:inline-block;
     vertical-align: top;
+    box-shadow: var(--shadow-card);
 }
 
 
@@ -355,12 +375,14 @@ body{
 .character_box{
   padding:20px;
   border: 1px solid var(--border-strong);
-  border-radius: var(--radius);
+  border-top: 2px solid var(--accent);
+  border-radius: var(--radius-lg);
   background: var(--surface);
   display: inline;
   position:relative;
   align-self: flex-start;
   vertical-align: top;
+  box-shadow: var(--shadow-card);
 }
 .character_box img{
   height:40px;

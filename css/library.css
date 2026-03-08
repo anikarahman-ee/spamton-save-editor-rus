@@ -9,6 +9,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    animation: fadeUp 0.45s 0.05s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 .lib-header {
@@ -20,8 +21,11 @@
 .lib-title {
     font-size: 30px;
     margin: 0 0 8px;
-    color: var(--text);
     font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .lib-subtitle {
@@ -65,7 +69,7 @@
     padding: 14px 16px;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
 }
 
 .lib-filters {
@@ -93,9 +97,11 @@
 }
 
 .lib-filter-btn.active {
-    background: var(--accent-dim);
-    color: var(--accent);
-    border-color: var(--accent);
+    background: var(--gradient);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 0 12px rgba(155,89,244,0.3);
+    font-weight: 600;
 }
 
 .lib-search-sort {
@@ -127,6 +133,7 @@
 
 .lib-search-input:focus {
     border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(155,89,244,0.15);
 }
 
 .lib-search-btn {
@@ -200,23 +207,46 @@
 .lib-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px;
+    border-radius: var(--radius-lg);
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+    transition: border-color var(--transition), background var(--transition),
+                box-shadow var(--transition), transform var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.lib-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    background: var(--gradient-dim);
+    transition: opacity var(--transition);
+    pointer-events: none;
 }
 
 .lib-card:hover {
     border-color: var(--accent);
     background: var(--elevated);
-    box-shadow: 0 0 0 1px var(--accent-dim);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.4), 0 0 0 1px rgba(155,89,244,0.2);
+    transform: translateY(-3px);
+}
+
+.lib-card:hover::before {
+    opacity: 1;
+}
+
+.lib-card:active {
+    transform: translateY(-1px);
 }
 
 /* Supporter card */
 .lib-card-supporter {
     border-color: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent-dim);
+    box-shadow: 0 0 0 1px rgba(155,89,244,0.25), var(--accent-glow-sm);
 }
 
 .lib-card-header {

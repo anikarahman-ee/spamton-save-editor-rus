@@ -3,6 +3,7 @@
     max-width: 960px;
     margin: 0 auto;
     padding: 0 20px 60px;
+    animation: fadeUp 0.45s 0.05s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 .col-header {
@@ -14,8 +15,11 @@
 .col-page-title {
     font-size: 26px;
     margin: 0 0 6px;
-    color: var(--text);
     font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .col-page-subtitle {
@@ -60,15 +64,38 @@
 .col-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px;
-    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    transition: border-color var(--transition), background var(--transition),
+                box-shadow var(--transition), transform var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.col-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    background: var(--gradient-dim);
+    transition: opacity var(--transition);
+    pointer-events: none;
 }
 
 .col-card:hover {
     border-color: var(--accent);
     background: var(--elevated);
-    box-shadow: 0 0 0 1px var(--accent-dim);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.4), 0 0 0 1px rgba(155,89,244,0.2);
+    transform: translateY(-3px);
+}
+
+.col-card:hover::before {
+    opacity: 1;
+}
+
+.col-card:active {
+    transform: translateY(-1px);
 }
 
 .col-card-header {
