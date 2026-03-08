@@ -1,0 +1,1085 @@
+/* ================================================================
+   enhancements.css — 100 Features Pack
+   Spamton Save Editor
+   ================================================================ */
+
+/* [F71] Scroll progress bar ------------------------------------ */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--gradient);
+    z-index: 9999;
+    pointer-events: none;
+    transition: width 0.08s linear;
+    box-shadow: 0 0 8px rgba(155,89,244,0.5);
+}
+
+/* [F73] Print stylesheet --------------------------------------- */
+@media print {
+    #authBar, .hero, .section-block:not(.print-section),
+    .main-footer, #scrollTopBtn, #scroll-progress,
+    .font-controls, .chapter-card-arrow, .community-grid { display: none !important; }
+
+    body { background: white !important; color: black !important; font-size: 12pt; }
+
+    .print-section, #saveData, #page_tabs, .submitButton { display: block !important; }
+
+    #saveData select, #saveData input { border: 1px solid #ccc !important; color: black !important; background: white !important; }
+    .val-changed { outline: 2px solid #f4a535 !important; }
+
+    h1, h2, h3 { color: black !important; }
+    a { color: black !important; text-decoration: underline; }
+
+    @page { margin: 2cm; }
+}
+
+/* [F74] Skeleton loader ---------------------------------------- */
+.skeleton {
+    background: linear-gradient(90deg,
+        var(--elevated) 25%,
+        var(--hover) 37%,
+        var(--elevated) 63%);
+    background-size: 400% 100%;
+    animation: skeleton-shimmer 1.4s ease infinite;
+    border-radius: var(--radius-sm);
+}
+
+@keyframes skeleton-shimmer {
+    0%   { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.skeleton-card {
+    height: 80px;
+    margin-bottom: 8px;
+}
+
+.skeleton-text {
+    height: 14px;
+    margin-bottom: 8px;
+    width: 70%;
+}
+
+.skeleton-text.short { width: 40%; }
+
+/* [F76] Tab badge count --------------------------------------- */
+.tab-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--warning);
+    color: #0b0b12;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 99px;
+    margin-left: 5px;
+    line-height: 1;
+    vertical-align: middle;
+    animation: fadeUp 0.15s ease both;
+}
+
+.tab-badge.zero { display: none; }
+
+/* [F77] "New" badge on chapter cards ------------------------- */
+.chapter-card[data-new="true"]::after {
+    content: 'NEW';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--gradient);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 99px;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(155,89,244,0.4);
+}
+
+/* [F78] Compact mode ----------------------------------------- */
+body.compact-mode #saveData .lineItem {
+    padding: 4px 0;
+}
+body.compact-mode #saveData {
+    font-size: 0.8em;
+}
+body.compact-mode #main_box,
+body.compact-mode #goner_box,
+body.compact-mode #thrash_box,
+body.compact-mode #lightworld_box,
+body.compact-mode #party_box,
+body.compact-mode #flags_box,
+body.compact-mode .flags_box,
+body.compact-mode .character_box,
+body.compact-mode .item_box,
+body.compact-mode #recruit_box,
+body.compact-mode #recruit_cafe_box {
+    padding: 10px;
+    margin: 5px;
+}
+
+/* [F79] Editor search field ---------------------------------- */
+.editor-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0 12px;
+    position: sticky;
+    top: 44px;
+    z-index: 100;
+    background: var(--bg);
+}
+
+.editor-search-input {
+    flex: 1;
+    padding: 7px 12px 7px 34px;
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.65em;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238080a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+.editor-search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(155,89,244,0.15);
+}
+
+.editor-search-clear {
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
+    color: var(--text-2);
+    padding: 7px 10px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.65em;
+    font-family: inherit;
+    transition: background var(--transition), color var(--transition);
+    white-space: nowrap;
+}
+
+.editor-search-clear:hover {
+    background: var(--hover);
+    color: var(--text);
+}
+
+.search-no-results {
+    text-align: center;
+    color: var(--text-3);
+    padding: 20px;
+    font-size: 0.7em;
+}
+
+/* [F80] Number steppers -------------------------------------- */
+.number-stepper-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    vertical-align: middle;
+}
+
+.number-stepper-wrap input[type=number] {
+    -moz-appearance: textfield;
+    text-align: center;
+}
+
+.number-stepper-wrap input::-webkit-outer-spin-button,
+.number-stepper-wrap input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.step-btn {
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
+    color: var(--text-2);
+    width: 22px;
+    height: 100%;
+    min-height: 32px;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: inherit;
+    border-radius: var(--radius-xs);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
+    user-select: none;
+}
+
+.step-btn:hover {
+    background: var(--hover);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.step-btn:active {
+    transform: scale(0.92);
+}
+
+/* [F81] Toast stack ------------------------------------------ */
+#toast-container {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20001;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 8px;
+    pointer-events: none;
+}
+
+.toast-item {
+    padding: 10px 20px 10px 14px;
+    border-radius: var(--radius-lg);
+    font-size: 13px;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid;
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    min-width: 220px;
+    max-width: 380px;
+    pointer-events: all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.toast-item.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.toast-icon {
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.toast-success {
+    background: rgba(31, 50, 38, 0.9);
+    border-color: rgba(76, 175, 125, 0.4);
+    color: #7bffb5;
+}
+
+.toast-error {
+    background: rgba(50, 20, 20, 0.9);
+    border-color: rgba(244, 89, 89, 0.4);
+    color: #ff9494;
+}
+
+.toast-warning {
+    background: rgba(47, 35, 10, 0.9);
+    border-color: rgba(244, 165, 53, 0.4);
+    color: #ffd080;
+}
+
+.toast-info {
+    background: rgba(22, 17, 40, 0.9);
+    border-color: rgba(155, 89, 244, 0.35);
+    color: #c4a3f7;
+}
+
+/* [F82] Keyboard shortcut overlay ---------------------------- */
+#shortcuts-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 5, 10, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 30000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+#shortcuts-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.shortcuts-box {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-top: 2px solid var(--accent);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    max-width: 520px;
+    width: 90%;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.7);
+    animation: fadeUp 0.2s ease both;
+}
+
+.shortcuts-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 20px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.shortcuts-close-btn {
+    float: right;
+    background: none;
+    border: none;
+    color: var(--text-2);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    margin-top: -4px;
+    -webkit-text-fill-color: var(--text-2);
+}
+.shortcuts-close-btn:hover { color: var(--accent); -webkit-text-fill-color: var(--accent); }
+
+.shortcuts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+}
+
+.shortcut-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-2);
+}
+
+.shortcut-desc {
+    color: var(--text-2);
+}
+
+.kbd {
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
+    border-bottom: 2px solid var(--border-strong);
+    border-radius: var(--radius-xs);
+    padding: 2px 7px;
+    font-size: 11px;
+    color: var(--text);
+    font-family: monospace;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* [F83] Online/offline indicator ----------------------------- */
+#online-indicator {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-family: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+    z-index: 19000;
+}
+
+#online-indicator.show {
+    opacity: 1;
+    pointer-events: none;
+    transform: translateY(0);
+}
+
+#online-indicator.offline {
+    background: rgba(50,20,20,0.9);
+    border: 1px solid rgba(244,89,89,0.4);
+    color: #ff9494;
+    backdrop-filter: blur(8px);
+}
+
+#online-indicator.back-online {
+    background: rgba(31,50,38,0.9);
+    border: 1px solid rgba(76,175,125,0.4);
+    color: #7bffb5;
+    backdrop-filter: blur(8px);
+}
+
+.indicator-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.offline .indicator-dot { background: #f45959; }
+.back-online .indicator-dot { background: #4caf7d; animation: pulse-glow-green 1s ease 2; }
+
+@keyframes pulse-glow-green {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(76,175,125,0.6); }
+    50%       { box-shadow: 0 0 0 5px rgba(76,175,125,0); }
+}
+
+/* [F84] Font size controls ----------------------------------- */
+.font-controls {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 9000;
+}
+
+.font-controls-btn {
+    width: 32px;
+    height: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    color: var(--text-2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-size: 14px;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
+    backdrop-filter: blur(8px);
+}
+
+.font-controls-btn:hover {
+    background: var(--elevated);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* [F85] Sticky editor tabs ----------------------------------- */
+#page_tabs {
+    position: sticky;
+    top: 40px;
+    z-index: 200;
+    background: var(--bg);
+    padding: 4px 0 0;
+}
+
+/* [F86] Box collapse ----------------------------------------- */
+.box-collapsible > .box-header {
+    cursor: pointer;
+    user-select: none;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.7em;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.box-collapsible > .box-header:hover { color: var(--accent); }
+
+.box-collapse-arrow {
+    font-size: 12px;
+    transition: transform 0.2s ease;
+    color: var(--text-3);
+}
+
+.box-collapsible.collapsed > .box-header .box-collapse-arrow {
+    transform: rotate(-90deg);
+}
+
+.box-collapsible .box-body {
+    overflow: hidden;
+    max-height: 9999px;
+    transition: max-height 0.3s ease;
+}
+
+.box-collapsible.collapsed .box-body {
+    max-height: 0;
+}
+
+/* [F87] Card stagger animations ------------------------------ */
+.chapters-grid .chapter-card:nth-child(1) { animation: fadeUp 0.25s 0.04s ease both; }
+.chapters-grid .chapter-card:nth-child(2) { animation: fadeUp 0.25s 0.08s ease both; }
+.chapters-grid .chapter-card:nth-child(3) { animation: fadeUp 0.25s 0.12s ease both; }
+.chapters-grid .chapter-card:nth-child(4) { animation: fadeUp 0.25s 0.16s ease both; }
+.chapters-grid .chapter-card:nth-child(5) { animation: fadeUp 0.25s 0.20s ease both; }
+.chapters-grid .chapter-card:nth-child(6) { animation: fadeUp 0.25s 0.24s ease both; }
+
+.community-grid .community-card:nth-child(1) { animation: fadeUp 0.25s 0.06s ease both; }
+.community-grid .community-card:nth-child(2) { animation: fadeUp 0.25s 0.12s ease both; }
+.community-grid .community-card:nth-child(3) { animation: fadeUp 0.25s 0.18s ease both; }
+.community-grid .community-card:nth-child(4) { animation: fadeUp 0.25s 0.22s ease both; }
+.community-grid .community-card:nth-child(5) { animation: fadeUp 0.25s 0.26s ease both; }
+
+/* [F88] Section reveal -------------------------------------- */
+.reveal-section {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.reveal-section.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* [F89] Download button progress fill ----------------------- */
+.submitButton.downloading {
+    position: relative;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.submitButton.downloading::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0%;
+    background: rgba(255,255,255,0.12);
+    animation: download-fill 0.6s ease forwards;
+}
+
+@keyframes download-fill {
+    to { width: 100%; }
+}
+
+/* [F90] Restore autosave banner ------------------------------ */
+#autosave-banner {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-strong);
+    border-left: 3px solid var(--warning);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-2);
+    animation: fadeUp 0.2s ease both;
+}
+
+#autosave-banner.hidden { display: none; }
+
+.autosave-banner-text { flex: 1; }
+
+.autosave-banner-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.autosave-restore-btn, .autosave-dismiss-btn {
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    border: 1px solid;
+    transition: background var(--transition), color var(--transition);
+}
+
+.autosave-restore-btn {
+    background: var(--gradient);
+    color: #fff;
+    border-color: transparent;
+}
+
+.autosave-dismiss-btn {
+    background: transparent;
+    color: var(--text-2);
+    border-color: var(--border-strong);
+}
+
+.autosave-dismiss-btn:hover {
+    background: var(--elevated);
+    color: var(--text);
+}
+
+/* [F66/F67] Auth: password toggle / caps lock warn ---------- */
+.auth-password-wrap {
+    position: relative;
+}
+
+.auth-password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-3);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+    line-height: 1;
+    transition: color var(--transition);
+}
+
+.auth-password-toggle:hover { color: var(--accent); }
+
+.caps-lock-warning {
+    font-size: 11px;
+    color: var(--warning);
+    margin-top: 3px;
+    display: none;
+}
+
+.caps-lock-warning.show { display: block; }
+
+/* [F68] Password strength meter ----------------------------- */
+.password-strength-bar {
+    height: 3px;
+    border-radius: 99px;
+    margin-top: 5px;
+    background: var(--elevated);
+    overflow: hidden;
+}
+
+.password-strength-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.3s ease, background 0.3s ease;
+    width: 0%;
+}
+
+.strength-weak   { background: var(--danger);  width: 25%; }
+.strength-fair   { background: var(--warning);  width: 50%; }
+.strength-good   { background: #4caf7d; width: 75%; }
+.strength-strong { background: var(--gradient); width: 100%; }
+
+.password-strength-label {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 3px;
+}
+
+/* [F69] Confirm password match ------------------------------ */
+.password-match-hint {
+    font-size: 11px;
+    margin-top: 3px;
+    display: none;
+}
+
+.password-match-hint.show { display: block; }
+.password-match-hint.match { color: #4caf7d; }
+.password-match-hint.no-match { color: var(--danger); }
+
+/* [F70] "Did you know?" tips -------------------------------- */
+#dyk-tip {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text-2);
+    margin: 12px 0 0;
+    animation: fadeUp 0.3s ease both;
+    cursor: pointer;
+    transition: border-color var(--transition);
+}
+
+#dyk-tip:hover { border-left-color: var(--accent-hover); }
+
+#dyk-tip strong { color: var(--accent); }
+
+/* [F72] Ripple effect --------------------------------------- */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple-anim 0.5s linear;
+    background: rgba(255,255,255,0.18);
+    pointer-events: none;
+}
+
+@keyframes ripple-anim {
+    to { transform: scale(4); opacity: 0; }
+}
+
+button, .auth-btn, .submitButton, .tab_click, .cloud-save-btn, .cloud-load-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+/* [F75] Page transition ------------------------------------ */
+body {
+    animation: page-in 0.18s ease both;
+}
+
+@keyframes page-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* [F91] PWA / install prompt ------------------------------ */
+#pwa-install-btn {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: var(--accent-dim);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
+    color: var(--accent);
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+}
+
+#pwa-install-btn.show { display: flex; }
+
+#pwa-install-btn:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* [F93] Skip to content link ------------------------------ */
+#skip-to-content {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 99999;
+    background: var(--accent);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    text-decoration: none;
+    transition: top 0.15s ease;
+}
+
+#skip-to-content:focus {
+    top: 8px;
+}
+
+/* Editor: changed summary modal --------------------------- */
+#changed-summary-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,5,10,0.8);
+    backdrop-filter: blur(6px);
+    z-index: 25000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+#changed-summary-modal.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.changed-summary-box {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-top: 2px solid var(--warning);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 70vh;
+    overflow-y: auto;
+    animation: fadeUp 0.2s ease both;
+}
+
+.changed-summary-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--warning);
+    margin: 0 0 16px;
+}
+
+.changed-summary-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    font-size: 13px;
+}
+
+.changed-summary-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-2);
+}
+
+.changed-summary-list li .csl-name { color: var(--text); }
+.changed-summary-list li .csl-old  { text-decoration: line-through; color: var(--text-3); }
+.changed-summary-list li .csl-new  { color: var(--warning); }
+
+.changed-summary-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+/* Editor toolbar ------------------------------------------ */
+.editor-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 10px;
+    font-size: 0.62em;
+}
+
+.editor-toolbar-btn {
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
+    color: var(--text-2);
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.editor-toolbar-btn:hover {
+    background: var(--hover);
+    color: var(--text);
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+}
+
+.editor-toolbar-btn.danger:hover {
+    background: rgba(244,89,89,0.12);
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+.editor-toolbar-btn.primary {
+    background: var(--gradient);
+    color: #fff;
+    border-color: transparent;
+}
+
+.editor-toolbar-btn.primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.editor-toolbar-sep {
+    width: 1px;
+    height: 20px;
+    background: var(--border-strong);
+    flex-shrink: 0;
+}
+
+#editor-changed-count {
+    font-size: 1em;
+    color: var(--text-3);
+    margin-left: auto;
+}
+
+#editor-changed-count span {
+    color: var(--warning);
+    font-weight: 700;
+}
+
+/* Copy field value button --------------------------------- */
+.field-copy-btn {
+    background: none;
+    border: none;
+    color: var(--text-3);
+    cursor: pointer;
+    font-size: 0.7em;
+    padding: 0 3px;
+    line-height: 1;
+    vertical-align: middle;
+    transition: color var(--transition);
+    font-family: inherit;
+}
+
+.field-copy-btn:hover { color: var(--accent); }
+
+/* Changed status in page title ----------------------------- */
+/* handled by JS: document.title */
+
+/* Upload zone drag active --------------------------------- */
+#saveFileLabel.drag-active {
+    border-color: var(--accent) !important;
+    background: var(--accent-dim) !important;
+}
+
+#saveFileLabel.drag-active #saveFileText {
+    color: var(--accent);
+}
+
+/* Changelog section --------------------------------------- */
+.changelog-section {
+    margin-top: 52px;
+}
+
+.changelog-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.changelog-entry {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 14px 18px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.changelog-version {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 13px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 50px;
+}
+
+.changelog-date {
+    font-size: 11px;
+    color: var(--text-3);
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 70px;
+    margin-top: 2px;
+}
+
+.changelog-text {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.5;
+}
+
+/* Stats counter ------------------------------------------- */
+.stat-value[data-counting] {
+    display: inline-block;
+    min-width: 2em;
+}
+
+/* Recently visited badge ---------------------------------- */
+.chapter-card.recently-visited::before {
+    content: '⏱';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+/* JSON Import/Export modal -------------------------------- */
+.json-modal-content {
+    width: 100%;
+    min-height: 160px;
+    max-height: 300px;
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'DeterminationCyrillic', monospace;
+    font-size: 0.62em;
+    padding: 10px;
+    resize: vertical;
+    outline: none;
+}
+
+.json-modal-content:focus {
+    border-color: var(--accent);
+}
+
+/* Mobile bottom nav --------------------------------------- */
+@media (max-width: 600px) {
+    .font-controls { display: none; }
+
+    #page_tabs {
+        top: 36px;
+        overflow-x: auto;
+        gap: 0;
+        padding-bottom: 4px;
+    }
+
+    #page_tabs::-webkit-scrollbar { height: 3px; }
+
+    .editor-toolbar {
+        font-size: 0.55em;
+    }
+}
+
+/* [F63/F64] Scroll top button improvement ------------------ */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 70px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 50%;
+    color: var(--accent);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s, box-shadow 0.2s;
+    z-index: 8000;
+    backdrop-filter: blur(8px);
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+    background: var(--elevated);
+    box-shadow: var(--accent-glow-sm);
+}

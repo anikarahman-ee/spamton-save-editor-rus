@@ -1,18 +1,24 @@
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <title>Редактор сохранений Deltarune</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Редактор сохранений Deltarune | Spamton Save Editor</title>
     <meta name="google-site-verification" content="5R_Cs8x8q9KpcK9PhsdTehXNhkHrEUiBWnu9QEhOSUc" />
-    <title>Spamton Save Editor</title>
 
+    <meta name="keywords" content="Deltarune, Undertale, Toby Fox, Save File, Editor, Chapter 1, Chapter 2, Chapter 3, Chapter 4, редактор сохранений">
+    <meta name="description" content="Неофициальный русскоязычный редактор сохранений Deltarune. Главы 1–4 и демо-версии.">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-    <meta name="keywords" content="Deltarune, Undertale, Toby Fox, Save File, Editor, Chapter 1, Chapter 2, Chapter 3, Chapter 4">
-    <meta name="description" content="A Save file editor for Deltarune.">
-    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
-
-    <meta property="og:title" content="Редактор сохранений Deltarune" />
-    <meta property="og:type" content="website" />
-    <meta property="og:description" content="A Save file editor for Deltarune." />
-    <meta name="theme-color" content="#0d0d14">
+    <meta property="og:title"       content="Редактор сохранений Deltarune" />
+    <meta property="og:type"        content="website" />
+    <meta property="og:description" content="Неофициальный русскоязычный редактор сохранений Deltarune. Главы 1–4 и демо-версии." />
+    <meta property="og:site_name"   content="Spamton Save Editor" />
+    <meta name="twitter:card"        content="summary" />
+    <meta name="twitter:title"       content="Редактор сохранений Deltarune" />
+    <meta name="twitter:description" content="Неофициальный русскоязычный редактор сохранений Deltarune" />
+    <meta name="theme-color" content="#9b59f4">
+    <link rel="manifest" href="manifest.json">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -22,6 +28,7 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/library.css">
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/enhancements.css">
 
     <style>
         @font-face {
@@ -53,6 +60,7 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" id="skip-to-content" class="skip-to-content">Перейти к содержимому</a>
 
     <!-- ─── Hero Section ─────────────────────── -->
     <div class="hero">
@@ -73,7 +81,7 @@
     </div>
 
     <!-- ─── Chapters Grid ────────────────────── -->
-    <div class="main-container">
+    <div class="main-container" id="main-content" role="main">
         <section class="section-block">
             <h2 class="section-title">Главы</h2>
             <div class="chapters-grid">
@@ -101,7 +109,7 @@
                     </div>
                     <div class="chapter-card-arrow">→</div>
                 </a>
-                <a href="deltarune4.html" class="chapter-card" data-chapter="4">
+                <a href="deltarune4.html" class="chapter-card" data-chapter="4" data-new="true">
                     <div class="chapter-card-number">04</div>
                     <div class="chapter-card-info">
                         <div class="chapter-card-title">Глава 4</div>
@@ -187,6 +195,18 @@
             </div>
         </section>
 
+        <!-- Changelog -->
+        <section class="section-block changelog-section reveal-section">
+            <h2 class="section-title">Changelog</h2>
+            <div id="changelogEntries" class="changelog-entries"></div>
+        </section>
+
+        <!-- Did you know -->
+        <div id="dyk-tip" style="margin: 0 auto 24px; max-width:700px; transition: opacity 0.3s ease;">
+            <span class="dyk-label">Знаете ли вы?</span>
+            <span class="dyk-text"></span>
+        </div>
+
         <footer class="main-footer">
             <p>DELTARUNE by <a href="https://deltarune.com/">Toby Fox</a></p>
             <p class="footer-sub">Этот сайт не связан с Toby Fox</p>
@@ -203,6 +223,7 @@
     <script src="js/profile.js"></script>
     <script src="js/collections.js"></script>
     <script src="js/admin.js"></script>
+    <script src="js/siteEnhancements.js"></script>
     <script>
         if (SupabaseConfig.isConfigured()) {
             Auth.init();
@@ -260,17 +281,13 @@
             }).catch(function () {});
         }
 
-        // Scroll to top
-        (function () {
-            var btn = document.getElementById('scrollTopBtn');
-            if (!btn) return;
-            window.addEventListener('scroll', function () {
-                btn.classList.toggle('visible', window.scrollY > 400);
-            });
-            btn.addEventListener('click', function () {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        })();
+        // Scroll to top (handled by siteEnhancements.js)
+
+        // Stats count-up: set data-target after load so siteEnhancements animates
+        var _origLoadStats = loadStats;
+        loadStats = function () {
+            _origLoadStats();
+        };
     </script>
 </body>
 </html>

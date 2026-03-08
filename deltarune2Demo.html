@@ -72,6 +72,7 @@
   </style>
   <link rel="stylesheet" href="css/deltaruneSavefile.css">
   <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/enhancements.css">
   <link rel="stylesheet"
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
@@ -136,8 +137,12 @@
     <script src="js/saveLibrary.js"></script>
     <script src="js/profile.js"></script>
 
+    <script src="js/siteEnhancements.js"></script>
+    <script src="js/editorEnhancements.js"></script>
   <script>
+    EditorEnhance.initPage("ch2Demo");
     EditorCore.init("ch2Demo");
+    EditorEnhance.patchEditorCore();
         if (typeof TranslationManager !== "undefined") TranslationManager.init("ch2Demo");
         if (SupabaseConfig.isConfigured()) { Auth.init(); CloudSaves.checkPendingSave(); SaveLibrary.checkPendingPublicSave(); }
   </script>
