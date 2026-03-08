@@ -964,8 +964,8 @@ body {
     display: flex;
     align-items: center;
     gap: 16px;
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius-lg);
     padding: 16px 18px;
     text-decoration: none;
@@ -985,17 +985,18 @@ body {
 }
 
 .credit-card:hover {
-    border-color: var(--border-strong);
+    border-color: var(--accent);
     transform: translateY(-3px);
-    box-shadow: var(--shadow-hover);
+    box-shadow: 0 8px 24px rgba(155, 89, 244, 0.18);
 }
 
 .credit-card:hover::before {
-    opacity: 0.05;
+    opacity: 0.06;
 }
 
 .credit-card.credit-dev {
     border-top: 2px solid var(--accent);
+    box-shadow: 0 0 0 1px rgba(155, 89, 244, 0.1);
 }
 
 .credit-icon {
