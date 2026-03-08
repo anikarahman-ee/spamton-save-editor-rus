@@ -489,23 +489,23 @@ var SaveLibrary = (function () {
                             ? '<div class="lib-card-desc">' + escapeHtml(save.description) + '</div>'
                             : '') +
                         '<div class="lib-card-meta">' +
-                            '<span class="' + authorClass + '">👤 ' + escapeHtml(save.author_name) + supporterBadge + '</span>' +
-                            '<span class="lib-card-date">📅 ' + date + '</span>' +
+                            '<span class="' + authorClass + '">' + escapeHtml(save.author_name) + supporterBadge + '</span>' +
+                            '<span class="lib-card-date">' + date + '</span>' +
                         '</div>' +
                         '<div class="lib-card-stats">' +
-                            '<span>⬇ ' + save.downloads + '</span>' +
+                            '<span>Скачали: ' + save.downloads + '</span>' +
                             '<span class="lib-likes-count" data-id="' + save.id + '">♥ ' + save.likes + '</span>' +
                         '</div>' +
                         '<div class="lib-card-actions">' +
                             '<button class="lib-action-btn lib-like-btn' + (isLiked(save.id) ? ' lib-liked' : '') + '" data-id="' + save.id + '" title="Нравится">♥</button>' +
                             '<button class="lib-action-btn lib-download-btn" data-id="' + save.id + '" title="Скачать файл">Скачать</button>' +
                             '<button class="lib-action-btn lib-load-btn" data-id="' + save.id + '" data-chapter="' + save.chapter + '" title="Открыть в редакторе">Открыть</button>' +
-                            '<button class="lib-action-btn lib-comment-btn" data-id="' + save.id + '" title="Комментарии">💬</button>' +
-                            '<button class="lib-action-btn lib-collect-btn" data-id="' + save.id + '" title="В коллекцию">📁</button>' +
-                            '<button class="lib-action-btn lib-share-btn" data-id="' + save.id + '" title="Поделиться ссылкой">🔗</button>' +
-                            (user && !isOwner ? '<button class="lib-action-btn lib-report-btn" data-id="' + save.id + '" title="Пожаловаться">⚠</button>' : '') +
+                            '<button class="lib-action-btn lib-comment-btn" data-id="' + save.id + '" title="Комментарии">Комм.</button>' +
+                            '<button class="lib-action-btn lib-collect-btn" data-id="' + save.id + '" title="В коллекцию">Колл.</button>' +
+                            '<button class="lib-action-btn lib-share-btn" data-id="' + save.id + '" title="Поделиться ссылкой">Ссылка</button>' +
+                            (user && !isOwner ? '<button class="lib-action-btn lib-report-btn" data-id="' + save.id + '" title="Пожаловаться">!</button>' : '') +
                             (isOwner ? '<button class="lib-action-btn lib-delete-btn" data-id="' + save.id + '" title="Удалить публикацию">Удалить</button>' : '') +
-                            (typeof Admin !== 'undefined' && Admin.isAdmin() && !isOwner ? '<button class="lib-action-btn lib-admin-delete-btn" data-id="' + save.id + '" title="Удалить (админ)">🛡 Удалить</button>' : '') +
+                            (typeof Admin !== 'undefined' && Admin.isAdmin() && !isOwner ? '<button class="lib-action-btn lib-admin-delete-btn" data-id="' + save.id + '" title="Удалить (админ)">Удалить</button>' : '') +
                         '</div>' +
                     '</div>';
             });
@@ -619,7 +619,7 @@ var SaveLibrary = (function () {
                         var id = btn.getAttribute('data-id');
                         var c = counts[id] || 0;
                         if (c > 0) {
-                            btn.textContent = '💬 ' + c;
+                            btn.textContent = 'Комм. ' + c;
                             btn.title = 'Комментарии (' + c + ')';
                         }
                     });
@@ -768,7 +768,7 @@ var SaveLibrary = (function () {
                     '<div class="save-item" data-save-id="' + doc.id + '">' +
                         '<div class="save-item-info">' +
                             '<div class="save-item-name">' + escapeHtml(doc.save_name) + '</div>' +
-                            '<div class="save-item-meta">' + chLabel + ' · ' + date + ' · ⬇ ' + (doc.downloads || 0) + '</div>' +
+                            '<div class="save-item-meta">' + chLabel + ' · ' + date + ' · Скачали: ' + (doc.downloads || 0) + '</div>' +
                         '</div>' +
                         '<div class="save-item-actions">' +
                             '<button class="save-action-btn save-delete-btn" data-id="' + doc.id + '" title="Удалить публикацию">✕</button>' +
@@ -852,7 +852,7 @@ var SaveLibrary = (function () {
                 '</div>' +
                 (doc.description ? '<p style="color:#aaa;font-size:14px;margin-bottom:12px">' + escapeHtml(doc.description) + '</p>' : '') +
                 '<div style="color:#666;font-size:13px;margin-bottom:16px">' +
-                    '📅 ' + date + ' · ⬇ ' + (doc.downloads || 0) + ' · ♥ ' + (doc.likes || 0) +
+                    date + ' · Скачали: ' + (doc.downloads || 0) + ' · ♥ ' + (doc.likes || 0) +
                 '</div>' +
                 '<div style="display:flex;gap:8px">' +
                     '<button class="auth-btn auth-btn-full" id="saveDetailDownload">Скачать</button>' +

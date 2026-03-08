@@ -238,7 +238,7 @@ var SaveCollections = (function () {
                 var hasSave = c.save_ids && c.save_ids.indexOf(saveId) >= 0;
                 var idStr = c.id ? String(c.id) : '';
                 html += '<div class="col-add-item' + (hasSave ? ' col-add-item-active' : '') + '" data-id="' + idStr + '">' +
-                        '<span class="col-add-icon">' + (hasSave ? '✓' : '📁') + '</span>' +
+                        '<span class="col-add-icon">' + (hasSave ? '✓' : '[ ]') + '</span>' +
                         '<span class="col-add-name">' + escapeHtml(c.name) + '</span>' +
                         '<span class="col-add-count">' + (c.save_ids ? c.save_ids.length : 0) + ' сохр.</span>' +
                     '</div>';
@@ -255,7 +255,7 @@ var SaveCollections = (function () {
                     if (isActive) {
                         removeFromCollection(cid, saveId).then(function () {
                             self.classList.remove('col-add-item-active');
-                            self.querySelector('.col-add-icon').textContent = '📁';
+                            self.querySelector('.col-add-icon').textContent = '[ ]';
                             showToast('Удалено из коллекции');
                         });
                     } else {
@@ -350,7 +350,6 @@ var SaveCollections = (function () {
             html +=
                 '<div class="col-card" data-id="' + idStr + '">' +
                     '<div class="col-card-header">' +
-                        '<span class="col-card-icon">📁</span>' +
                         '<span class="col-card-name">' + escapeHtml(c.name) + '</span>' +
                     '</div>' +
                     (c.description ? '<div class="col-card-desc">' + escapeHtml(c.description) + '</div>' : '') +

@@ -283,7 +283,7 @@ var Admin = (function () {
         var modal = document.getElementById('authModal');
         var content = document.getElementById('authModalContent');
         content.innerHTML =
-            '<h2 class="auth-title">⚠ Пожаловаться</h2>' +
+            '<h2 class="auth-title">Пожаловаться</h2>' +
             '<div id="authError" class="auth-error"></div>' +
             '<form id="reportForm">' +
                 '<label class="auth-label">Причина жалобы' +
@@ -346,7 +346,7 @@ var Admin = (function () {
         var modal = document.getElementById('authModal');
         var content = document.getElementById('authModalContent');
         content.innerHTML =
-            '<h2 class="auth-title">💡 Предложить идею</h2>' +
+            '<h2 class="auth-title">Предложить идею</h2>' +
             '<div id="authError" class="auth-error"></div>' +
             '<form id="suggestionForm">' +
                 '<label class="auth-label">Категория' +

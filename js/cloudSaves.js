@@ -235,10 +235,10 @@ var CloudSaves = (function () {
                         '</div>' +
                         '<div class="save-item-actions">' +
                             '<button class="save-action-btn save-load-btn" data-id="' + save.id + '" data-chapter="' + save.chapter + '" title="Загрузить в редактор">▶</button>' +
-                            '<button class="save-action-btn save-download-btn" data-id="' + save.id + '" title="Скачать файл">⬇</button>' +
-                            '<button class="save-action-btn save-publish-btn" data-id="' + save.id + '" title="Опубликовать в библиотеку">📢</button>' +
-                            '<button class="save-action-btn save-rename-btn" data-id="' + save.id + '" title="Переименовать">✏</button>' +
-                            '<button class="save-action-btn save-delete-btn" data-id="' + save.id + '" title="Удалить">✕</button>' +
+                            '<button class="save-action-btn save-download-btn" data-id="' + save.id + '" title="Скачать файл">↓</button>' +
+                            '<button class="save-action-btn save-publish-btn" data-id="' + save.id + '" title="Опубликовать в библиотеку">Пуб.</button>' +
+                            '<button class="save-action-btn save-rename-btn" data-id="' + save.id + '" title="Переименовать">Имя</button>' +
+                            '<button class="save-action-btn save-delete-btn" data-id="' + save.id + '" title="Удалить">×</button>' +
                         '</div>' +
                     '</div>';
             });

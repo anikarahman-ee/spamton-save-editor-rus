@@ -64,10 +64,10 @@ var Auth = (function () {
                 '<div id="authBar-user" style="display:none">' +
                     '<div id="authBarAvatar" class="user-avatar user-avatar-letter" style="width:28px;height:28px;font-size:14px;line-height:28px;cursor:pointer;" title="Мой профиль">?</div>' +
                     '<span id="authUserEmail"></span>' +
-                    '<button class="auth-btn auth-btn-small" id="authProfileBtn">👤 Профиль</button>' +
-                    '<a href="library.html" class="auth-btn auth-btn-small auth-btn-outline" id="authLibraryBtn">📚 Библиотека</a>' +
+                    '<button class="auth-btn auth-btn-small" id="authProfileBtn">Профиль</button>' +
+                    '<a href="library.html" class="auth-btn auth-btn-small auth-btn-outline" id="authLibraryBtn">Библиотека</a>' +
                     '<button class="auth-btn auth-btn-small" id="authMySavesBtn">Мои сохранения</button>' +
-                    '<a href="admin.html" class="auth-btn auth-btn-small auth-btn-outline" id="authAdminBtn" style="display:none;color:#ff4444;border-color:#ff4444;">🛡 Админ</a>' +
+                    '<a href="admin.html" class="auth-btn auth-btn-small auth-btn-outline" id="authAdminBtn" style="display:none;color:#ffff00;border-color:#ffff00;">Админ</a>' +
                     '<button class="auth-btn auth-btn-outline auth-btn-small" id="authLogoutBtn">Выйти</button>' +
                 '</div>' +
             '</div>';
@@ -347,7 +347,7 @@ var Auth = (function () {
                                 var abadge = document.createElement('span');
                                 abadge.className = 'admin-badge';
                                 abadge.title = 'Администратор';
-                                abadge.textContent = '🛡';
+                                abadge.textContent = 'ADM';
                                 emailSpan.parentNode.insertBefore(abadge, emailSpan.nextSibling);
                             }
                         }

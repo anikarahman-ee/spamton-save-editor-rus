@@ -24,7 +24,7 @@
             margin: 0;
             padding: 0;
         }
-        a, a:visited, a:hover, a:active { color: #2db4d2; text-decoration: none; }
+        a, a:visited, a:hover, a:active { color: #ffff00; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -32,12 +32,12 @@
     <div class="admin-page">
         <div class="admin-header">
             <a href="index.html" class="admin-back">← На главную</a>
-            <h1 class="admin-title">🛡 Админ-панель</h1>
+            <h1 class="admin-title">Админ-панель</h1>
             <p class="admin-subtitle">Управление сайтом</p>
         </div>
 
         <div id="adminAccessDenied" class="admin-denied" style="display:none;">
-            <h2>⛔ Доступ запрещён</h2>
+            <h2>Доступ запрещён</h2>
             <p>У вас нет прав администратора.</p>
             <a href="index.html" class="auth-btn">На главную</a>
         </div>
@@ -45,16 +45,16 @@
         <div id="adminContent" style="display:none;">
             <!-- Tabs -->
             <div class="admin-tabs">
-                <button class="admin-tab active" data-tab="users">👥 Пользователи</button>
-                <button class="admin-tab" data-tab="reports">⚠ Жалобы <span id="reportsCount" class="admin-tab-badge"></span></button>
-                <button class="admin-tab" data-tab="suggestions">💡 Предложения <span id="suggestionsCount" class="admin-tab-badge"></span></button>
-                <button class="admin-tab" data-tab="saves">📚 Сохранения</button>
+                <button class="admin-tab active" data-tab="users">Пользователи</button>
+                <button class="admin-tab" data-tab="reports">Жалобы <span id="reportsCount" class="admin-tab-badge"></span></button>
+                <button class="admin-tab" data-tab="suggestions">Предложения <span id="suggestionsCount" class="admin-tab-badge"></span></button>
+                <button class="admin-tab" data-tab="saves">Сохранения</button>
             </div>
 
             <!-- Users Tab -->
             <div class="admin-panel" id="tabUsers">
                 <div class="admin-panel-header">
-                    <h2>👥 Управление пользователями</h2>
+                    <h2>Управление пользователями</h2>
                     <div class="admin-search-wrap">
                         <input type="text" id="userSearch" class="admin-search" placeholder="Поиск по имени...">
                     </div>
@@ -67,7 +67,7 @@
             <!-- Reports Tab -->
             <div class="admin-panel" id="tabReports" style="display:none;">
                 <div class="admin-panel-header">
-                    <h2>⚠ Жалобы</h2>
+                    <h2>Жалобы</h2>
                     <div class="admin-filter-wrap">
                         <select id="reportStatusFilter" class="admin-select">
                             <option value="pending">Ожидают</option>
@@ -85,7 +85,7 @@
             <!-- Suggestions Tab -->
             <div class="admin-panel" id="tabSuggestions" style="display:none;">
                 <div class="admin-panel-header">
-                    <h2>💡 Предложения</h2>
+                    <h2>Предложения</h2>
                     <div class="admin-filter-wrap">
                         <select id="suggestionStatusFilter" class="admin-select">
                             <option value="pending">Ожидают</option>
@@ -103,7 +103,7 @@
             <!-- Saves Tab -->
             <div class="admin-panel" id="tabSaves" style="display:none;">
                 <div class="admin-panel-header">
-                    <h2>📚 Управление сохранениями</h2>
+                    <h2>Управление сохранениями</h2>
                     <div class="admin-search-wrap">
                         <input type="text" id="saveSearch" class="admin-search" placeholder="Поиск по названию...">
                     </div>
@@ -225,8 +225,8 @@
                 users.forEach(function (u) {
                     var role = u.role || '';
                     var roleBadge = '';
-                    if (role === 'admin') roleBadge = '<span class="admin-role-badge admin-role-admin">🛡 Admin</span>';
-                    else if (role === 'moderator') roleBadge = '<span class="admin-role-badge admin-role-mod">🔧 Mod</span>';
+                    if (role === 'admin') roleBadge = '<span class="admin-role-badge admin-role-admin">Admin</span>';
+                    else if (role === 'moderator') roleBadge = '<span class="admin-role-badge admin-role-mod">Mod</span>';
                     else if (u.is_supporter) roleBadge = '<span class="admin-role-badge admin-role-supporter">★ Supporter</span>';
 
                     html +=
@@ -244,8 +244,8 @@
                                 '<select class="admin-role-select" data-userid="' + esc(u.user_id) + '">' +
                                     '<option value=""' + (!role ? ' selected' : '') + '>Обычный</option>' +
                                     '<option value="supporter"' + (role === 'supporter' || (!role && u.is_supporter) ? ' selected' : '') + '>★ Supporter</option>' +
-                                    '<option value="moderator"' + (role === 'moderator' ? ' selected' : '') + '>🔧 Модератор</option>' +
-                                    '<option value="admin"' + (role === 'admin' ? ' selected' : '') + '>🛡 Админ</option>' +
+                                    '<option value="moderator"' + (role === 'moderator' ? ' selected' : '') + '>Модератор</option>' +
+                                    '<option value="admin"' + (role === 'admin' ? ' selected' : '') + '>Админ</option>' +
                                 '</select>' +
                                 '<button class="admin-btn admin-btn-apply" data-userid="' + esc(u.user_id) + '">Применить</button>' +
                             '</div>' +
@@ -298,7 +298,7 @@
                         '<div class="admin-item admin-report-item">' +
                             '<div class="admin-item-info">' +
                                 '<div class="admin-item-title">' +
-                                    '⚠ Жалоба на сохранение' +
+                                    'Жалоба на сохранение' +
                                     '<span class="admin-status ' + statusClass + '">' + statusLabel + '</span>' +
                                 '</div>' +
                                 '<div class="admin-item-meta">' +
@@ -312,9 +312,9 @@
                             '</div>' +
                             '<div class="admin-item-actions">' +
                                 (r.status === 'pending' ?
-                                    '<button class="admin-btn admin-btn-resolve" data-id="' + r.id + '">✓ Решить</button>' +
-                                    '<button class="admin-btn admin-btn-reject" data-id="' + r.id + '">✕ Отклонить</button>' +
-                                    '<button class="admin-btn admin-btn-danger" data-id="' + r.id + '" data-saveid="' + esc(r.target_id || '') + '">🗑 Удалить сейв</button>'
+                                    '<button class="admin-btn admin-btn-resolve" data-id="' + r.id + '">Решить</button>' +
+                                    '<button class="admin-btn admin-btn-reject" data-id="' + r.id + '">Отклонить</button>' +
+                                    '<button class="admin-btn admin-btn-danger" data-id="' + r.id + '" data-saveid="' + esc(r.target_id || '') + '">Удалить сейв</button>'
                                 : '') +
                                 '<button class="admin-btn admin-btn-delete-report" data-id="' + r.id + '">Удалить</button>' +
                             '</div>' +
@@ -396,11 +396,11 @@
                 }
 
                 var categoryLabels = {
-                    feature: '🆕 Новая функция',
-                    improvement: '📈 Улучшение',
-                    bugfix: '🐛 Исправление',
-                    design: '🎨 Дизайн',
-                    other: '📝 Другое'
+                    feature: 'Новая функция',
+                    improvement: 'Улучшение',
+                    bugfix: 'Исправление',
+                    design: 'Дизайн',
+                    other: 'Другое'
                 };
 
                 var html = '';
@@ -426,11 +426,11 @@
                             '</div>' +
                             '<div class="admin-item-actions">' +
                                 (s.status === 'pending' ?
-                                    '<button class="admin-btn admin-btn-accept-sug" data-id="' + s.id + '">✓ Принять</button>' +
-                                    '<button class="admin-btn admin-btn-reject-sug" data-id="' + s.id + '">✕ Отклонить</button>'
+                                    '<button class="admin-btn admin-btn-accept-sug" data-id="' + s.id + '">Принять</button>' +
+                                    '<button class="admin-btn admin-btn-reject-sug" data-id="' + s.id + '">Отклонить</button>'
                                 : '') +
-                                '<button class="admin-btn admin-btn-respond-sug" data-id="' + s.id + '">💬 Ответить</button>' +
-                                '<button class="admin-btn admin-btn-delete-sug" data-id="' + s.id + '">🗑</button>' +
+                                '<button class="admin-btn admin-btn-respond-sug" data-id="' + s.id + '">Ответить</button>' +
+                                '<button class="admin-btn admin-btn-delete-sug" data-id="' + s.id + '">Удалить</button>' +
                             '</div>' +
                         '</div>';
                 });
@@ -527,13 +527,13 @@
                                 '<div class="admin-item-meta">' +
                                     'Глава: ' + esc(s.chapter || '—') +
                                     ' · Автор: ' + esc(s.author_name || 'Аноним') +
-                                    ' · ⬇ ' + (s.downloads || 0) +
-                                    ' · ♥ ' + (s.likes || 0) +
+                                    ' · Загрузки: ' + (s.downloads || 0) +
+                                    ' · Лайки: ' + (s.likes || 0) +
                                     ' · ' + formatDate(s.published_at) +
                                 '</div>' +
                             '</div>' +
                             '<div class="admin-item-actions">' +
-                                '<button class="admin-btn admin-btn-danger admin-delete-save" data-id="' + s.id + '">🗑 Удалить</button>' +
+                                '<button class="admin-btn admin-btn-danger admin-delete-save" data-id="' + s.id + '">Удалить</button>' +
                             '</div>' +
                         '</div>';
                 });
