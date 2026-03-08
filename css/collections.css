@@ -1,0 +1,207 @@
+/* ─── Collections Page ─────────────────────── */
+.col-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+}
+
+.col-header {
+    padding: 40px 0 30px;
+    border-bottom: 1px solid #1a1a1a;
+    margin-bottom: 30px;
+}
+
+.col-page-title {
+    font-size: 28px;
+    margin: 0 0 6px;
+    color: #fff;
+}
+
+.col-page-subtitle {
+    font-size: 14px;
+    color: #888;
+    margin: 0 0 20px;
+}
+
+.col-header-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.lib-back-link {
+    color: #2db4d2 !important;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+/* ─── Grid ─────────────────────────────────── */
+.col-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+/* ─── Cards ────────────────────────────────── */
+.col-card {
+    background: #111;
+    border: 1px solid #222;
+    padding: 18px;
+    transition: all .2s;
+}
+
+.col-card:hover {
+    border-color: #2db4d2;
+    background: #161616;
+}
+
+.col-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.col-card-icon {
+    font-size: 24px;
+}
+
+.col-card-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.col-card-desc {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    max-height: 40px;
+    overflow: hidden;
+}
+
+.col-card-meta {
+    display: flex;
+    gap: 14px;
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 14px;
+}
+
+.col-card-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ─── Detail View ──────────────────────────── */
+.col-detail-header {
+    margin-bottom: 24px;
+}
+
+.col-detail-title {
+    font-size: 24px;
+    margin: 12px 0 6px;
+    color: #fff;
+}
+
+.col-detail-desc {
+    color: #888;
+    font-size: 14px;
+    margin: 0 0 6px;
+}
+
+.col-detail-meta {
+    color: #555;
+    font-size: 12px;
+}
+
+.col-detail-saves {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.col-save-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #111;
+    border: 1px solid #1a1a1a;
+    padding: 12px 16px;
+    transition: border-color .2s;
+}
+
+.col-save-item:hover {
+    border-color: #333;
+}
+
+.col-save-ch {
+    background: #1a1a2e;
+    color: #2db4d2;
+    padding: 2px 8px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    border: 1px solid #2db4d233;
+}
+
+.col-save-name {
+    flex: 1;
+    font-size: 15px;
+    color: #ccc;
+}
+
+.col-save-author {
+    font-size: 12px;
+    color: #555;
+}
+
+/* ─── Add to Collection Modal items ────────── */
+.col-add-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.col-add-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid #222;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.col-add-item:hover {
+    border-color: #2db4d2;
+    background: #1a1a1a;
+}
+
+.col-add-item-active {
+    border-color: #2db4d2;
+    background: #0d2a30;
+}
+
+.col-add-icon {
+    font-size: 18px;
+    min-width: 26px;
+    text-align: center;
+}
+
+.col-add-name {
+    flex: 1;
+    font-size: 14px;
+}
+
+.col-add-count {
+    font-size: 11px;
+    color: #555;
+}
+
+/* ─── Responsive ───────────────────────────── */
+@media (max-width: 640px) {
+    .col-grid { grid-template-columns: 1fr; }
+    .col-header-actions { flex-direction: column; align-items: flex-start; }
+}

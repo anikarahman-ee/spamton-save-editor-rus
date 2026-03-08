@@ -1,0 +1,746 @@
+/* ============================================
+   Auth & Cloud Saves — стили
+   Spamton Save Editor
+   ============================================ */
+
+/* ─── Auth Bar ─────────────────────────────── */
+
+#authBar {
+    background: #111;
+    border-bottom: 1px solid #333;
+    padding: 8px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+#authBar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+#authBar-guest,
+#authBar-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#authUserEmail {
+    color: #aaa;
+    font-size: 14px;
+    margin-right: 4px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ─── Auth Buttons ─────────────────────────── */
+
+.auth-btn {
+    background: #2db4d2;
+    color: #000;
+    border: none;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.auth-btn:hover {
+    background: #3ac5e3;
+}
+
+.auth-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.auth-btn-outline {
+    background: transparent;
+    color: #2db4d2;
+    border: 1px solid #2db4d2;
+}
+
+.auth-btn-outline:hover {
+    background: rgba(45, 180, 210, 0.15);
+}
+
+.auth-btn-small {
+    padding: 5px 12px;
+    font-size: 13px;
+}
+
+.auth-btn-full {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.auth-btn-google {
+    background: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.auth-btn-google:hover {
+    background: #f5f5f5;
+}
+
+/* ─── Auth Modal ───────────────────────────── */
+
+.auth-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(4px);
+}
+
+.auth-modal {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 32px;
+    width: 90%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.auth-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.auth-modal-close:hover {
+    color: #fff;
+}
+
+.auth-title {
+    color: #fff;
+    margin: 0 0 20px;
+    font-size: 22px;
+    text-align: center;
+}
+
+.auth-label {
+    display: block;
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 14px;
+}
+
+.auth-input {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    background: #111;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.auth-input:focus {
+    border-color: #2db4d2;
+}
+
+.auth-error {
+    background: rgba(255, 70, 70, 0.15);
+    border: 1px solid rgba(255, 70, 70, 0.3);
+    color: #ff6b6b;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 14px;
+    display: none;
+}
+
+.auth-divider {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+.auth-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #333;
+}
+
+.auth-divider span {
+    background: #1a1a1a;
+    color: #666;
+    padding: 0 12px;
+    position: relative;
+    font-size: 13px;
+}
+
+.auth-switch {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    margin-top: 18px;
+}
+
+.auth-switch a {
+    color: #2db4d2;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* ─── Publish notice & textarea ────────────── */
+
+.publish-notice {
+    color: #888;
+    font-size: 13px;
+    margin: 12px 0;
+    padding: 10px;
+    background: rgba(45, 180, 210, 0.1);
+    border: 1px solid rgba(45, 180, 210, 0.2);
+    border-radius: 4px;
+}
+
+.auth-textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* ─── Saves List ───────────────────────────── */
+
+#savesFilterBar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.saves-filter-btn {
+    background: #222;
+    color: #aaa;
+    border: 1px solid #444;
+    padding: 5px 12px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.saves-filter-btn:hover {
+    background: #333;
+    color: #fff;
+}
+
+.saves-filter-btn.active {
+    background: #2db4d2;
+    color: #000;
+    border-color: #2db4d2;
+}
+
+.saves-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.saves-loading,
+.saves-empty,
+.saves-error {
+    text-align: center;
+    padding: 24px;
+    color: #888;
+    font-size: 14px;
+}
+
+.saves-error {
+    color: #ff6b6b;
+}
+
+.save-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    transition: background 0.2s;
+}
+
+.save-item:hover {
+    background: #222;
+}
+
+.save-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.save-item-name {
+    color: #fff;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.save-item-meta {
+    color: #777;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.save-item-actions {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+    margin-left: 12px;
+}
+
+.save-action-btn {
+    background: #333;
+    color: #ccc;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.save-action-btn:hover {
+    background: #444;
+    color: #fff;
+}
+
+.save-load-btn:hover {
+    background: #2db4d2;
+    color: #000;
+}
+
+.save-delete-btn:hover {
+    background: #e74c3c;
+    color: #fff;
+}
+
+/* ─── Cloud Save Button (in editor) ────────── */
+
+.cloud-save-btn {
+    display: inline-block;
+    padding: .5em 1em;
+    border: 2px solid #2db4d2;
+    color: #2db4d2;
+    cursor: pointer;
+    margin-top: 1em;
+    margin-left: 10px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.cloud-save-btn:hover {
+    background: #2db4d2;
+    color: #000;
+}
+
+.cloud-load-btn {
+    display: inline-block;
+    padding: .5em 1em;
+    border: 2px solid #27ae60;
+    color: #27ae60;
+    cursor: pointer;
+    margin-top: 1em;
+    margin-left: 10px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.cloud-load-btn:hover {
+    background: #27ae60;
+    color: #000;
+}
+
+.cloud-publish-btn {
+    display: inline-block;
+    padding: .5em 1em;
+    border: 2px solid #e67e22;
+    color: #e67e22;
+    cursor: pointer;
+    margin-top: 1em;
+    margin-left: 10px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.cloud-publish-btn:hover {
+    background: #e67e22;
+    color: #000;
+}
+
+.save-publish-btn:hover {
+    background: #e67e22;
+    color: #000;
+}
+
+/* ─── Toast notification ───────────────────── */
+
+.cloud-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #2db4d2;
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: inherit;
+    z-index: 20000;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+}
+
+.cloud-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ─── Responsive ───────────────────────────── */
+
+@media (max-width: 600px) {
+    .auth-modal {
+        padding: 20px;
+        margin: 10px;
+        width: calc(100% - 20px);
+    }
+
+    #authBar-inner {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    #authUserEmail {
+        max-width: 140px;
+        font-size: 12px;
+    }
+
+    .save-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .save-item-actions {
+        margin-left: 0;
+        margin-top: 8px;
+    }
+}
+
+/* ─── User Avatar ──────────────────────────── */
+
+.user-avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.user-avatar-letter {
+    background: #1a2a3a;
+    color: #2db4d2;
+    text-align: center;
+    border: 1px solid #2db4d233;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ─── Supporter ────────────────────────────── */
+
+.supporter-avatar {
+    border: 2px solid #ffcc00 !important;
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.4), 0 0 16px rgba(255, 204, 0, 0.15);
+}
+
+.supporter-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffcc00, #ff9900);
+    color: #000;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+    line-height: 1.4;
+    text-shadow: none;
+    white-space: nowrap;
+}
+
+.supporter-status-bar {
+    background: linear-gradient(135deg, rgba(255,204,0,0.12), rgba(255,153,0,0.08));
+    border: 1px solid rgba(255, 204, 0, 0.3);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    color: #ffcc00;
+    font-size: 13px;
+    text-align: center;
+}
+
+.supporter-promo {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.supporter-promo-link {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid #ffcc00;
+    border-radius: 4px;
+    color: #ffcc00 !important;
+    font-size: 13px;
+    font-family: inherit;
+    text-decoration: none !important;
+    transition: all 0.25s;
+    letter-spacing: 0.5px;
+}
+
+.supporter-promo-link:hover {
+    background: #ffcc00;
+    color: #000 !important;
+    box-shadow: 0 0 16px rgba(255, 204, 0, 0.4);
+}
+
+.comment-author-supporter {
+    color: #ffcc00 !important;
+}
+
+.lib-card-author-supporter {
+    color: #ffcc00;
+}
+
+/* ─── Profile Modal ────────────────────────── */
+
+.profile-modal {
+    max-width: 460px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.profile-avatar-wrap {
+    position: relative;
+}
+
+.profile-avatar-edit {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    background: #2db4d2;
+    color: #000;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background .2s;
+}
+
+.profile-avatar-edit:hover {
+    background: #3ac5e3;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 20px;
+    margin: 0 0 4px;
+    color: #fff;
+}
+
+.profile-bio {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.4;
+}
+
+.profile-bio-input {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* ─── Comments ─────────────────────────────── */
+
+.comments-modal {
+    max-width: 560px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.comments-section {
+    padding: 4px 0;
+}
+
+.comments-title {
+    font-size: 18px;
+    margin: 0 0 14px;
+    color: #ffcc00;
+    letter-spacing: 1px;
+}
+
+.comments-list {
+    max-height: 340px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+}
+
+.comments-empty,
+.comments-loading {
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+    padding: 20px 0;
+}
+
+.comments-login-hint {
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+    padding: 10px 0;
+}
+
+.comment-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.comment-item:last-child {
+    border-bottom: none;
+}
+
+.comment-avatar {
+    flex-shrink: 0;
+}
+
+.comment-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.comment-author {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2db4d2;
+}
+
+.comment-date {
+    font-size: 11px;
+    color: #555;
+}
+
+.comment-delete {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    transition: color .2s;
+}
+
+.comment-delete:hover {
+    color: #ff4444;
+}
+
+.comment-text {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.comment-form {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+.comment-input {
+    flex: 1;
+    background: #111;
+    border: 1px solid #333;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px 10px;
+    resize: none;
+    border-radius: 4px;
+}
+
+.comment-input:focus {
+    border-color: #2db4d2;
+    outline: none;
+}
+
+.comment-submit {
+    flex-shrink: 0;
+}

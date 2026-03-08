@@ -1,0 +1,104 @@
+<html>
+<head>
+    <title>Коллекции — Spamton Save Editor</title>
+
+    <meta name="keywords" content="Deltarune, Save File, Collections, Community">
+    <meta name="description" content="Коллекции сохранений Deltarune. Подборки от игроков.">
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+
+    <meta property="og:title" content="Коллекции — Spamton Save Editor" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Коллекции сохранений Deltarune. Подборки от игроков." />
+    <meta name="theme-color" content="#000000">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/collections.css">
+    <link rel="stylesheet" href="css/library.css">
+
+    <style>
+        @font-face {
+            font-family: 'DeterminationCyrillic';
+            src: url('fonts/determinationmonorusbylyajk.otf');
+        }
+        @font-face {
+            font-family: 'DeterminationCyrillic', DeterminationMonoWebRegular,;
+            src: url('/fonts/determination-mono-web-font/DeterminationMonoWebRegular-Z5oq.ttf');
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-family: 'DeterminationCyrillic', DeterminationMonoWebRegular, 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        a, a:visited, a:hover, a:active {
+            color: #2db4d2;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="col-page">
+        <div class="col-header">
+            <h1 class="col-page-title">📁 Коллекции сохранений</h1>
+            <p class="col-page-subtitle">Подборки сохранений от игроков сообщества</p>
+            <div class="col-header-actions">
+                <a href="index.html" class="lib-back-link">← На главную</a>
+                <a href="library.html" class="lib-back-link">📚 Библиотека</a>
+                <button class="auth-btn" id="colCreateBtn">+ Создать коллекцию</button>
+                <button class="auth-btn auth-btn-outline" id="colMyBtn">Мои коллекции</button>
+                <button class="auth-btn auth-btn-outline" id="colAllBtn">Все коллекции</button>
+            </div>
+        </div>
+
+        <div id="colGrid" class="col-grid">
+            <p style="text-align:center;color:#888;">Загрузка...</p>
+        </div>
+    </div>
+
+    <button class="scroll-top-btn" id="scrollTopBtn" title="Наверх">↑</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabaseConfig.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cloudSaves.js"></script>
+    <script src="js/saveLibrary.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/collections.js"></script>
+    <script>
+        if (SupabaseConfig.isConfigured()) {
+            Auth.init();
+            Auth.onAuthChange(function () {
+                SaveCollections.initCollectionsPage();
+            });
+        } else {
+            document.getElementById('colGrid').innerHTML =
+                '<p style="text-align:center;color:#ff4444;">Supabase не настроен.</p>';
+        }
+
+        // Scroll to top
+        (function () {
+            var btn = document.getElementById('scrollTopBtn');
+            if (!btn) return;
+            window.addEventListener('scroll', function () {
+                btn.classList.toggle('visible', window.scrollY > 400);
+            });
+            btn.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script>
+</body>
+</html>

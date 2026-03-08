@@ -1,12 +1,12 @@
 <html>
 <head>
-    <title>Spamton Save Editor</title>
+    <title>Редактор сохранений Deltarune</title>
 
     <meta name="keywords" content="Deltarune, Undertale, Toby Fox, Save File, Editor, Chapter 1, Chapter 2, Chapter 3, Chapter 4">
     <meta name="description" content="A Save file editor for Deltarune.">
     <meta http-equiv="content-type" content="text/html; charset = UTF-8">
 
-    <meta property="og:title" content="Spamton Save Editor" />
+    <meta property="og:title" content="Редактор сохранений Deltarune" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="A Save file editor for Deltarune." />
     <meta name="theme-color" content="#000000">
@@ -14,12 +14,13 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/library.css">
+    <link rel="stylesheet" href="css/admin.css">
 
     <style>
-
-
-
         @font-face {
             font-family: 'DeterminationCyrillic';
             src: url('fonts/determinationmonorusbylyajk.otf');
@@ -29,7 +30,6 @@
             src: url('/fonts/determination-mono-web-font/DeterminationMonoWebRegular-Z5oq.ttf');
         }
 
-
         *, *::before, *::after {
             box-sizing: border-box;
         }
@@ -37,64 +37,251 @@
         body {
             background-color: #000000;
             color: #FFFFFF;
-            font-size: 1.5vw;
+            font-size: 16px;
             font-family: 'DeterminationCyrillic', DeterminationMonoWebRegular, 'Ubuntu', sans-serif;
-            width: 100vw;
-            height: 100vh;
             margin: 0;
             padding: 0;
-            vertical-align: top;
         }
 
         a, a:visited, a:hover, a:active {
             color: #2db4d2;
-            text-decoration: inherit;
-        }
-
-
-        @keyframes colorFade {
-            0% {
-                color: #2db4d2;
-            }
-            33% {
-                color: #70d0ff;
-            }
-            66% {
-                color: #ff7f50;
-            }
-            100% {
-                color: #8a2be2;
-            }
-        }
-
-        .color-fade {
-            font-size: 38px;
-            animation: colorFade 10s infinite alternate ease-in-out;
-            transition: color 1s ease-in-out;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
 
-    <br><br><center style="font-size:52">Spamton Save Editor</center>
-    <center style="font-size:24">Неофициальный редактор сохранений Deltarune</center>
-    <br><br>
-    <center><a href="https://deltarune.com/" class="color-fade">Купить Deltarune</a></center>
-    <br><br><hr><br>
+    <!-- ─── Hero Section ─────────────────────── -->
+    <div class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-logo">
+                <span class="hero-bracket">[</span>
+                <span class="hero-title-text">SPAMTON</span>
+                <span class="hero-bracket">]</span>
+            </div>
+            <h1 class="hero-subtitle">SAVE EDITOR</h1>
+            <p class="hero-desc">Неофициальный редактор сохранений Deltarune</p>
+            <a href="https://deltarune.com/" class="hero-cta">
+                <span class="hero-cta-icon">♥</span> Купить Deltarune
+            </a>
+        </div>
+        <div class="hero-scanlines"></div>
+    </div>
 
-    <center>Демо-главы</center>
-    <center><a href='deltarune1Demo.html'>(ДЕМО) Deltarune Глава 1</a></center>
-    <center><a href='deltarune2Demo.html'>(ДЕМО) Deltarune Глава 2</a></center>
-    <br><hr>
-    <br><center>Главы</center><br>
-    <center><a href='deltarune1.html'>Deltarune Глава 1</a></center>
-    <br>
-    <center><a href='deltarune2.html'>Deltarune Глава 2</a></center>
-    <br>
-    <center><a href='deltarune3.html'>Deltarune Глава 3</a></center>
-    <br>
-    <center><a href='deltarune4.html'>Deltarune Глава 4</a></center>
-    <br><br><br>
-    <br />
+    <!-- ─── Chapters Grid ────────────────────── -->
+    <div class="main-container">
+        <section class="section-block">
+            <h2 class="section-title">
+                <span class="section-icon">⚔</span> Главы
+            </h2>
+            <div class="chapters-grid">
+                <a href="deltarune1.html" class="chapter-card" data-chapter="1">
+                    <div class="chapter-card-number">01</div>
+                    <div class="chapter-card-info">
+                        <div class="chapter-card-title">Глава 1</div>
+                        <div class="chapter-card-sub">THE BEGINNING</div>
+                    </div>
+                    <div class="chapter-card-arrow">→</div>
+                </a>
+                <a href="deltarune2.html" class="chapter-card" data-chapter="2">
+                    <div class="chapter-card-number">02</div>
+                    <div class="chapter-card-info">
+                        <div class="chapter-card-title">Глава 2</div>
+                        <div class="chapter-card-sub">A CYBER'S WORLD</div>
+                    </div>
+                    <div class="chapter-card-arrow">→</div>
+                </a>
+                <a href="deltarune3.html" class="chapter-card" data-chapter="3">
+                    <div class="chapter-card-number">03</div>
+                    <div class="chapter-card-info">
+                        <div class="chapter-card-title">Глава 3</div>
+                        <div class="chapter-card-sub">???</div>
+                    </div>
+                    <div class="chapter-card-arrow">→</div>
+                </a>
+                <a href="deltarune4.html" class="chapter-card" data-chapter="4">
+                    <div class="chapter-card-number">04</div>
+                    <div class="chapter-card-info">
+                        <div class="chapter-card-title">Глава 4</div>
+                        <div class="chapter-card-sub">???</div>
+                    </div>
+                    <div class="chapter-card-arrow">→</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Demo Section -->
+        <section class="section-block section-demo">
+            <h2 class="section-title">
+                <span class="section-icon">🎮</span> Демо-версии
+            </h2>
+            <div class="demo-grid">
+                <a href="deltarune1Demo.html" class="demo-card">
+                    <span class="demo-badge">DEMO</span>
+                    <span class="demo-name">Глава 1</span>
+                </a>
+                <a href="deltarune2Demo.html" class="demo-card">
+                    <span class="demo-badge">DEMO</span>
+                    <span class="demo-name">Глава 2</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section class="section-block">
+            <h2 class="section-title">
+                <span class="section-icon">🌐</span> Сообщество
+            </h2>
+            <div class="community-grid">
+                <a href="library.html" class="community-card community-library">
+                    <div class="community-card-icon">📚</div>
+                    <div class="community-card-info">
+                        <div class="community-card-title">Библиотека сохранений</div>
+                        <div class="community-card-desc">Скачивайте и публикуйте сохранения</div>
+                    </div>
+                </a>
+                <a href="collections.html" class="community-card community-collections">
+                    <div class="community-card-icon">📁</div>
+                    <div class="community-card-info">
+                        <div class="community-card-title">Коллекции</div>
+                        <div class="community-card-desc">Подборки сохранений от игроков</div>
+                    </div>
+                </a>
+                <div class="community-card community-profile" id="profileCard" style="display:none; cursor:pointer;">
+                    <div class="community-card-icon">👤</div>
+                    <div class="community-card-info">
+                        <div class="community-card-title">Мой профиль</div>
+                        <div class="community-card-desc">Аватарка, описание, публикации</div>
+                    </div>
+                </div>
+                <a href="https://boosty.to/spamton" target="_blank" class="community-card community-boosty">
+                    <div class="community-card-icon">★</div>
+                    <div class="community-card-info">
+                        <div class="community-card-title">Поддержать на Boosty</div>
+                        <div class="community-card-desc">Получите статус Supporter и жёлтую рамку</div>
+                    </div>
+                </a>
+                <div class="community-card community-suggestion" id="suggestionCard" style="display:none; cursor:pointer;">
+                    <div class="community-card-icon">💡</div>
+                    <div class="community-card-info">
+                        <div class="community-card-title">Предложить идею</div>
+                        <div class="community-card-desc">Отправьте предложение по улучшению</div>
+                    </div>
+                </div>
+                <a href="admin.html" class="community-card community-admin" id="adminCard" style="display:none;">
+                    <div class="community-card-icon">🛡</div>
+                    <div class="community-card-info">
+                        <div class="community-card-title">Админ-панель</div>
+                        <div class="community-card-desc">Управление сайтом</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Stats ticker -->
+        <section class="section-block stats-section" id="statsSection" style="display:none;">
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-value" id="statSaves">—</span>
+                    <span class="stat-label">сохранений</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="statUsers">—</span>
+                    <span class="stat-label">авторов</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="statDownloads">—</span>
+                    <span class="stat-label">скачиваний</span>
+                </div>
+            </div>
+        </section>
+
+        <footer class="main-footer">
+            <p>DELTARUNE by <a href="https://deltarune.com/">Toby Fox</a></p>
+            <p class="footer-sub">Этот сайт не связан с Toby Fox</p>
+            <p class="footer-sub"><a href="https://boosty.to/spamton" target="_blank" class="boosty-footer-link">★ Поддержать на Boosty</a></p>
+        </footer>
+    </div>
+
+    <button class="scroll-top-btn" id="scrollTopBtn" title="Наверх">↑</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabaseConfig.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cloudSaves.js"></script>
+    <script src="js/saveLibrary.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/collections.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        if (SupabaseConfig.isConfigured()) {
+            Auth.init();
+            Auth.onAuthChange(function (user) {
+                var profileCard = document.getElementById('profileCard');
+                var suggestionCard = document.getElementById('suggestionCard');
+                var adminCard = document.getElementById('adminCard');
+                if (user) {
+                    profileCard.style.display = '';
+                    suggestionCard.style.display = '';
+                    loadStats();
+                    // Check admin
+                    if (typeof Admin !== 'undefined') {
+                        Admin.checkAdmin().then(function (isAdmin) {
+                            if (isAdmin && adminCard) adminCard.style.display = '';
+                        });
+                    }
+                } else {
+                    profileCard.style.display = 'none';
+                    suggestionCard.style.display = 'none';
+                    if (adminCard) adminCard.style.display = 'none';
+                }
+            });
+
+            document.getElementById('profileCard').addEventListener('click', function () {
+                if (typeof UserProfile !== 'undefined') {
+                    UserProfile.showProfileModal();
+                }
+            });
+
+            document.getElementById('suggestionCard').addEventListener('click', function () {
+                if (typeof Admin !== 'undefined') {
+                    Admin.showSuggestionModal();
+                }
+            });
+        }
+
+        function loadStats() {
+            var sb = SupabaseConfig.getClient();
+            if (!sb) return;
+            Promise.all([
+                sb.from('public_saves').select('id', { count: 'exact', head: true }),
+                sb.from('public_saves').select('downloads'),
+                sb.from('public_saves').select('user_id')
+            ]).then(function (results) {
+                var totalSaves = results[0].count || 0;
+                var downloads = results[1].data || [];
+                var totalDownloads = downloads.reduce(function (sum, s) { return sum + (s.downloads || 0); }, 0);
+                var userIds = results[2].data || [];
+                var uniqueUsers = new Set(userIds.map(function (s) { return s.user_id; })).size;
+                document.getElementById('statSaves').textContent = totalSaves;
+                document.getElementById('statUsers').textContent = uniqueUsers;
+                document.getElementById('statDownloads').textContent = totalDownloads;
+                document.getElementById('statsSection').style.display = '';
+            }).catch(function () {});
+        }
+
+        // Scroll to top
+        (function () {
+            var btn = document.getElementById('scrollTopBtn');
+            if (!btn) return;
+            window.addEventListener('scroll', function () {
+                btn.classList.toggle('visible', window.scrollY > 400);
+            });
+            btn.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script>
 </body>
 </html>

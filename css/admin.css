@@ -1,0 +1,466 @@
+/* ─── Admin Panel Styles ──────────────────────── */
+
+.admin-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.admin-header {
+    text-align: center;
+    padding: 30px 0 20px;
+    border-bottom: 1px solid #222;
+    margin-bottom: 24px;
+}
+
+.admin-back {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #2db4d2;
+    font-size: 14px;
+}
+.admin-back:hover {
+    text-decoration: underline;
+}
+
+.admin-title {
+    font-size: 28px;
+    margin: 0 0 8px;
+    color: #fff;
+}
+
+.admin-subtitle {
+    color: #888;
+    margin: 0;
+    font-size: 14px;
+}
+
+.admin-denied {
+    text-align: center;
+    padding: 60px 20px;
+    color: #ff4444;
+}
+.admin-denied h2 {
+    font-size: 24px;
+    margin: 0 0 16px;
+}
+.admin-denied p {
+    color: #888;
+    margin: 0 0 24px;
+}
+
+/* ─── Tabs ───────────────────────────────────── */
+
+.admin-tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 2px solid #222;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.admin-tab {
+    background: none;
+    border: none;
+    color: #888;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.2s, border-color 0.2s;
+    position: relative;
+}
+.admin-tab:hover {
+    color: #fff;
+}
+.admin-tab.active {
+    color: #2db4d2;
+    border-bottom-color: #2db4d2;
+}
+
+.admin-tab-badge {
+    display: inline-block;
+    background: #ff4444;
+    color: #fff;
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-left: 4px;
+    min-width: 18px;
+    text-align: center;
+}
+.admin-tab-badge:empty {
+    display: none;
+}
+
+/* ─── Panel ──────────────────────────────────── */
+
+.admin-panel {
+    animation: fadeIn 0.2s;
+}
+
+.admin-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.admin-panel-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #fff;
+}
+
+.admin-search-wrap,
+.admin-filter-wrap {
+    flex-shrink: 0;
+}
+
+.admin-search {
+    background: #111;
+    border: 1px solid #333;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    width: 250px;
+    max-width: 100%;
+}
+.admin-search:focus {
+    outline: none;
+    border-color: #2db4d2;
+}
+
+.admin-select {
+    background: #111;
+    border: 1px solid #333;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.admin-select:focus {
+    outline: none;
+    border-color: #2db4d2;
+}
+
+/* ─── List Items ─────────────────────────────── */
+
+.admin-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-item {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: border-color 0.2s;
+}
+.admin-item:hover {
+    border-color: #333;
+}
+
+.admin-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-item-title {
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.admin-item-desc {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 6px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 80px;
+    overflow-y: auto;
+}
+
+.admin-item-meta {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.admin-item-actions {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+/* ─── Buttons ────────────────────────────────── */
+
+.admin-btn {
+    background: #222;
+    border: 1px solid #333;
+    color: #ccc;
+    font-family: inherit;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+.admin-btn:hover {
+    background: #333;
+    color: #fff;
+}
+.admin-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.admin-btn-apply {
+    background: #1a4a5c;
+    border-color: #2db4d2;
+    color: #2db4d2;
+}
+.admin-btn-apply:hover {
+    background: #2db4d2;
+    color: #000;
+}
+
+.admin-btn-danger {
+    background: #3a1111;
+    border-color: #ff4444;
+    color: #ff4444;
+}
+.admin-btn-danger:hover {
+    background: #ff4444;
+    color: #fff;
+}
+
+.admin-btn-resolve {
+    background: #113a11;
+    border-color: #44ff44;
+    color: #44ff44;
+}
+.admin-btn-resolve:hover {
+    background: #44ff44;
+    color: #000;
+}
+
+.admin-btn-reject {
+    background: #3a2a11;
+    border-color: #ff8844;
+    color: #ff8844;
+}
+.admin-btn-reject:hover {
+    background: #ff8844;
+    color: #000;
+}
+
+.admin-btn-accept-sug {
+    background: #113a11;
+    border-color: #44ff44;
+    color: #44ff44;
+}
+.admin-btn-accept-sug:hover {
+    background: #44ff44;
+    color: #000;
+}
+
+.admin-btn-reject-sug {
+    background: #3a2a11;
+    border-color: #ff8844;
+    color: #ff8844;
+}
+.admin-btn-reject-sug:hover {
+    background: #ff8844;
+    color: #000;
+}
+
+.admin-btn-respond-sug {
+    background: #1a1a3a;
+    border-color: #6666ff;
+    color: #8888ff;
+}
+.admin-btn-respond-sug:hover {
+    background: #6666ff;
+    color: #fff;
+}
+
+.admin-btn-delete-sug,
+.admin-btn-delete-report {
+    background: #2a1111;
+    border-color: #882222;
+    color: #aa4444;
+}
+.admin-btn-delete-sug:hover,
+.admin-btn-delete-report:hover {
+    background: #882222;
+    color: #fff;
+}
+
+/* ─── Role badges ────────────────────────────── */
+
+.admin-role-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+    font-weight: 500;
+}
+.admin-role-admin {
+    background: rgba(255, 68, 68, 0.2);
+    color: #ff4444;
+    border: 1px solid #ff4444;
+}
+.admin-role-mod {
+    background: rgba(68, 136, 255, 0.2);
+    color: #4488ff;
+    border: 1px solid #4488ff;
+}
+.admin-role-supporter {
+    background: rgba(255, 204, 0, 0.2);
+    color: #ffcc00;
+    border: 1px solid #ffcc00;
+}
+
+.admin-role-select {
+    background: #111;
+    border: 1px solid #333;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ─── Status badges ──────────────────────────── */
+
+.admin-status {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+}
+.admin-status-pending {
+    background: rgba(255, 170, 0, 0.2);
+    color: #ffaa00;
+}
+.admin-status-resolved,
+.admin-status-accepted,
+.admin-status-done {
+    background: rgba(68, 255, 68, 0.2);
+    color: #44ff44;
+}
+.admin-status-rejected {
+    background: rgba(255, 68, 68, 0.2);
+    color: #ff4444;
+}
+
+.admin-category {
+    font-size: 12px;
+    color: #2db4d2;
+}
+
+/* ─── States ─────────────────────────────────── */
+
+.admin-loading {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+}
+.admin-empty {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+.admin-error {
+    text-align: center;
+    padding: 40px;
+    color: #ff4444;
+}
+
+/* ─── Report button in library ───────────────── */
+
+.lib-report-btn {
+    color: #888 !important;
+    font-size: 13px;
+}
+.lib-report-btn:hover {
+    color: #ff4444 !important;
+}
+
+.lib-admin-delete-btn {
+    color: #ff4444 !important;
+    border-color: #ff4444 !important;
+    font-size: 12px;
+}
+.lib-admin-delete-btn:hover {
+    background: #ff4444 !important;
+    color: #fff !important;
+}
+
+/* ─── Admin badge in auth bar ────────────────── */
+
+.admin-badge {
+    display: inline-block;
+    background: rgba(255, 68, 68, 0.2);
+    color: #ff4444;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    margin-left: 6px;
+    border: 1px solid rgba(255, 68, 68, 0.3);
+}
+
+/* ─── Responsive ─────────────────────────────── */
+
+@media (max-width: 700px) {
+    .admin-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .admin-item-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .admin-tabs {
+        gap: 0;
+    }
+    .admin-tab {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+    .admin-search {
+        width: 100%;
+    }
+    .admin-panel-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

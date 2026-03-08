@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Админ-панель — Spamton Save Editor</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/library.css">
+    <link rel="stylesheet" href="css/admin.css">
+
+    <style>
+        @font-face {
+            font-family: 'DeterminationCyrillic';
+            src: url('fonts/determinationmonorusbylyajk.otf');
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        body {
+            background-color: #000;
+            color: #fff;
+            font-size: 16px;
+            font-family: 'DeterminationCyrillic', 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        a, a:visited, a:hover, a:active { color: #2db4d2; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-page">
+        <div class="admin-header">
+            <a href="index.html" class="admin-back">← На главную</a>
+            <h1 class="admin-title">🛡 Админ-панель</h1>
+            <p class="admin-subtitle">Управление сайтом</p>
+        </div>
+
+        <div id="adminAccessDenied" class="admin-denied" style="display:none;">
+            <h2>⛔ Доступ запрещён</h2>
+            <p>У вас нет прав администратора.</p>
+            <a href="index.html" class="auth-btn">На главную</a>
+        </div>
+
+        <div id="adminContent" style="display:none;">
+            <!-- Tabs -->
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="users">👥 Пользователи</button>
+                <button class="admin-tab" data-tab="reports">⚠ Жалобы <span id="reportsCount" class="admin-tab-badge"></span></button>
+                <button class="admin-tab" data-tab="suggestions">💡 Предложения <span id="suggestionsCount" class="admin-tab-badge"></span></button>
+                <button class="admin-tab" data-tab="saves">📚 Сохранения</button>
+            </div>
+
+            <!-- Users Tab -->
+            <div class="admin-panel" id="tabUsers">
+                <div class="admin-panel-header">
+                    <h2>👥 Управление пользователями</h2>
+                    <div class="admin-search-wrap">
+                        <input type="text" id="userSearch" class="admin-search" placeholder="Поиск по имени...">
+                    </div>
+                </div>
+                <div id="usersList" class="admin-list">
+                    <div class="admin-loading">Загрузка...</div>
+                </div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div class="admin-panel" id="tabReports" style="display:none;">
+                <div class="admin-panel-header">
+                    <h2>⚠ Жалобы</h2>
+                    <div class="admin-filter-wrap">
+                        <select id="reportStatusFilter" class="admin-select">
+                            <option value="pending">Ожидают</option>
+                            <option value="">Все</option>
+                            <option value="resolved">Решены</option>
+                            <option value="rejected">Отклонены</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="reportsList" class="admin-list">
+                    <div class="admin-loading">Загрузка...</div>
+                </div>
+            </div>
+
+            <!-- Suggestions Tab -->
+            <div class="admin-panel" id="tabSuggestions" style="display:none;">
+                <div class="admin-panel-header">
+                    <h2>💡 Предложения</h2>
+                    <div class="admin-filter-wrap">
+                        <select id="suggestionStatusFilter" class="admin-select">
+                            <option value="pending">Ожидают</option>
+                            <option value="">Все</option>
+                            <option value="accepted">Приняты</option>
+                            <option value="rejected">Отклонены</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="suggestionsList" class="admin-list">
+                    <div class="admin-loading">Загрузка...</div>
+                </div>
+            </div>
+
+            <!-- Saves Tab -->
+            <div class="admin-panel" id="tabSaves" style="display:none;">
+                <div class="admin-panel-header">
+                    <h2>📚 Управление сохранениями</h2>
+                    <div class="admin-search-wrap">
+                        <input type="text" id="saveSearch" class="admin-search" placeholder="Поиск по названию...">
+                    </div>
+                </div>
+                <div id="savesList" class="admin-list">
+                    <div class="admin-loading">Загрузка...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="scroll-top-btn" id="scrollTopBtn" title="Наверх">↑</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabaseConfig.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cloudSaves.js"></script>
+    <script src="js/saveLibrary.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/collections.js"></script>
+    <script src="js/comments.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        if (!SupabaseConfig.isConfigured()) {
+            document.querySelector('.admin-page').innerHTML =
+                '<div class="admin-denied"><h2>Supabase не настроен</h2><a href="index.html" class="auth-btn">На главную</a></div>';
+        } else {
+            Auth.init();
+            Auth.onAuthChange(function (user) {
+                if (!user) {
+                    document.getElementById('adminAccessDenied').style.display = 'block';
+                    document.getElementById('adminContent').style.display = 'none';
+                    return;
+                }
+
+                Admin.checkAdmin().then(function (isAdmin) {
+                    if (!isAdmin) {
+                        document.getElementById('adminAccessDenied').style.display = 'block';
+                        document.getElementById('adminContent').style.display = 'none';
+                    } else {
+                        document.getElementById('adminAccessDenied').style.display = 'none';
+                        document.getElementById('adminContent').style.display = 'block';
+                        initAdminPanel();
+                    }
+                });
+            });
+        }
+
+        var currentTab = 'users';
+
+        function initAdminPanel() {
+            // Wire tabs
+            document.querySelectorAll('.admin-tab').forEach(function (tab) {
+                tab.addEventListener('click', function () {
+                    currentTab = this.getAttribute('data-tab');
+                    document.querySelectorAll('.admin-tab').forEach(function (t) { t.classList.remove('active'); });
+                    this.classList.add('active');
+                    document.querySelectorAll('.admin-panel').forEach(function (p) { p.style.display = 'none'; });
+                    var panelId = 'tab' + currentTab.charAt(0).toUpperCase() + currentTab.slice(1);
+                    var panel = document.getElementById(panelId);
+                    if (panel) panel.style.display = 'block';
+                    loadTabData(currentTab);
+                });
+            });
+
+            // Wire search
+            document.getElementById('userSearch').addEventListener('input', debounce(function () {
+                loadUsers(this.value.trim());
+            }, 400));
+
+            document.getElementById('saveSearch').addEventListener('input', debounce(function () {
+                loadSaves(this.value.trim());
+            }, 400));
+
+            // Wire filters
+            document.getElementById('reportStatusFilter').addEventListener('change', function () {
+                loadReports(this.value);
+            });
+            document.getElementById('suggestionStatusFilter').addEventListener('change', function () {
+                loadSuggestionsTab(this.value);
+            });
+
+            // Initial load
+            loadUsers('');
+            loadReportCount();
+            loadSuggestionCount();
+        }
+
+        function loadTabData(tab) {
+            switch (tab) {
+                case 'users': loadUsers(document.getElementById('userSearch').value.trim()); break;
+                case 'reports': loadReports(document.getElementById('reportStatusFilter').value); break;
+                case 'suggestions': loadSuggestionsTab(document.getElementById('suggestionStatusFilter').value); break;
+                case 'saves': loadSaves(document.getElementById('saveSearch').value.trim()); break;
+            }
+        }
+
+        // ─── Users ─────────────────────────────────
+
+        function loadUsers(search) {
+            var listEl = document.getElementById('usersList');
+            listEl.innerHTML = '<div class="admin-loading">Загрузка...</div>';
+
+            Admin.getAllUsers().then(function (users) {
+                if (search) {
+                    var lower = search.toLowerCase();
+                    users = users.filter(function (u) {
+                        return (u.display_name || '').toLowerCase().indexOf(lower) >= 0 ||
+                               (u.user_id || '').toLowerCase().indexOf(lower) >= 0;
+                    });
+                }
+
+                if (users.length === 0) {
+                    listEl.innerHTML = '<div class="admin-empty">Пользователи не найдены</div>';
+                    return;
+                }
+
+                var html = '';
+                users.forEach(function (u) {
+                    var role = u.role || '';
+                    var roleBadge = '';
+                    if (role === 'admin') roleBadge = '<span class="admin-role-badge admin-role-admin">🛡 Admin</span>';
+                    else if (role === 'moderator') roleBadge = '<span class="admin-role-badge admin-role-mod">🔧 Mod</span>';
+                    else if (u.is_supporter) roleBadge = '<span class="admin-role-badge admin-role-supporter">★ Supporter</span>';
+
+                    html +=
+                        '<div class="admin-item admin-user-item">' +
+                            '<div class="admin-item-info">' +
+                                '<div class="admin-item-title">' +
+                                    esc(u.display_name || 'Аноним') + ' ' + roleBadge +
+                                '</div>' +
+                                '<div class="admin-item-meta">' +
+                                    'ID: ' + esc(u.user_id || '—') +
+                                    (u.created_at ? ' · Создан: ' + formatDate(u.created_at) : '') +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="admin-item-actions">' +
+                                '<select class="admin-role-select" data-userid="' + esc(u.user_id) + '">' +
+                                    '<option value=""' + (!role ? ' selected' : '') + '>Обычный</option>' +
+                                    '<option value="supporter"' + (role === 'supporter' || (!role && u.is_supporter) ? ' selected' : '') + '>★ Supporter</option>' +
+                                    '<option value="moderator"' + (role === 'moderator' ? ' selected' : '') + '>🔧 Модератор</option>' +
+                                    '<option value="admin"' + (role === 'admin' ? ' selected' : '') + '>🛡 Админ</option>' +
+                                '</select>' +
+                                '<button class="admin-btn admin-btn-apply" data-userid="' + esc(u.user_id) + '">Применить</button>' +
+                            '</div>' +
+                        '</div>';
+                });
+                listEl.innerHTML = html;
+
+                // Wire apply buttons
+                listEl.querySelectorAll('.admin-btn-apply').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var userId = this.getAttribute('data-userid');
+                        var select = listEl.querySelector('.admin-role-select[data-userid="' + userId + '"]');
+                        var newRole = select ? select.value : '';
+                        var self = this;
+                        self.disabled = true;
+                        self.textContent = '...';
+
+                        Admin.setUserRole(userId, newRole).then(function () {
+                            self.textContent = '✓';
+                            setTimeout(function () { self.textContent = 'Применить'; self.disabled = false; }, 1500);
+                        }).catch(function (err) {
+                            self.textContent = 'Ошибка';
+                            self.disabled = false;
+                            alert(typeof err === 'string' ? err : err.message || 'Ошибка');
+                        });
+                    });
+                });
+            }).catch(function (err) {
+                listEl.innerHTML = '<div class="admin-error">Ошибка: ' + esc(err.message || String(err)) + '</div>';
+            });
+        }
+
+        // ─── Reports ───────────────────────────────
+
+        function loadReports(status) {
+            var listEl = document.getElementById('reportsList');
+            listEl.innerHTML = '<div class="admin-loading">Загрузка...</div>';
+
+            Admin.getReports(status).then(function (reports) {
+                if (reports.length === 0) {
+                    listEl.innerHTML = '<div class="admin-empty">Нет жалоб</div>';
+                    return;
+                }
+
+                var html = '';
+                reports.forEach(function (r) {
+                    var statusClass = 'admin-status-' + (r.status || 'pending');
+                    var statusLabel = { pending: 'Ожидает', resolved: 'Решена', rejected: 'Отклонена' }[r.status] || r.status;
+                    html +=
+                        '<div class="admin-item admin-report-item">' +
+                            '<div class="admin-item-info">' +
+                                '<div class="admin-item-title">' +
+                                    '⚠ Жалоба на сохранение' +
+                                    '<span class="admin-status ' + statusClass + '">' + statusLabel + '</span>' +
+                                '</div>' +
+                                '<div class="admin-item-meta">' +
+                                    'Причина: ' + esc(r.reason || '—') +
+                                '</div>' +
+                                '<div class="admin-item-meta">' +
+                                    'Save ID: ' + esc(r.target_id || '—') +
+                                    ' · Автор жалобы: ' + esc(r.reporter_id || '—') +
+                                    ' · ' + formatDate(r.created_at) +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="admin-item-actions">' +
+                                (r.status === 'pending' ?
+                                    '<button class="admin-btn admin-btn-resolve" data-id="' + r.id + '">✓ Решить</button>' +
+                                    '<button class="admin-btn admin-btn-reject" data-id="' + r.id + '">✕ Отклонить</button>' +
+                                    '<button class="admin-btn admin-btn-danger" data-id="' + r.id + '" data-saveid="' + esc(r.target_id || '') + '">🗑 Удалить сейв</button>'
+                                : '') +
+                                '<button class="admin-btn admin-btn-delete-report" data-id="' + r.id + '">Удалить</button>' +
+                            '</div>' +
+                        '</div>';
+                });
+                listEl.innerHTML = html;
+
+                // Wire buttons
+                listEl.querySelectorAll('.admin-btn-resolve').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var id = this.getAttribute('data-id');
+                        Admin.resolveReport(id, 'resolved').then(function () {
+                            showToast('Жалоба отмечена как решённая');
+                            loadReports(document.getElementById('reportStatusFilter').value);
+                            loadReportCount();
+                        });
+                    });
+                });
+                listEl.querySelectorAll('.admin-btn-reject').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var id = this.getAttribute('data-id');
+                        Admin.resolveReport(id, 'rejected').then(function () {
+                            showToast('Жалоба отклонена');
+                            loadReports(document.getElementById('reportStatusFilter').value);
+                            loadReportCount();
+                        });
+                    });
+                });
+                listEl.querySelectorAll('.admin-btn-danger').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var saveId = this.getAttribute('data-saveid');
+                        var reportId = this.getAttribute('data-id');
+                        if (!saveId) return;
+                        if (!confirm('Удалить это сохранение из библиотеки?')) return;
+                        Admin.adminDeleteSave(saveId).then(function () {
+                            return Admin.resolveReport(reportId, 'resolved');
+                        }).then(function () {
+                            showToast('Сохранение удалено, жалоба решена');
+                            loadReports(document.getElementById('reportStatusFilter').value);
+                            loadReportCount();
+                        }).catch(function (err) {
+                            alert('Ошибка: ' + (err.message || String(err)));
+                        });
+                    });
+                });
+                listEl.querySelectorAll('.admin-btn-delete-report').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var id = this.getAttribute('data-id');
+                        if (!confirm('Удалить эту жалобу?')) return;
+                        Admin.deleteReport(id).then(function () {
+                            showToast('Жалоба удалена');
+                            loadReports(document.getElementById('reportStatusFilter').value);
+                            loadReportCount();
+                        });
+                    });
+                });
+            }).catch(function (err) {
+                listEl.innerHTML = '<div class="admin-error">Ошибка: ' + esc(err.message || String(err)) + '</div>';
+            });
+        }
+
+        function loadReportCount() {
+            Admin.getReports('pending').then(function (reports) {
+                var badge = document.getElementById('reportsCount');
+                if (badge) badge.textContent = reports.length > 0 ? reports.length : '';
+            }).catch(function () {});
+        }
+
+        // ─── Suggestions ───────────────────────────
+
+        function loadSuggestionsTab(status) {
+            var listEl = document.getElementById('suggestionsList');
+            listEl.innerHTML = '<div class="admin-loading">Загрузка...</div>';
+
+            Admin.getSuggestions(status).then(function (suggestions) {
+                if (suggestions.length === 0) {
+                    listEl.innerHTML = '<div class="admin-empty">Нет предложений</div>';
+                    return;
+                }
+
+                var categoryLabels = {
+                    feature: '🆕 Новая функция',
+                    improvement: '📈 Улучшение',
+                    bugfix: '🐛 Исправление',
+                    design: '🎨 Дизайн',
+                    other: '📝 Другое'
+                };
+
+                var html = '';
+                suggestions.forEach(function (s) {
+                    var statusClass = 'admin-status-' + (s.status || 'pending');
+                    var statusLabel = { pending: 'Ожидает', accepted: 'Принято', rejected: 'Отклонено', done: 'Готово' }[s.status] || s.status;
+                    var catLabel = categoryLabels[s.category] || s.category;
+
+                    html +=
+                        '<div class="admin-item admin-suggestion-item">' +
+                            '<div class="admin-item-info">' +
+                                '<div class="admin-item-title">' +
+                                    '<span class="admin-category">' + catLabel + '</span> ' +
+                                    esc(s.title || '—') +
+                                    '<span class="admin-status ' + statusClass + '">' + statusLabel + '</span>' +
+                                '</div>' +
+                                '<div class="admin-item-desc">' + esc(s.description || '') + '</div>' +
+                                '<div class="admin-item-meta">' +
+                                    'От: ' + esc(s.author_name || 'Аноним') +
+                                    ' · ' + formatDate(s.created_at) +
+                                    (s.admin_response ? ' · Ответ: ' + esc(s.admin_response) : '') +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="admin-item-actions">' +
+                                (s.status === 'pending' ?
+                                    '<button class="admin-btn admin-btn-accept-sug" data-id="' + s.id + '">✓ Принять</button>' +
+                                    '<button class="admin-btn admin-btn-reject-sug" data-id="' + s.id + '">✕ Отклонить</button>'
+                                : '') +
+                                '<button class="admin-btn admin-btn-respond-sug" data-id="' + s.id + '">💬 Ответить</button>' +
+                                '<button class="admin-btn admin-btn-delete-sug" data-id="' + s.id + '">🗑</button>' +
+                            '</div>' +
+                        '</div>';
+                });
+                listEl.innerHTML = html;
+
+                // Wire buttons
+                listEl.querySelectorAll('.admin-btn-accept-sug').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var id = this.getAttribute('data-id');
+                        Admin.resolveSuggestion(id, 'accepted').then(function () {
+                            showToast('Предложение принято');
+                            loadSuggestionsTab(document.getElementById('suggestionStatusFilter').value);
+                            loadSuggestionCount();
+                        });
+                    });
+                });
+                listEl.querySelectorAll('.admin-btn-reject-sug').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var id = this.getAttribute('data-id');
+                        Admin.resolveSuggestion(id, 'rejected').then(function () {
+                            showToast('Предложение отклонено');
+                            loadSuggestionsTab(document.getElementById('suggestionStatusFilter').value);
+                            loadSuggestionCount();
+                        });
+                    });
+                });
+                listEl.querySelectorAll('.admin-btn-respond-sug').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var id = this.getAttribute('data-id');
+                        var response = prompt('Ваш ответ на предложение:');
+                        if (response === null) return;
+                        Admin.resolveSuggestion(id, null, response).then(function () {
+                            showToast('Ответ сохранён');
+                            loadSuggestionsTab(document.getElementById('suggestionStatusFilter').value);
+                        });
+                    });
+                });
+                listEl.querySelectorAll('.admin-btn-delete-sug').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var id = this.getAttribute('data-id');
+                        if (!confirm('Удалить это предложение?')) return;
+                        Admin.deleteSuggestion(id).then(function () {
+                            showToast('Предложение удалено');
+                            loadSuggestionsTab(document.getElementById('suggestionStatusFilter').value);
+                            loadSuggestionCount();
+                        });
+                    });
+                });
+            }).catch(function (err) {
+                listEl.innerHTML = '<div class="admin-error">Ошибка: ' + esc(err.message || String(err)) + '</div>';
+            });
+        }
+
+        function loadSuggestionCount() {
+            Admin.getSuggestions('pending').then(function (suggestions) {
+                var badge = document.getElementById('suggestionsCount');
+                if (badge) badge.textContent = suggestions.length > 0 ? suggestions.length : '';
+            }).catch(function () {});
+        }
+
+        // ─── Saves ─────────────────────────────────
+
+        function loadSaves(search) {
+            var listEl = document.getElementById('savesList');
+            listEl.innerHTML = '<div class="admin-loading">Загрузка...</div>';
+
+            var sb = SupabaseConfig.getClient();
+            if (!sb) {
+                listEl.innerHTML = '<div class="admin-error">Supabase не настроен</div>';
+                return;
+            }
+
+            var query = sb.from('public_saves')
+                .select('id, chapter, save_name, author_name, user_id, downloads, likes, published_at')
+                .order('published_at', { ascending: false })
+                .limit(50);
+            if (search) {
+                query = query.ilike('save_name', '%' + search + '%');
+            }
+
+            query.then(function (res) {
+                var saves = res.data || [];
+                if (saves.length === 0) {
+                    listEl.innerHTML = '<div class="admin-empty">Сохранения не найдены</div>';
+                    return;
+                }
+
+                var html = '';
+                saves.forEach(function (s) {
+                    html +=
+                        '<div class="admin-item admin-save-item">' +
+                            '<div class="admin-item-info">' +
+                                '<div class="admin-item-title">' + esc(s.save_name || '—') + '</div>' +
+                                '<div class="admin-item-meta">' +
+                                    'Глава: ' + esc(s.chapter || '—') +
+                                    ' · Автор: ' + esc(s.author_name || 'Аноним') +
+                                    ' · ⬇ ' + (s.downloads || 0) +
+                                    ' · ♥ ' + (s.likes || 0) +
+                                    ' · ' + formatDate(s.published_at) +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="admin-item-actions">' +
+                                '<button class="admin-btn admin-btn-danger admin-delete-save" data-id="' + s.id + '">🗑 Удалить</button>' +
+                            '</div>' +
+                        '</div>';
+                });
+                listEl.innerHTML = html;
+
+                listEl.querySelectorAll('.admin-delete-save').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var id = this.getAttribute('data-id');
+                        if (!confirm('Удалить это сохранение из библиотеки?')) return;
+                        var self = this;
+                        self.disabled = true;
+                        Admin.adminDeleteSave(id).then(function () {
+                            showToast('Сохранение удалено');
+                            loadSaves(document.getElementById('saveSearch').value.trim());
+                        }).catch(function (err) {
+                            self.disabled = false;
+                            alert('Ошибка: ' + (err.message || String(err)));
+                        });
+                    });
+                });
+            }).catch(function (err) {
+                listEl.innerHTML = '<div class="admin-error">Ошибка: ' + esc(err.message || String(err)) + '</div>';
+            });
+        }
+
+        // ─── Helpers ───────────────────────────────
+
+        function esc(s) {
+            var div = document.createElement('div');
+            div.textContent = s;
+            return div.innerHTML;
+        }
+
+        function formatDate(d) {
+            if (!d) return '—';
+            try {
+                var date = d instanceof Date ? d : new Date(d);
+                return date.toLocaleDateString('ru-RU') + ' ' + date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+            } catch (e) { return '—'; }
+        }
+
+        function showToast(message) {
+            var toast = document.createElement('div');
+            toast.className = 'cloud-toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(function () { toast.classList.add('show'); }, 10);
+            setTimeout(function () {
+                toast.classList.remove('show');
+                setTimeout(function () { toast.remove(); }, 300);
+            }, 3000);
+        }
+
+        function debounce(fn, delay) {
+            var timer;
+            return function () {
+                var self = this;
+                var args = arguments;
+                clearTimeout(timer);
+                timer = setTimeout(function () { fn.apply(self, args); }, delay);
+            };
+        }
+
+        // Scroll to top
+        (function () {
+            var btn = document.getElementById('scrollTopBtn');
+            if (!btn) return;
+            window.addEventListener('scroll', function () {
+                btn.classList.toggle('visible', window.scrollY > 400);
+            });
+            btn.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script>
+</body>
+</html>

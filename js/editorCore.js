@@ -291,6 +291,34 @@ var EditorCore = (function () {
                 var out = originalLines.join("\r\n");
                 saveAs(new Blob([out], { type: "application/octet-stream" }), originalName);
             });
+
+        // ─── Cloud Save / Load buttons ───
+        var cloudSaveBtn = document.getElementById("cloudSaveBtn");
+        if (cloudSaveBtn) {
+            cloudSaveBtn.addEventListener("click", function () {
+                if (typeof CloudSaves === 'undefined') return;
+                var text = getCurrentSaveText();
+                if (text) {
+                    CloudSaves.showSaveDialog(currentKey, text);
+                }
+            });
+        }
+
+        var cloudLoadBtn = document.getElementById("cloudLoadBtn");
+        if (cloudLoadBtn) {
+            cloudLoadBtn.addEventListener("click", function () {
+                if (typeof CloudSaves === 'undefined') return;
+                CloudSaves.showSavesModal(currentKey);
+            });
+        }
+
+        var cloudPublishBtn = document.getElementById("cloudPublishBtn");
+        if (cloudPublishBtn) {
+            cloudPublishBtn.addEventListener("click", function () {
+                if (typeof SaveLibrary === 'undefined') return;
+                SaveLibrary.showPublishFromEditor();
+            });
+        }
     }
 
     function updateRoomSelect(showAll) {
@@ -422,8 +450,72 @@ var EditorCore = (function () {
         }
     }
 
+    /**
+     * Загрузить сохранение из текста (для облачных сохранений)
+     * @param {string} text — полный текст файла сохранения
+     * @param {string} [name] — имя файла (опционально)
+     */
+    function loadFromText(text, name) {
+        if (!cfg) {
+            console.error("EditorCore не инициализирован");
+            return;
+        }
+        var fullText = text.replace(/\r?\n/g, "\r\n");
+        originalLines = fullText.split("\r\n");
+        if (originalLines.length !== cfg.length) {
+            alert("Неверное сохранение: ожидалось " + cfg.length +
+                " строк, получено " + originalLines.length);
+            return;
+        }
+        originalName = name || "cloud_save";
+        openEditor(fullText);
+    }
+
+    /**
+     * Получить текущий текст сохранения (из формы редактора)
+     * @returns {string|null}
+     */
+    function getCurrentSaveText() {
+        if (!originalLines || originalLines.length === 0) return null;
+
+        var saveDataDiv = document.getElementById("saveData");
+        if (!saveDataDiv) return null;
+
+        var formVals = {};
+        saveDataDiv.querySelectorAll("select,input").forEach(function (el) {
+            if (!el.name) return;
+            if (el.type === "checkbox") {
+                var off = el.getAttribute("off") || "0",
+                    on = el.getAttribute("on") || "1";
+                formVals[el.name] = el.checked ? on : off;
+            } else {
+                formVals[el.name] = el.value;
+            }
+        });
+
+        var lines = originalLines.slice();
+        cfg.exportLines.forEach(function (n) {
+            var key = "_" + n;
+            if (formVals[key] != null) {
+                lines[n - 1] = formVals[key];
+            }
+        });
+
+        return lines.join("\r\n");
+    }
+
+    /**
+     * Получить текущий ключ главы
+     */
+    function getChapterKey() {
+        return currentKey;
+    }
+
     return {
         init: init,
-        refreshEditor: refreshEditor
+        refreshEditor: refreshEditor,
+        loadFromText: loadFromText,
+        getCurrentSaveText: getCurrentSaveText,
+        getChapterKey: getChapterKey
     };
 })();

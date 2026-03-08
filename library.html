@@ -1,0 +1,254 @@
+<html>
+<head>
+    <title>Библиотека сохранений — Spamton Save Editor</title>
+
+    <meta name="keywords" content="Deltarune, Save File, Library, Community, Download">
+    <meta name="description" content="Публичная библиотека сохранений Deltarune. Скачивайте и делитесь сохранениями.">
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+
+    <meta property="og:title" content="Библиотека сохранений — Spamton Save Editor" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Публичная библиотека сохранений Deltarune. Скачивайте и делитесь сохранениями." />
+    <meta name="theme-color" content="#000000">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/library.css">
+    <link rel="stylesheet" href="css/admin.css">
+
+    <style>
+        @font-face {
+            font-family: 'DeterminationCyrillic';
+            src: url('fonts/determinationmonorusbylyajk.otf');
+        }
+        @font-face {
+            font-family: 'DeterminationCyrillic', DeterminationMonoWebRegular,;
+            src: url('/fonts/determination-mono-web-font/DeterminationMonoWebRegular-Z5oq.ttf');
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-family: 'DeterminationCyrillic', DeterminationMonoWebRegular, 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        a, a:visited, a:hover, a:active {
+            color: #2db4d2;
+            text-decoration: inherit;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lib-page">
+        <div class="lib-header">
+            <h1 class="lib-title">📚 Библиотека сохранений</h1>
+            <p class="lib-subtitle">Скачивайте сохранения других игроков или делитесь своими</p>
+            <div class="lib-header-actions">
+                <a href="index.html" class="lib-back-link">← На главную</a>
+                <a href="https://boosty.to/spamton" target="_blank" class="lib-back-link boosty-header-link">★ Boosty</a>
+                <button class="auth-btn" id="libPublishBtn" style="display:none">Опубликовать сохранение</button>
+                <button class="auth-btn auth-btn-outline" id="libMyPubsBtn" style="display:none">Мои публикации</button>
+            </div>
+        </div>
+
+        <div class="lib-toolbar">
+            <div class="lib-filters">
+                <button class="lib-filter-btn active" data-chapter="">Все</button>
+                <button class="lib-filter-btn" data-chapter="ch1">Глава 1</button>
+                <button class="lib-filter-btn" data-chapter="ch2">Глава 2</button>
+                <button class="lib-filter-btn" data-chapter="ch3">Глава 3</button>
+                <button class="lib-filter-btn" data-chapter="ch4">Глава 4</button>
+                <button class="lib-filter-btn" data-chapter="ch1Demo">Демо 1</button>
+                <button class="lib-filter-btn" data-chapter="ch2Demo">Демо 2</button>
+            </div>
+            <div class="lib-search-sort">
+                <div class="lib-search">
+                    <input type="text" id="libSearchInput" class="lib-search-input" placeholder="Поиск по названию...">
+                    <button id="libSearchBtn" class="lib-search-btn">🔍</button>
+                </div>
+                <select id="libSortSelect" class="lib-sort-select">
+                    <option value="newest">Сначала новые</option>
+                    <option value="oldest">Сначала старые</option>
+                    <option value="downloads">По скачиваниям</option>
+                    <option value="likes">По лайкам</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="lib-count-bar">
+            <span id="libCount">Загрузка...</span>
+        </div>
+
+        <div id="libGrid" class="lib-grid">
+            <div class="lib-loading">Загрузка...</div>
+        </div>
+
+        <div id="libPagination" class="lib-pagination"></div>
+    </div>
+
+    <button class="scroll-top-btn" id="scrollTopBtn" title="Наверх">↑</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabaseConfig.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cloudSaves.js"></script>
+    <script src="js/saveLibrary.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/comments.js"></script>
+    <script src="js/collections.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        if (SupabaseConfig.isConfigured()) {
+            Auth.init();
+            Auth.onAuthChange(function (user) {
+                var pubBtn = document.getElementById('libPublishBtn');
+                var myPubsBtn = document.getElementById('libMyPubsBtn');
+                if (user) {
+                    pubBtn.style.display = '';
+                    myPubsBtn.style.display = '';
+                    // Check admin status before loading library
+                    if (typeof Admin !== 'undefined') {
+                        Admin.checkAdmin().then(function () {
+                            SaveLibrary.initLibraryPage();
+                        });
+                    } else {
+                        SaveLibrary.initLibraryPage();
+                    }
+                } else {
+                    pubBtn.style.display = 'none';
+                    myPubsBtn.style.display = 'none';
+                    SaveLibrary.initLibraryPage();
+                }
+            });
+
+            document.getElementById('libPublishBtn').addEventListener('click', function () {
+                // Показать диалог загрузки файла для публикации
+                showFilePublishDialog();
+            });
+
+            document.getElementById('libMyPubsBtn').addEventListener('click', function () {
+                SaveLibrary.showMyPublications();
+            });
+        } else {
+            document.getElementById('libGrid').innerHTML =
+                '<div class="lib-error">MongoDB не настроен. Библиотека недоступна.</div>';
+        }
+
+        function showFilePublishDialog() {
+            var modal = document.getElementById('authModal');
+            var content = document.getElementById('authModalContent');
+            content.innerHTML =
+                '<h2 class="auth-title">Опубликовать сохранение</h2>' +
+                '<div id="authError" class="auth-error"></div>' +
+                '<form id="filePublishForm">' +
+                    '<label class="auth-label">Файл сохранения' +
+                        '<input type="file" id="publishFile" class="auth-input" required accept="*">' +
+                    '</label>' +
+                    '<label class="auth-label">Глава' +
+                        '<select id="publishChapter" class="auth-input" required>' +
+                            '<option value="">Выберите главу</option>' +
+                            '<option value="ch1">Глава 1</option>' +
+                            '<option value="ch2">Глава 2</option>' +
+                            '<option value="ch3">Глава 3</option>' +
+                            '<option value="ch4">Глава 4</option>' +
+                            '<option value="ch1Demo">Демо Глава 1</option>' +
+                            '<option value="ch2Demo">Демо Глава 2</option>' +
+                        '</select>' +
+                    '</label>' +
+                    '<label class="auth-label">Название' +
+                        '<input type="text" id="publishNameInput" class="auth-input" required maxlength="100" ' +
+                            'placeholder="Например: 100% прохождение">' +
+                    '</label>' +
+                    '<label class="auth-label">Описание (необязательно)' +
+                        '<textarea id="publishDescInput" class="auth-input auth-textarea" rows="3" ' +
+                            'maxlength="500" placeholder="Расскажите о сохранении..."></textarea>' +
+                    '</label>' +
+                    '<p class="publish-notice">Сохранение станет доступно всем пользователям в библиотеке.</p>' +
+                    '<button type="submit" class="auth-btn auth-btn-full">Опубликовать</button>' +
+                '</form>';
+
+            modal.style.display = 'flex';
+
+            document.getElementById('filePublishForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var fileInput = document.getElementById('publishFile');
+                var chapter = document.getElementById('publishChapter').value;
+                var name = document.getElementById('publishNameInput').value.trim();
+                var desc = document.getElementById('publishDescInput').value.trim();
+
+                if (!fileInput.files || !fileInput.files[0]) {
+                    showPublishError('Выберите файл сохранения');
+                    return;
+                }
+
+                var btn = this.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                btn.textContent = 'Загрузка...';
+
+                var reader = new FileReader();
+                reader.onload = function (ev) {
+                    var saveData = ev.target.result;
+                    btn.textContent = 'Публикация...';
+
+                    SaveLibrary.publishSave({
+                        chapter: chapter,
+                        save_name: name,
+                        save_data: saveData,
+                        description: desc
+                    }).then(function () {
+                        Auth.hideModal();
+                        // Показать тост и обновить список
+                        var toast = document.createElement('div');
+                        toast.className = 'cloud-toast';
+                        toast.textContent = 'Сохранение опубликовано!';
+                        document.body.appendChild(toast);
+                        setTimeout(function () { toast.classList.add('show'); }, 10);
+                        setTimeout(function () {
+                            toast.classList.remove('show');
+                            setTimeout(function () { toast.remove(); }, 300);
+                        }, 3000);
+                        SaveLibrary.initLibraryPage();
+                    }).catch(function (err) {
+                        btn.disabled = false;
+                        btn.textContent = 'Опубликовать';
+                        showPublishError(err.message);
+                    });
+                };
+                reader.readAsText(fileInput.files[0]);
+            });
+        }
+
+        function showPublishError(msg) {
+            var el = document.getElementById('authError');
+            if (el) {
+                el.textContent = 'Ошибка: ' + msg;
+                el.style.display = 'block';
+            }
+        }
+
+        // Scroll to top button
+        (function () {
+            var btn = document.getElementById('scrollTopBtn');
+            if (!btn) return;
+            window.addEventListener('scroll', function () {
+                btn.classList.toggle('visible', window.scrollY > 400);
+            });
+            btn.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script>
+</body>
+</html>
