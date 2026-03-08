@@ -1,9 +1,9 @@
-/* ============================================
-   Save Library — стили страницы библиотеки
+﻿/* ============================================
+   Save Library вЂ” СЃС‚РёР»Рё СЃС‚СЂР°РЅРёС†С‹ Р±РёР±Р»РёРѕС‚РµРєРё
    Spamton Save Editor
    ============================================ */
 
-/* ─── Page Layout ──────────────────────────── */
+/* в”Ђв”Ђв”Ђ Page Layout в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
 
 .lib-page {
     max-width: 1200px;
@@ -14,18 +14,19 @@
 .lib-header {
     text-align: center;
     margin-bottom: 30px;
-    padding: 20px 0;
+    padding: 24px 0 20px;
 }
 
 .lib-title {
-    font-size: 32px;
+    font-size: 30px;
     margin: 0 0 8px;
-    color: #fff;
+    color: var(--text);
+    font-weight: 700;
 }
 
 .lib-subtitle {
-    color: #888;
-    font-size: 16px;
+    color: var(--text-2);
+    font-size: 15px;
     margin: 0 0 20px;
 }
 
@@ -33,35 +34,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
 .lib-back-link {
-    color: #fff;
+    color: var(--text-2);
     font-size: 13px;
     text-decoration: none;
-    padding: 6px 14px;
-    border: 2px solid #fff;
-    transition: background .15s, color .15s;
+    padding: 5px 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--elevated);
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
 }
 
 .lib-back-link:hover {
-    background: #fff;
-    color: #000;
-    border-color: #fff;
+    background: var(--hover);
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
-/* ─── Toolbar ──────────────────────────────── */
+/* в”Ђв”Ђв”Ђ Toolbar в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
 
 .lib-toolbar {
     display: flex;
     flex-direction: column;
     gap: 12px;
     margin-bottom: 18px;
-    padding: 14px;
-    background: #000;
-    border: 2px solid #fff;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
 
 .lib-filters {
@@ -71,26 +75,27 @@
 }
 
 .lib-filter-btn {
-    background: #000;
-    color: #fff;
-    border: 2px solid #fff;
-    padding: 5px 12px;
+    background: var(--elevated);
+    color: var(--text-2);
+    border: 1px solid var(--border);
+    padding: 5px 14px;
     font-size: 13px;
     font-family: inherit;
     cursor: pointer;
-    border-radius: 0;
-    transition: background .15s, color .15s;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
 }
 
 .lib-filter-btn:hover {
-    background: #fff;
-    color: #000;
+    background: var(--hover);
+    color: var(--text);
+    border-color: var(--border-strong);
 }
 
 .lib-filter-btn.active {
-    background: #ffff00;
-    color: #000;
-    border-color: #ffff00;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
 .lib-search-sort {
@@ -108,46 +113,45 @@
 
 .lib-search-input {
     flex: 1;
-    padding: 7px 10px;
-    background: #000;
-    border: 2px solid #fff;
+    padding: 7px 12px;
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
     border-right: none;
-    border-radius: 0;
-    color: #fff;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    color: var(--text);
     font-size: 13px;
     font-family: inherit;
     outline: none;
-    transition: border-color .15s;
+    transition: border-color var(--transition);
 }
 
 .lib-search-input:focus {
-    border-color: #ffff00;
+    border-color: var(--accent);
 }
 
 .lib-search-btn {
-    padding: 7px 12px;
-    background: #000;
-    border: 2px solid #fff;
-    border-radius: 0;
-    color: #fff;
+    padding: 7px 14px;
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    color: var(--text-2);
     cursor: pointer;
     font-size: 13px;
     font-family: inherit;
-    transition: background .15s, color .15s;
+    transition: background var(--transition), color var(--transition);
 }
 
 .lib-search-btn:hover {
-    background: #fff;
-    color: #000;
-    border-color: #fff;
+    background: var(--hover);
+    color: var(--text);
 }
 
 .lib-sort-select {
-    padding: 7px 10px;
-    background: #000;
-    border: 2px solid #fff;
-    border-radius: 0;
-    color: #fff;
+    padding: 7px 12px;
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text);
     font-size: 13px;
     font-family: inherit;
     cursor: pointer;
@@ -155,25 +159,25 @@
 }
 
 .lib-sort-select option {
-    background: #000;
-    color: #fff;
+    background: var(--surface);
+    color: var(--text);
 }
 
-/* ─── Count bar ────────────────────────────── */
+/* в”Ђв”Ђв”Ђ Count bar в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
 
 .lib-count-bar {
-    color: #666;
+    color: var(--text-3);
     font-size: 13px;
     margin-bottom: 14px;
     padding: 0 4px;
 }
 
-/* ─── Grid ─────────────────────────────────── */
+/* в”Ђв”Ђв”Ђ Grid в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
 
 .lib-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
+    gap: 14px;
     min-height: 200px;
 }
 
@@ -183,36 +187,36 @@
     grid-column: 1 / -1;
     text-align: center;
     padding: 60px 20px;
-    color: #aaa;
+    color: var(--text-2);
     font-size: 14px;
 }
 
 .lib-error {
-    color: #fff;
+    color: var(--danger);
 }
 
-/* ─── Card ─────────────────────────────────── */
+/* в”Ђв”Ђв”Ђ Card в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
 
 .lib-card {
-    background: #000;
-    border: 2px solid #fff;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     padding: 14px;
     display: flex;
     flex-direction: column;
-    transition: border-color .15s;
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
 }
 
 .lib-card:hover {
-    border-color: #ffff00;
+    border-color: var(--accent);
+    background: var(--elevated);
+    box-shadow: 0 0 0 1px var(--accent-dim);
 }
 
 /* Supporter card */
 .lib-card-supporter {
-    border-color: #ffff00;
-}
-
-.lib-card-supporter:hover {
-    border-color: #ffff00;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent-dim);
 }
 
 .lib-card-header {
@@ -223,27 +227,29 @@
 }
 
 .lib-card-chapter {
-    background: #000;
-    color: #ffff00;
-    border: 1px solid #ffff00;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-xs);
     padding: 2px 8px;
     font-size: 11px;
     font-weight: bold;
 }
 
 .lib-card-own {
-    background: #000;
-    color: #fff;
-    border: 1px solid #fff;
+    background: var(--elevated);
+    color: var(--text-2);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-xs);
     padding: 2px 7px;
     font-size: 11px;
     font-weight: bold;
 }
 
 .lib-card-name {
-    color: #fff;
+    color: var(--text);
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 6px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -254,7 +260,7 @@
 }
 
 .lib-card-desc {
-    color: #aaa;
+    color: var(--text-2);
     font-size: 12px;
     margin-bottom: 10px;
     overflow: hidden;
@@ -269,14 +275,14 @@
 .lib-card-meta {
     display: flex;
     gap: 12px;
-    color: #aaa;
+    color: var(--text-3);
     font-size: 12px;
     margin-bottom: 8px;
     flex-wrap: wrap;
 }
 
 .lib-card-stats {
-    color: #aaa;
+    color: var(--text-3);
     font-size: 12px;
     margin-bottom: 10px;
 }
@@ -290,32 +296,32 @@
 .lib-action-btn {
     flex: 1;
     padding: 6px 8px;
-    border: 2px solid #fff;
-    border-radius: 0;
-    background: #000;
-    color: #fff;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--elevated);
+    color: var(--text-2);
     font-size: 12px;
     font-family: inherit;
     cursor: pointer;
-    transition: background .15s, color .15s;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
     text-align: center;
 }
 
 .lib-action-btn:hover {
-    background: #fff;
-    color: #000;
+    background: var(--hover);
+    color: var(--text);
+    border-color: var(--border-strong);
 }
 
 .lib-download-btn:hover {
-    background: #ffff00;
-    color: #000;
-    border-color: #ffff00;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
 .lib-load-btn:hover {
-    background: #fff;
-    color: #000;
-    border-color: #fff;
+    background: var(--hover);
+    color: var(--text);
 }
 
 .lib-delete-btn {
@@ -324,12 +330,12 @@
 }
 
 .lib-delete-btn:hover {
-    background: #fff;
-    color: #000;
-    border-color: #fff;
+    background: rgba(244,89,89,0.12);
+    color: var(--danger);
+    border-color: var(--danger);
 }
 
-/* ─── Pagination ───────────────────────────── */
+/* в”Ђв”Ђв”Ђ Pagination в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
 
 .lib-pagination {
     display: flex;
@@ -341,49 +347,50 @@
 }
 
 .lib-page-btn {
-    padding: 6px 12px;
-    background: #000;
-    border: 2px solid #fff;
-    border-radius: 0;
-    color: #fff;
+    padding: 6px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text-2);
     font-size: 13px;
     font-family: inherit;
     cursor: pointer;
-    transition: background .15s, color .15s;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
 }
 
 .lib-page-btn:hover {
-    background: #fff;
-    color: #000;
+    background: var(--hover);
+    color: var(--text);
+    border-color: var(--accent);
 }
 
 .lib-page-btn.active {
-    background: #ffff00;
-    color: #000;
-    border-color: #ffff00;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
-/* ─── Like button ──────────────────────────── */
+/* в”Ђв”Ђв”Ђ Like button в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
 
 .lib-like-btn {
     flex: 0 0 auto;
     padding: 6px 9px;
     font-size: 14px;
-    transition: background .15s, color .15s;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
 }
 
 .lib-like-btn:hover,
 .lib-like-btn.lib-liked {
-    background: #fff;
-    color: #000;
-    border-color: #fff;
+    background: rgba(244, 89, 89, 0.12);
+    color: #f47;
+    border-color: #f47;
 }
 
 .lib-likes-count {
-    color: #fff;
+    color: var(--text-2);
 }
 
-/* ─── Share button ─────────────────────────── */
+/* в”Ђв”Ђв”Ђ Share button в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
 
 .lib-share-btn {
     flex: 0 0 auto;
@@ -391,12 +398,12 @@
 }
 
 .lib-share-btn:hover {
-    background: #fff;
-    color: #000;
-    border-color: #fff;
+    background: var(--hover);
+    color: var(--text);
+    border-color: var(--border-strong);
 }
 
-/* ─── Scroll to top ────────────────────────── */
+/* в”Ђв”Ђв”Ђ Scroll to top в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
 
 .scroll-top-btn {
     position: fixed;
@@ -404,31 +411,33 @@
     right: 24px;
     width: 40px;
     height: 40px;
-    border: 2px solid #fff;
-    border-radius: 0;
-    background: #000;
-    color: #fff;
-    font-size: 18px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--elevated);
+    color: var(--text-2);
+    font-size: 16px;
     cursor: pointer;
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 999;
-    transition: background .15s, color .15s;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
     font-family: inherit;
     line-height: 1;
+    box-shadow: var(--shadow-sm);
 }
 
 .scroll-top-btn:hover {
-    background: #fff;
-    color: #000;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
 .scroll-top-btn.visible {
     display: flex;
 }
 
-/* ─── Responsive ───────────────────────────── */
+/* в”Ђв”Ђв”Ђ Responsive в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
 
 @media (max-width: 768px) {
     .lib-page {
@@ -469,3 +478,4 @@
         flex: 1;
     }
 }
+

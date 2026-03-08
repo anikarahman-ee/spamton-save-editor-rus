@@ -1,17 +1,56 @@
 /* ============================================
+   Design Tokens — Spamton Save Editor
+   ============================================ */
+
+:root {
+    --bg:            #0d0d14;
+    --surface:       #13131e;
+    --elevated:      #1c1c2d;
+    --hover:         #22223a;
+    --border:        rgba(255,255,255,0.07);
+    --border-strong: rgba(255,255,255,0.14);
+    --accent:        #9b59f4;
+    --accent-hover:  #b07af7;
+    --accent-dim:    rgba(155,89,244,0.13);
+    --accent-glow:   0 0 20px rgba(155,89,244,0.25);
+    --text:          #e2e2ec;
+    --text-2:        #8888aa;
+    --text-3:        #55556a;
+    --danger:        #f45959;
+    --success:       #4caf7d;
+    --radius:        8px;
+    --radius-sm:     5px;
+    --radius-xs:     3px;
+    --transition:    0.18s ease;
+    --shadow:        0 4px 24px rgba(0,0,0,0.5);
+    --shadow-sm:     0 2px 12px rgba(0,0,0,0.35);
+}
+
+/* ─── Global base (applies on all pages) ─────── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================
    Auth & Cloud Saves — стили
-   Spamton Save Editor
    ============================================ */
 
 /* ─── Auth Bar ─────────────────────────────── */
 
 #authBar {
-    background: #000;
-    border-bottom: 2px solid #fff;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
     padding: 6px 16px;
     position: sticky;
     top: 0;
     z-index: 1000;
+    backdrop-filter: blur(8px);
 }
 
 #authBar-inner {
@@ -31,8 +70,8 @@
 }
 
 #authUserEmail {
-    color: #aaa;
-    font-size: 14px;
+    color: var(--text-2);
+    font-size: 13px;
     margin-right: 4px;
     max-width: 200px;
     overflow: hidden;
@@ -43,36 +82,50 @@
 /* ─── Auth Buttons ─────────────────────────── */
 
 .auth-btn {
-    background: #000;
-    color: #fff;
-    border: 2px solid #fff;
+    background: var(--elevated);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
     padding: 5px 14px;
     font-size: 13px;
     font-family: inherit;
     cursor: pointer;
-    border-radius: 0;
-    transition: background 0.15s, color 0.15s;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
 }
 
 .auth-btn:hover {
-    background: #fff;
-    color: #000;
+    background: var(--hover);
+    border-color: var(--accent);
+    color: var(--accent-hover);
 }
 
 .auth-btn:disabled {
-    opacity: 0.6;
+    opacity: 0.45;
     cursor: not-allowed;
 }
 
 .auth-btn-outline {
-    background: #000;
-    color: #fff;
-    border: 2px solid #fff;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-strong);
 }
 
 .auth-btn-outline:hover {
-    background: #fff;
-    color: #000;
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    color: var(--accent-hover);
+}
+
+.auth-btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+.auth-btn-primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: #fff;
 }
 
 .auth-btn-small {
@@ -87,14 +140,18 @@
 }
 
 .auth-btn-google {
-    background: #000;
-    color: #fff;
-    border: 2px solid #fff;
+    background: var(--elevated);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    gap: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .auth-btn-google:hover {
-    background: #fff;
-    color: #000;
+    background: var(--hover);
+    border-color: var(--accent);
 }
 
 /* ─── Auth Modal ───────────────────────────── */
@@ -105,7 +162,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,44 +171,48 @@
 }
 
 .auth-modal {
-    background: #000;
-    border: 2px solid #fff;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
     padding: 28px;
     width: 90%;
     max-width: 420px;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
+    box-shadow: var(--shadow);
 }
 
 .auth-modal-close {
     position: absolute;
-    top: 8px;
-    right: 12px;
+    top: 10px;
+    right: 14px;
     background: none;
     border: none;
-    color: #fff;
-    font-size: 24px;
+    color: var(--text-2);
+    font-size: 22px;
     cursor: pointer;
     padding: 0;
     line-height: 1;
     font-family: inherit;
+    transition: color var(--transition);
 }
 
 .auth-modal-close:hover {
-    color: #ffff00;
+    color: var(--accent);
 }
 
 .auth-title {
-    color: #fff;
+    color: var(--text);
     margin: 0 0 20px;
-    font-size: 22px;
+    font-size: 20px;
     text-align: center;
+    font-weight: 600;
 }
 
 .auth-label {
     display: block;
-    color: #fff;
+    color: var(--text-2);
     font-size: 13px;
     margin-bottom: 12px;
 }
@@ -158,27 +220,29 @@
 .auth-input {
     display: block;
     width: 100%;
-    padding: 8px 10px;
+    padding: 8px 12px;
     margin-top: 5px;
-    background: #000;
-    border: 2px solid #fff;
-    border-radius: 0;
-    color: #fff;
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text);
     font-size: 14px;
     font-family: inherit;
     outline: none;
-    transition: border-color 0.15s;
+    transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .auth-input:focus {
-    border-color: #ffff00;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim);
 }
 
 .auth-error {
-    background: #000;
-    border: 2px solid #fff;
-    color: #fff;
-    padding: 8px 10px;
+    background: rgba(244, 89, 89, 0.1);
+    border: 1px solid rgba(244, 89, 89, 0.4);
+    border-radius: var(--radius-sm);
+    color: #f88;
+    padding: 8px 12px;
     font-size: 13px;
     margin-bottom: 12px;
     display: none;
@@ -197,12 +261,12 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: #fff;
+    background: var(--border-strong);
 }
 
 .auth-divider span {
-    background: #000;
-    color: #aaa;
+    background: var(--surface);
+    color: var(--text-3);
     padding: 0 10px;
     position: relative;
     font-size: 12px;
@@ -210,29 +274,31 @@
 
 .auth-switch {
     text-align: center;
-    color: #888;
+    color: var(--text-3);
     font-size: 14px;
     margin-top: 18px;
 }
 
 .auth-switch a {
-    color: #ffff00;
+    color: var(--accent);
     text-decoration: none;
 }
 
 .auth-switch a:hover {
+    color: var(--accent-hover);
     text-decoration: underline;
 }
 
 /* ─── Publish notice & textarea ────────────── */
 
 .publish-notice {
-    color: #aaa;
+    color: var(--text-2);
     font-size: 13px;
     margin: 10px 0;
-    padding: 8px 10px;
-    background: #000;
-    border: 2px solid #fff;
+    padding: 8px 12px;
+    background: var(--elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
 }
 
 .auth-textarea {
@@ -250,26 +316,27 @@
 }
 
 .saves-filter-btn {
-    background: #000;
-    color: #fff;
-    border: 2px solid #fff;
-    padding: 4px 10px;
+    background: var(--elevated);
+    color: var(--text-2);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
     font-size: 12px;
     font-family: inherit;
     cursor: pointer;
-    border-radius: 0;
-    transition: background 0.15s, color 0.15s;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
 }
 
 .saves-filter-btn:hover {
-    background: #fff;
-    color: #000;
+    background: var(--hover);
+    color: var(--text);
+    border-color: var(--border-strong);
 }
 
 .saves-filter-btn.active {
-    background: #ffff00;
-    color: #000;
-    border-color: #ffff00;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
 .saves-list {
@@ -282,26 +349,29 @@
 .saves-error {
     text-align: center;
     padding: 24px;
-    color: #aaa;
+    color: var(--text-3);
     font-size: 13px;
 }
 
 .saves-error {
-    color: #fff;
+    color: var(--danger);
 }
 
 .save-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
-    border: 2px solid #fff;
+    padding: 10px 12px;
+    background: var(--elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
     margin-bottom: 6px;
-    transition: border-color 0.15s;
+    transition: border-color var(--transition), background var(--transition);
 }
 
 .save-item:hover {
-    border-color: #ffff00;
+    border-color: var(--accent);
+    background: var(--hover);
 }
 
 .save-item-info {
@@ -310,7 +380,7 @@
 }
 
 .save-item-name {
-    color: #fff;
+    color: var(--text);
     font-size: 14px;
     white-space: nowrap;
     overflow: hidden;
@@ -318,7 +388,7 @@
 }
 
 .save-item-meta {
-    color: #777;
+    color: var(--text-3);
     font-size: 12px;
     margin-top: 4px;
 }
@@ -331,97 +401,105 @@
 }
 
 .save-action-btn {
-    background: #000;
-    color: #fff;
-    border: 2px solid #fff;
+    background: var(--surface);
+    color: var(--text-2);
+    border: 1px solid var(--border-strong);
     min-width: 32px;
     height: 28px;
-    padding: 0 6px;
+    padding: 0 8px;
     cursor: pointer;
     font-size: 13px;
     font-family: inherit;
+    border-radius: var(--radius-xs);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.15s, color 0.15s;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
 }
 
 .save-action-btn:hover {
-    background: #fff;
-    color: #000;
+    background: var(--hover);
+    border-color: var(--border-strong);
+    color: var(--text);
 }
 
 .save-load-btn:hover {
-    background: #ffff00;
-    color: #000;
-    border-color: #ffff00;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
 .save-delete-btn:hover {
-    background: #fff;
-    color: #000;
+    background: rgba(244, 89, 89, 0.12);
+    color: var(--danger);
+    border-color: var(--danger);
 }
 
-/* ─── Cloud Save Button (in editor) ────────── */
+/* ─── Cloud Save Buttons (in editor) ───────── */
 
 .cloud-save-btn {
     display: inline-block;
-    padding: .5em 1em;
-    border: 2px solid #fff;
-    color: #fff;
+    padding: .45em 1.1em;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text);
     cursor: pointer;
     margin-top: 1em;
     margin-left: 10px;
     text-align: center;
-    background: #000;
-    transition: background 0.15s, color 0.15s;
+    background: var(--elevated);
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
 }
 
 .cloud-save-btn:hover {
-    background: #fff;
-    color: #000;
+    background: var(--hover);
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
 .cloud-load-btn {
     display: inline-block;
-    padding: .5em 1em;
-    border: 2px solid #ffff00;
-    color: #ffff00;
+    padding: .45em 1.1em;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
+    color: var(--accent);
     cursor: pointer;
     margin-top: 1em;
     margin-left: 10px;
     text-align: center;
-    background: #000;
-    transition: background 0.15s, color 0.15s;
+    background: var(--accent-dim);
+    transition: background var(--transition), color var(--transition);
 }
 
 .cloud-load-btn:hover {
-    background: #ffff00;
-    color: #000;
+    background: var(--accent);
+    color: #fff;
 }
 
 .cloud-publish-btn {
     display: inline-block;
-    padding: .5em 1em;
-    border: 2px solid #fff;
-    color: #fff;
+    padding: .45em 1.1em;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text);
     cursor: pointer;
     margin-top: 1em;
     margin-left: 10px;
     text-align: center;
-    background: #000;
-    transition: background 0.15s, color 0.15s;
+    background: var(--elevated);
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
 }
 
 .cloud-publish-btn:hover {
-    background: #fff;
-    color: #000;
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
 .save-publish-btn:hover {
-    background: #ffff00;
-    color: #000;
-    border-color: #ffff00;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
 /* ─── Toast notification ───────────────────── */
@@ -431,12 +509,14 @@
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
-    background: #000;
-    color: #fff;
-    border: 2px solid #fff;
+    background: var(--elevated);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
     padding: 10px 22px;
     font-size: 13px;
     font-family: inherit;
+    box-shadow: var(--shadow);
     z-index: 20000;
     opacity: 0;
     transition: opacity 0.3s, transform 0.3s;
@@ -452,7 +532,7 @@
 
 @media (max-width: 600px) {
     .auth-modal {
-        padding: 16px;
+        padding: 18px;
         margin: 8px;
         width: calc(100% - 16px);
     }
@@ -481,16 +561,17 @@
 /* ─── User Avatar ──────────────────────────── */
 
 .user-avatar {
-    border-radius: 0;
+    border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
 }
 
 .user-avatar-letter {
-    background: #000;
-    color: #fff;
+    background: var(--elevated);
+    color: var(--text);
     text-align: center;
-    border: 2px solid #fff;
+    border: 1px solid var(--border-strong);
+    border-radius: 50%;
     font-weight: 700;
     display: inline-flex;
     align-items: center;
@@ -500,42 +581,46 @@
 /* ─── Supporter ────────────────────────────── */
 
 .supporter-avatar {
-    border: 2px solid #ffff00 !important;
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 0 8px var(--accent-dim);
 }
 
 .supporter-badge {
     display: inline-block;
-    background: #000;
-    color: #ffff00;
+    background: var(--accent-dim);
+    color: var(--accent);
     font-size: 10px;
     font-weight: 700;
-    padding: 1px 6px;
-    border: 1px solid #ffff00;
+    padding: 1px 7px;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-xs);
     vertical-align: middle;
-    line-height: 1.4;
+    line-height: 1.5;
     white-space: nowrap;
 }
 
 .supporter-status-bar {
-    background: #000;
-    border: 2px solid #ffff00;
+    background: var(--accent-dim);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
     padding: 8px 12px;
     margin-bottom: 14px;
-    color: #ffff00;
+    color: var(--accent-hover);
     font-size: 13px;
     text-align: center;
 }
 
 .supporter-token-section {
-    border: 2px solid #fff;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
     padding: 10px 12px;
     margin-bottom: 14px;
-    background: #000;
+    background: var(--elevated);
 }
 
 .supporter-token-label {
     font-size: 12px;
-    color: #aaa;
+    color: var(--text-2);
     margin-bottom: 6px;
 }
 
@@ -548,19 +633,20 @@
 
 .supporter-token-value {
     font-family: 'DeterminationCyrillic', monospace;
-    font-size: 15px;
-    color: #ffff00;
+    font-size: 14px;
+    color: var(--accent);
     letter-spacing: 2px;
-    border: 1px solid #ffff00;
-    padding: 2px 8px;
-    background: #000;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-xs);
+    padding: 3px 10px;
+    background: var(--accent-dim);
     flex: 1;
     user-select: all;
 }
 
 .supporter-token-hint {
     font-size: 11px;
-    color: #aaa;
+    color: var(--text-3);
 }
 
 .supporter-promo {
@@ -571,27 +657,27 @@
 .supporter-promo-link {
     display: inline-block;
     padding: 7px 18px;
-    border: 2px solid #ffff00;
-    color: #ffff00 !important;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
+    color: var(--accent) !important;
     font-size: 13px;
     font-family: inherit;
     text-decoration: none !important;
-    background: #000;
-    transition: background 0.15s, color 0.15s;
-    letter-spacing: 0.5px;
+    background: var(--accent-dim);
+    transition: background var(--transition), color var(--transition);
 }
 
 .supporter-promo-link:hover {
-    background: #ffff00;
-    color: #000 !important;
+    background: var(--accent);
+    color: #fff !important;
 }
 
 .comment-author-supporter {
-    color: #ffcc00 !important;
+    color: var(--accent-hover) !important;
 }
 
 .lib-card-author-supporter {
-    color: #ffcc00;
+    color: var(--accent-hover);
 }
 
 /* ─── Profile Modal ────────────────────────── */
@@ -615,22 +701,24 @@
     position: absolute;
     bottom: -2px;
     right: -2px;
-    background: #000;
-    color: #fff;
+    background: var(--elevated);
+    color: var(--text-2);
     width: 22px;
     height: 22px;
-    border: 2px solid #fff;
+    border: 1px solid var(--border-strong);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 12px;
-    transition: background .15s, color .15s;
+    font-size: 11px;
+    transition: background var(--transition), color var(--transition);
 }
 
 .profile-avatar-edit:hover {
-    background: #fff;
-    color: #000;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
 .profile-info {
@@ -640,12 +728,12 @@
 .profile-name {
     font-size: 20px;
     margin: 0 0 4px;
-    color: #fff;
+    color: var(--text);
 }
 
 .profile-bio {
     font-size: 13px;
-    color: #888;
+    color: var(--text-2);
     line-height: 1.4;
 }
 
@@ -667,10 +755,10 @@
 }
 
 .comments-title {
-    font-size: 17px;
+    font-size: 16px;
     margin: 0 0 12px;
-    color: #ffff00;
-    letter-spacing: 1px;
+    color: var(--accent);
+    font-weight: 600;
 }
 
 .comments-list {
@@ -682,14 +770,14 @@
 .comments-empty,
 .comments-loading {
     text-align: center;
-    color: #555;
+    color: var(--text-3);
     font-size: 14px;
     padding: 20px 0;
 }
 
 .comments-login-hint {
     text-align: center;
-    color: #666;
+    color: var(--text-3);
     font-size: 13px;
     padding: 10px 0;
 }
@@ -698,7 +786,7 @@
     display: flex;
     gap: 10px;
     padding: 10px 0;
-    border-bottom: 1px solid #1a1a1a;
+    border-bottom: 1px solid var(--border);
 }
 
 .comment-item:last-child {
@@ -724,19 +812,19 @@
 .comment-author {
     font-size: 12px;
     font-weight: 700;
-    color: #fff;
+    color: var(--text);
 }
 
 .comment-date {
     font-size: 11px;
-    color: #555;
+    color: var(--text-3);
 }
 
 .comment-delete {
     margin-left: auto;
     background: none;
     border: none;
-    color: #555;
+    color: var(--text-3);
     cursor: pointer;
     font-size: 14px;
     padding: 0 4px;
@@ -744,12 +832,12 @@
 }
 
 .comment-delete:hover {
-    color: #ff4444;
+    color: var(--danger);
 }
 
 .comment-text {
     font-size: 14px;
-    color: #ccc;
+    color: var(--text-2);
     line-height: 1.4;
     word-break: break-word;
 }
@@ -762,19 +850,21 @@
 
 .comment-input {
     flex: 1;
-    background: #000;
-    border: 2px solid #fff;
-    color: #fff;
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text);
     font-family: inherit;
     font-size: 13px;
-    padding: 7px 9px;
+    padding: 7px 10px;
     resize: none;
-    border-radius: 0;
     outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .comment-input:focus {
-    border-color: #ffff00;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim);
 }
 
 .comment-submit {
