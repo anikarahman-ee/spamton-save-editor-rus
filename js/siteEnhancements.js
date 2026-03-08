@@ -471,12 +471,12 @@ var SiteEnhance = (function () {
        [F61] Changelog
        ═══════════════════════════════════════════════════ */
     var CHANGELOG = [
-        { version: '2.5', date: '2025-06', text: 'Добавлена поддержка глав 3 и 4' },
-        { version: '2.4', date: '2025-05', text: 'Улучшен UI: тёмная тема с фиолетовым акцентом' },
-        { version: '2.3', date: '2025-04', text: 'Облачные сохранения — публичная библиотека' },
-        { version: '2.2', date: '2025-03', text: 'Поддержка демо-версий глав 1 и 2' },
-        { version: '2.1', date: '2025-01', text: 'Автосохранение в localStorage редактора' },
-        { version: '2.0', date: '2024-12', text: 'Редизайн: адаптация для русской аудитории' },
+        { version: 'v3.0', date: 'Март 2026',    text: 'Полный редизайн UI: тёмная тема, фиолетовый акцент, glassmorphism. Undo/Redo, автосохранение, поиск по полям, PWA.' },
+        { version: 'v2.3', date: 'Конец 2025',   text: 'Облачные сохранения через Supabase. Публичная библиотека и коллекции.' },
+        { version: 'v2.2', date: 'Середина 2025', text: 'Поддержка Глав 3 и 4.' },
+        { version: 'v2.1', date: 'Начало 2025',   text: 'Демо-версии Глав 1 и 2. Профили пользователей.' },
+        { version: 'v2.0', date: '2024',          text: 'Адаптация для русскоязычной аудитории. Переводы DumpyCats и LazyDesman.' },
+        { version: 'v1.0', date: '2022',          text: 'Первый публичный релиз — редактор Глав 1 и 2.' },
     ];
 
     function initChangelog() {
@@ -484,9 +484,11 @@ var SiteEnhance = (function () {
         if (!list) return;
         list.innerHTML = CHANGELOG.map(function (e) {
             return '<div class="changelog-entry">' +
+                '<div class="changelog-entry-meta">' +
                 '<span class="changelog-version">' + e.version + '</span>' +
                 '<span class="changelog-date">' + e.date + '</span>' +
-                '<span class="changelog-text">' + e.text + '</span>' +
+                '</div>' +
+                '<div class="changelog-text">' + e.text + '</div>' +
                 '</div>';
         }).join('');
     }

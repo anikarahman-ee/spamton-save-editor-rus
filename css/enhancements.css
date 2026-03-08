@@ -957,17 +957,41 @@ body {
 .changelog-entries {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0;
+    border-left: 2px solid var(--border-strong);
+    padding-left: 20px;
+    margin-left: 8px;
 }
 
 .changelog-entry {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 14px 18px;
+    position: relative;
+    padding: 0 0 24px 0;
+}
+
+/* Dot on timeline */
+.changelog-entry::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    flex-shrink: 0;
+}
+
+.changelog-entry:first-child::before {
+    background: var(--gradient);
+    box-shadow: 0 0 8px rgba(155, 89, 244, 0.5);
+}
+
+.changelog-entry-meta {
     display: flex;
-    gap: 16px;
-    align-items: flex-start;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
 }
 
 .changelog-version {
@@ -978,17 +1002,12 @@ body {
     font-weight: 700;
     font-size: 13px;
     white-space: nowrap;
-    flex-shrink: 0;
-    min-width: 50px;
 }
 
 .changelog-date {
     font-size: 11px;
     color: var(--text-3);
     white-space: nowrap;
-    flex-shrink: 0;
-    min-width: 70px;
-    margin-top: 2px;
 }
 
 .changelog-text {

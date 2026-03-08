@@ -67,7 +67,7 @@ var Auth = (function () {
                     '<button class="auth-btn auth-btn-small" id="authProfileBtn">Профиль</button>' +
                     '<a href="library.html" class="auth-btn auth-btn-small auth-btn-outline" id="authLibraryBtn">Библиотека</a>' +
                     '<button class="auth-btn auth-btn-small" id="authMySavesBtn">Мои сохранения</button>' +
-                    '<a href="admin.html" class="auth-btn auth-btn-small auth-btn-outline" id="authAdminBtn" style="display:none;color:#ffff00;border-color:#ffff00;">Админ</a>' +
+                    '<a href="admin.html" class="auth-btn auth-btn-small auth-btn-outline" id="authAdminBtn" style="display:none;">Админ</a>' +
                     '<button class="auth-btn auth-btn-outline auth-btn-small" id="authLogoutBtn">Выйти</button>' +
                 '</div>' +
             '</div>';
