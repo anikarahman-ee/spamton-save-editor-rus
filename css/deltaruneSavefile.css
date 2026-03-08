@@ -123,7 +123,7 @@ body{
 #goner_box{
     padding:20px;
     margin:10px;
-    width:600px;
+    width:700px;
     border: 1px solid var(--border-strong);
     border-top: 2px solid var(--accent);
     border-radius: var(--radius-lg);
@@ -344,7 +344,7 @@ body{
 }
 
 .filename input{
-  width:150px;
+  width:210px;
 }
 
 #flags_box, .flags_box{
@@ -365,11 +365,11 @@ body{
 }
 
 .flag input{
-  width:100px;
+  width:140px;
 }
 
 .room_id select{
-  width:375px;
+  width:490px;
 }
 
 .character_box{
@@ -396,7 +396,7 @@ body{
 }
 .character_box{
   margin: 10px;
-  width:360px;
+  width:430px;
 }
 
 
@@ -434,17 +434,17 @@ body{
 }
 
 #item_wrapper{
-    max-width:660px;
+    max-width:980px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 .item_slot{
-  width:200px;
+  width:250px;
 }
 
 .item_slot select{
-  width:175px;
+  width:225px;
 }
 
 .hidden{
@@ -482,7 +482,7 @@ body{
 }
 
 #recruit_wrapper{
-    max-width:900px;
+    max-width:1100px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -504,14 +504,14 @@ body{
 }
 
 #recruit_cafe_wrapper{
-  max-width:350px;
+  max-width:450px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
 .recruit_cafe select{
-  width:230px;
+  width:290px;
 }
 
 .unused_recruit, .unused_recruit_cafe{
@@ -536,7 +536,7 @@ select:focus, input:focus {
 
 
 input[type='number']{
-  width:85px;
+  width:108px;
 }
 
 input[name='_11'] {
@@ -625,24 +625,24 @@ input[type="checkbox"]:checked::after {
 
 /* Changed data highlights */
 .val-changed, span.val-changed {
-    color: #FFFF00 !important;
+    color: var(--warning) !important;
 }
 
 input.val-changed, select.val-changed {
-    color: #FFFF00 !important;
-    border-color: #FFFF00 !important;
+    color: var(--warning) !important;
+    border-color: var(--warning) !important;
 }
 
 input[type="checkbox"].val-changed {
-    border-color: #FFFF00 !important;
+    border-color: var(--warning) !important;
 }
 
 input[type="checkbox"].val-changed:checked {
-    background-color: #FFFF00 !important;
+    background-color: var(--warning) !important;
 }
 
 input[type="checkbox"].val-changed:checked::after {
-    border-color: #000 !important;
+    border-color: #0b0b12 !important;
 }
 
 /* Recruits grey color fix */
@@ -660,13 +660,13 @@ label.lineItem.is-checked input[type="checkbox"] ~ span.selectTitle {
 
 label.lineItem.val-changed input[type="checkbox"]:not(:checked) ~ span.selectTitle,
 label.lineItem.val-changed input[type="checkbox"]:checked ~ span.selectTitle {
-    color: #FFFF00 !important;
+    color: var(--warning) !important;
 }
 
 .lineItem.val-changed .selectTitle,
 .lineItem.val-changed input[type="text"],
 .lineItem.val-changed input[type="number"],
 .lineItem.val-changed select {
-  color: #FFFF00 !important;
-  border-color: #FFFF00 !important;
+  color: var(--warning) !important;
+  border-color: var(--warning) !important;
 }

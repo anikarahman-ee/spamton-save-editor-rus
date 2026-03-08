@@ -9,7 +9,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    animation: fadeUp 0.45s 0.05s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation: fadeUp 0.3s ease both;
 }
 
 .lib-header {

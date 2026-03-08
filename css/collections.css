@@ -3,7 +3,7 @@
     max-width: 960px;
     margin: 0 auto;
     padding: 0 20px 60px;
-    animation: fadeUp 0.45s 0.05s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation: fadeUp 0.3s ease both;
 }
 
 .col-header {
