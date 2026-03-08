@@ -440,6 +440,36 @@ var Admin = (function () {
         return div.innerHTML;
     }
 
+    // ─── Выдача Supporter по токену ──────────────
+
+    /**
+     * Найти пользователя по supporter_token и выдать ему Supporter
+     * @param {string} token
+     */
+    function grantSupporterByToken(token) {
+        if (!_isAdmin) return Promise.reject('\u041d\u0435\u0442 \u043f\u0440\u0430\u0432 \u0430\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0430\u0442\u043e\u0440\u0430');
+        var sb = SupabaseConfig.getClient();
+        if (!sb) return Promise.reject('\u0421\u0435\u0440\u0432\u0438\u0441 \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u0435\u043d');
+        var normalizedToken = token.trim().toUpperCase();
+        if (!normalizedToken) return Promise.reject('\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u043e\u043a\u0435\u043d');
+        return sb.from('user_profiles')
+            .select('*')
+            .eq('supporter_token', normalizedToken)
+            .maybeSingle()
+            .then(function (res) {
+                if (res.error) throw new Error(res.error.message);
+                if (!res.data) throw new Error('\u0422\u043e\u043a\u0435\u043d \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d');
+                var profile = res.data;
+                return sb.from('user_profiles')
+                    .update({ is_supporter: true, role: 'supporter' })
+                    .eq('user_id', profile.user_id)
+                    .then(function (upRes) {
+                        if (upRes.error) throw new Error(upRes.error.message);
+                        return profile;
+                    });
+            });
+    }
+
     // ─── Public API ──────────────────────────────
 
     return {
@@ -461,6 +491,7 @@ var Admin = (function () {
         showReportModal: showReportModal,
         showSuggestionModal: showSuggestionModal,
         submitSuggestion: submitSuggestion,
+        grantSupporterByToken: grantSupporterByToken,
         escapeHtml: escapeHtml
     };
 })();

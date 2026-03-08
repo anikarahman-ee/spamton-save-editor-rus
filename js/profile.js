@@ -60,6 +60,40 @@ var UserProfile = (function () {
             });
     }
 
+    // ─── Supporter Token ─────────────────────────
+
+    function generateSupporterToken() {
+        var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var token = 'SPT-';
+        for (var i = 0; i < 8; i++) {
+            token += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return token;
+    }
+
+    function ensureSupporterToken(profile) {
+        if (profile && profile.supporter_token) {
+            return Promise.resolve(profile.supporter_token);
+        }
+        var user = Auth.getUser();
+        if (!user) return Promise.resolve(null);
+        var sb = SupabaseConfig.getClient();
+        if (!sb) return Promise.resolve(null);
+        var token = generateSupporterToken();
+        delete cachedProfiles[user.id];
+        return sb.from('user_profiles')
+            .update({ supporter_token: token })
+            .eq('user_id', user.id)
+            .then(function (res) {
+                if (res.error) {
+                    return getMyProfile().then(function (p) {
+                        return p ? p.supporter_token : null;
+                    });
+                }
+                return token;
+            });
+    }
+
     // ─── Avatar helpers ──────────────────────────
 
     function readFileAsDataURL(file) {
@@ -171,7 +205,7 @@ var UserProfile = (function () {
         var p = profile || {};
         var supporterSection = p.is_supporter
             ? '<div class="supporter-status-bar"><span class="supporter-badge">★ Supporter</span> Спасибо за поддержку!</div>'
-            : '<div class="supporter-promo"><a href="https://boosty.to/spamton" target="_blank" class="supporter-promo-link">★ Стать Supporter на Boosty</a></div>';
+            : '';
         var html =
             '<h2 class="auth-title">Мой профиль</h2>' +
             supporterSection +
@@ -272,6 +306,7 @@ var UserProfile = (function () {
         getProfile: getProfile,
         getMyProfile: getMyProfile,
         updateProfile: updateProfile,
+        ensureSupporterToken: ensureSupporterToken,
         renderAvatar: renderAvatar,
         renderSupporterBadge: renderSupporterBadge,
         isSupporter: isSupporter,

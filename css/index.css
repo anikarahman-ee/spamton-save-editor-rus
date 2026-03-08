@@ -227,25 +227,33 @@
     padding: 18px 16px;
     text-decoration: none !important;
     color: #fff !important;
-    transition: border-color .15s;
+    transition: background .15s, color .15s, border-color .15s;
 }
 
 .community-card:hover {
-    background: #000;
-    border-color: #ffff00;
+    background: #fff;
+    border-color: #fff;
+    color: #000 !important;
     transform: none;
     box-shadow: none;
 }
 
+.community-card:hover .community-card-icon {
+    color: #000;
+}
+
+.community-card:hover .community-card-desc {
+    color: #000;
+}
+
 .community-card-icon {
-    font-size: 14px;
-    min-width: 40px;
+    font-size: 13px;
+    min-width: 48px;
     text-align: center;
     color: #ffff00;
     font-weight: 700;
     letter-spacing: 1px;
-    border: 1px solid #ffff00;
-    padding: 2px 4px;
+    flex-shrink: 0;
 }
 
 .community-card-title {
@@ -259,34 +267,15 @@
     margin-top: 3px;
 }
 
-/* Boosty supporter card */
-.community-boosty {
-    border-color: #ffff00;
-}
-
-.community-boosty:hover {
-    border-color: #ffff00;
-}
-
-.community-boosty .community-card-icon {
-    color: #ffff00;
-    border-color: #ffff00;
-}
-
-.community-boosty .community-card-title {
-    color: #ffff00;
-}
-
 /* Suggestion card */
 .community-suggestion {
     border-color: #fff;
 }
 .community-suggestion:hover {
-    border-color: #ffff00;
+    border-color: #fff;
 }
 .community-suggestion .community-card-icon {
-    color: #fff;
-    border-color: #fff;
+    color: #ffff00;
 }
 
 /* Admin card */
@@ -294,34 +283,15 @@
     border-color: #fff;
 }
 .community-admin:hover {
-    border-color: #ffff00;
+    border-color: #fff;
 }
 .community-admin .community-card-icon {
-    color: #fff;
-    border-color: #fff;
+    color: #ffff00;
 }
 .community-admin .community-card-title {
     color: #fff;
 }
 
-.boosty-footer-link {
-    color: #ffff00 !important;
-    text-decoration: none;
-}
-
-.boosty-footer-link:hover {
-    text-decoration: underline;
-}
-
-.boosty-header-link {
-    border-color: #ffff00 !important;
-    color: #ffff00 !important;
-}
-
-.boosty-header-link:hover {
-    background: #ffff00 !important;
-    color: #000 !important;
-}
 
 /* ─── Stats ────────────────────────────────── */
 .stats-section {

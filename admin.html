@@ -190,6 +190,31 @@
             loadUsers('');
             loadReportCount();
             loadSuggestionCount();
+
+            // Wire token grant
+            document.getElementById('grantSupporterBtn').addEventListener('click', function () {
+                var token = document.getElementById('supporterTokenInput').value.trim().toUpperCase();
+                var resultEl = document.getElementById('tokenGrantResult');
+                if (!token) { resultEl.textContent = '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u043e\u043a\u0435\u043d'; resultEl.className = 'admin-token-grant-result admin-token-error'; return; }
+                var btn = this;
+                btn.disabled = true;
+                btn.textContent = '...';
+                resultEl.textContent = '';
+                resultEl.className = 'admin-token-grant-result';
+                Admin.grantSupporterByToken(token).then(function (profile) {
+                    btn.disabled = false;
+                    btn.textContent = '\u0412\u044b\u0434\u0430\u0442\u044c';
+                    resultEl.textContent = '\u2713 Supporter \u0432\u044b\u0434\u0430\u043d: ' + (profile.display_name || profile.user_id);
+                    resultEl.className = 'admin-token-grant-result admin-token-ok';
+                    document.getElementById('supporterTokenInput').value = '';
+                    loadUsers(document.getElementById('userSearch').value.trim());
+                }).catch(function (err) {
+                    btn.disabled = false;
+                    btn.textContent = '\u0412\u044b\u0434\u0430\u0442\u044c';
+                    resultEl.textContent = '\u2717 ' + (typeof err === 'string' ? err : err.message || '\u041e\u0448\u0438\u0431\u043a\u0430');
+                    resultEl.className = 'admin-token-grant-result admin-token-error';
+                });
+            });
         }
 
         function loadTabData(tab) {

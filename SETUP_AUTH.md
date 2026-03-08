@@ -76,16 +76,20 @@ create table if not exists public.save_likes (
 
 -- ─── Профили пользователей ─────────────────────────────────────────────
 create table if not exists public.user_profiles (
-    id            uuid primary key default gen_random_uuid(),
-    user_id       uuid not null unique references auth.users(id) on delete cascade,
-    display_name  text not null default '',
-    bio           text not null default '',
-    avatar        text not null default '',
-    is_supporter  boolean not null default false,
-    role          text,           -- 'admin', 'moderator' или null
-    created_at    timestamptz not null default now(),
-    updated_at    timestamptz not null default now()
+    id               uuid primary key default gen_random_uuid(),
+    user_id          uuid not null unique references auth.users(id) on delete cascade,
+    display_name     text not null default '',
+    bio              text not null default '',
+    avatar           text not null default '',
+    is_supporter     boolean not null default false,
+    role             text,           -- 'admin', 'moderator' или null
+    supporter_token  text unique,    -- уникальный токен для выдачи Supporter (формат SPT-XXXXXXXX)
+    created_at       timestamptz not null default now(),
+    updated_at       timestamptz not null default now()
 );
+
+-- Если таблица уже существует, добавьте колонку через миграцию:
+-- alter table public.user_profiles add column if not exists supporter_token text unique;
 
 -- ─── Комментарии ───────────────────────────────────────────────────────
 create table if not exists public.comments (

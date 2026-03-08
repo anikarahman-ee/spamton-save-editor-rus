@@ -526,6 +526,43 @@
     text-align: center;
 }
 
+.supporter-token-section {
+    border: 2px solid #fff;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    background: #000;
+}
+
+.supporter-token-label {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 6px;
+}
+
+.supporter-token-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.supporter-token-value {
+    font-family: 'DeterminationCyrillic', monospace;
+    font-size: 15px;
+    color: #ffff00;
+    letter-spacing: 2px;
+    border: 1px solid #ffff00;
+    padding: 2px 8px;
+    background: #000;
+    flex: 1;
+    user-select: all;
+}
+
+.supporter-token-hint {
+    font-size: 11px;
+    color: #aaa;
+}
+
 .supporter-promo {
     text-align: center;
     margin-bottom: 16px;
