@@ -38,18 +38,18 @@
 }
 
 .lib-back-link {
-    color: #2db4d2;
-    font-size: 14px;
+    color: #fff;
+    font-size: 13px;
     text-decoration: none;
-    padding: 8px 16px;
-    border: 1px solid #333;
-    border-radius: 4px;
-    transition: all 0.2s;
+    padding: 6px 14px;
+    border: 2px solid #fff;
+    transition: background .15s, color .15s;
 }
 
 .lib-back-link:hover {
-    background: #222;
-    border-color: #2db4d2;
+    background: #fff;
+    color: #000;
+    border-color: #fff;
 }
 
 /* ─── Toolbar ──────────────────────────────── */
@@ -57,12 +57,11 @@
 .lib-toolbar {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin-bottom: 20px;
-    padding: 16px;
-    background: #111;
-    border: 1px solid #333;
-    border-radius: 8px;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding: 14px;
+    background: #000;
+    border: 2px solid #fff;
 }
 
 .lib-filters {
@@ -72,26 +71,26 @@
 }
 
 .lib-filter-btn {
-    background: #222;
-    color: #aaa;
-    border: 1px solid #444;
-    padding: 6px 14px;
-    font-size: 14px;
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 5px 12px;
+    font-size: 13px;
     font-family: inherit;
     cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.2s;
+    border-radius: 0;
+    transition: background .15s, color .15s;
 }
 
 .lib-filter-btn:hover {
-    background: #333;
-    color: #fff;
+    background: #fff;
+    color: #000;
 }
 
 .lib-filter-btn.active {
-    background: #2db4d2;
+    background: #ffff00;
     color: #000;
-    border-color: #2db4d2;
+    border-color: #ffff00;
 }
 
 .lib-search-sort {
@@ -109,53 +108,54 @@
 
 .lib-search-input {
     flex: 1;
-    padding: 8px 12px;
-    background: #1a1a1a;
-    border: 1px solid #444;
+    padding: 7px 10px;
+    background: #000;
+    border: 2px solid #fff;
     border-right: none;
-    border-radius: 4px 0 0 4px;
+    border-radius: 0;
     color: #fff;
-    font-size: 14px;
+    font-size: 13px;
     font-family: inherit;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color .15s;
 }
 
 .lib-search-input:focus {
-    border-color: #2db4d2;
+    border-color: #ffff00;
 }
 
 .lib-search-btn {
-    padding: 8px 14px;
-    background: #333;
-    border: 1px solid #444;
-    border-radius: 0 4px 4px 0;
-    color: #ccc;
+    padding: 7px 12px;
+    background: #000;
+    border: 2px solid #fff;
+    border-radius: 0;
+    color: #fff;
     cursor: pointer;
-    font-size: 14px;
-    transition: all 0.2s;
+    font-size: 13px;
+    font-family: inherit;
+    transition: background .15s, color .15s;
 }
 
 .lib-search-btn:hover {
-    background: #2db4d2;
+    background: #fff;
     color: #000;
-    border-color: #2db4d2;
+    border-color: #fff;
 }
 
 .lib-sort-select {
-    padding: 8px 12px;
-    background: #1a1a1a;
-    border: 1px solid #444;
-    border-radius: 4px;
+    padding: 7px 10px;
+    background: #000;
+    border: 2px solid #fff;
+    border-radius: 0;
     color: #fff;
-    font-size: 14px;
+    font-size: 13px;
     font-family: inherit;
     cursor: pointer;
     outline: none;
 }
 
 .lib-sort-select option {
-    background: #1a1a1a;
+    background: #000;
     color: #fff;
 }
 
@@ -183,39 +183,36 @@
     grid-column: 1 / -1;
     text-align: center;
     padding: 60px 20px;
-    color: #888;
-    font-size: 16px;
+    color: #aaa;
+    font-size: 14px;
 }
 
 .lib-error {
-    color: #ff6b6b;
+    color: #fff;
 }
 
 /* ─── Card ─────────────────────────────────── */
 
 .lib-card {
-    background: #111;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 16px;
+    background: #000;
+    border: 2px solid #fff;
+    padding: 14px;
     display: flex;
     flex-direction: column;
-    transition: border-color 0.2s, transform 0.2s;
+    transition: border-color .15s;
 }
 
 .lib-card:hover {
-    border-color: #555;
-    transform: translateY(-2px);
+    border-color: #ffff00;
 }
 
-/* Supporter card highlight */
+/* Supporter card */
 .lib-card-supporter {
-    border-color: rgba(255, 204, 0, 0.25);
+    border-color: #ffff00;
 }
 
 .lib-card-supporter:hover {
-    border-color: rgba(255, 204, 0, 0.5);
-    box-shadow: 0 4px 20px rgba(255, 204, 0, 0.08);
+    border-color: #ffff00;
 }
 
 .lib-card-header {
@@ -226,19 +223,19 @@
 }
 
 .lib-card-chapter {
-    background: #2db4d2;
-    color: #000;
-    padding: 3px 10px;
-    border-radius: 3px;
-    font-size: 12px;
+    background: #000;
+    color: #ffff00;
+    border: 1px solid #ffff00;
+    padding: 2px 8px;
+    font-size: 11px;
     font-weight: bold;
 }
 
 .lib-card-own {
-    background: #27ae60;
-    color: #000;
-    padding: 3px 8px;
-    border-radius: 3px;
+    background: #000;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 2px 7px;
     font-size: 11px;
     font-weight: bold;
 }
@@ -257,8 +254,8 @@
 }
 
 .lib-card-desc {
-    color: #999;
-    font-size: 13px;
+    color: #aaa;
+    font-size: 12px;
     margin-bottom: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -272,16 +269,16 @@
 .lib-card-meta {
     display: flex;
     gap: 12px;
-    color: #666;
+    color: #aaa;
     font-size: 12px;
     margin-bottom: 8px;
     flex-wrap: wrap;
 }
 
 .lib-card-stats {
-    color: #888;
-    font-size: 13px;
-    margin-bottom: 12px;
+    color: #aaa;
+    font-size: 12px;
+    margin-bottom: 10px;
 }
 
 .lib-card-actions {
@@ -292,44 +289,44 @@
 
 .lib-action-btn {
     flex: 1;
-    padding: 8px 10px;
-    border: 1px solid #444;
-    border-radius: 4px;
-    background: #222;
-    color: #ccc;
-    font-size: 13px;
+    padding: 6px 8px;
+    border: 2px solid #fff;
+    border-radius: 0;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
     font-family: inherit;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: background .15s, color .15s;
     text-align: center;
 }
 
 .lib-action-btn:hover {
-    background: #333;
-    color: #fff;
+    background: #fff;
+    color: #000;
 }
 
 .lib-download-btn:hover {
-    background: #2db4d2;
+    background: #ffff00;
     color: #000;
-    border-color: #2db4d2;
+    border-color: #ffff00;
 }
 
 .lib-load-btn:hover {
-    background: #27ae60;
+    background: #fff;
     color: #000;
-    border-color: #27ae60;
+    border-color: #fff;
 }
 
 .lib-delete-btn {
     flex: 0;
-    padding: 8px 12px;
+    padding: 6px 10px;
 }
 
 .lib-delete-btn:hover {
-    background: #e74c3c;
-    color: #fff;
-    border-color: #e74c3c;
+    background: #fff;
+    color: #000;
+    border-color: #fff;
 }
 
 /* ─── Pagination ───────────────────────────── */
@@ -344,89 +341,87 @@
 }
 
 .lib-page-btn {
-    padding: 8px 14px;
-    background: #222;
-    border: 1px solid #444;
-    border-radius: 4px;
-    color: #ccc;
-    font-size: 14px;
+    padding: 6px 12px;
+    background: #000;
+    border: 2px solid #fff;
+    border-radius: 0;
+    color: #fff;
+    font-size: 13px;
     font-family: inherit;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: background .15s, color .15s;
 }
 
 .lib-page-btn:hover {
-    background: #333;
-    color: #fff;
+    background: #fff;
+    color: #000;
 }
 
 .lib-page-btn.active {
-    background: #2db4d2;
+    background: #ffff00;
     color: #000;
-    border-color: #2db4d2;
+    border-color: #ffff00;
 }
 
 /* ─── Like button ──────────────────────────── */
 
 .lib-like-btn {
     flex: 0 0 auto;
-    padding: 8px 10px;
-    font-size: 16px;
-    transition: all 0.2s;
+    padding: 6px 9px;
+    font-size: 14px;
+    transition: background .15s, color .15s;
 }
 
 .lib-like-btn:hover,
 .lib-like-btn.lib-liked {
-    background: #e74c3c;
-    color: #fff;
-    border-color: #e74c3c;
+    background: #fff;
+    color: #000;
+    border-color: #fff;
 }
 
 .lib-likes-count {
-    color: #e74c3c;
+    color: #fff;
 }
 
 /* ─── Share button ─────────────────────────── */
 
 .lib-share-btn {
     flex: 0 0 auto;
-    padding: 8px 10px;
+    padding: 6px 9px;
 }
 
 .lib-share-btn:hover {
-    background: #9b59b6;
-    color: #fff;
-    border-color: #9b59b6;
+    background: #fff;
+    color: #000;
+    border-color: #fff;
 }
 
 /* ─── Scroll to top ────────────────────────── */
 
 .scroll-top-btn {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 48px;
-    height: 48px;
-    border: 2px solid #2db4d2;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.85);
-    color: #2db4d2;
-    font-size: 22px;
+    bottom: 24px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #fff;
+    border-radius: 0;
+    background: #000;
+    color: #fff;
+    font-size: 18px;
     cursor: pointer;
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 999;
-    transition: all 0.3s;
+    transition: background .15s, color .15s;
     font-family: inherit;
     line-height: 1;
-    box-shadow: 0 0 12px rgba(45, 180, 210, 0.3);
 }
 
 .scroll-top-btn:hover {
-    background: #2db4d2;
+    background: #fff;
     color: #000;
-    box-shadow: 0 0 20px rgba(45, 180, 210, 0.6);
 }
 
 .scroll-top-btn.visible {

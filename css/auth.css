@@ -6,9 +6,9 @@
 /* ─── Auth Bar ─────────────────────────────── */
 
 #authBar {
-    background: #111;
-    border-bottom: 1px solid #333;
-    padding: 8px 16px;
+    background: #000;
+    border-bottom: 2px solid #fff;
+    padding: 6px 16px;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -43,19 +43,20 @@
 /* ─── Auth Buttons ─────────────────────────── */
 
 .auth-btn {
-    background: #2db4d2;
-    color: #000;
-    border: none;
-    padding: 8px 18px;
-    font-size: 14px;
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 5px 14px;
+    font-size: 13px;
     font-family: inherit;
     cursor: pointer;
-    border-radius: 4px;
-    transition: background 0.2s, opacity 0.2s;
+    border-radius: 0;
+    transition: background 0.15s, color 0.15s;
 }
 
 .auth-btn:hover {
-    background: #3ac5e3;
+    background: #fff;
+    color: #000;
 }
 
 .auth-btn:disabled {
@@ -64,34 +65,36 @@
 }
 
 .auth-btn-outline {
-    background: transparent;
-    color: #2db4d2;
-    border: 1px solid #2db4d2;
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
 }
 
 .auth-btn-outline:hover {
-    background: rgba(45, 180, 210, 0.15);
+    background: #fff;
+    color: #000;
 }
 
 .auth-btn-small {
-    padding: 5px 12px;
-    font-size: 13px;
+    padding: 4px 10px;
+    font-size: 12px;
 }
 
 .auth-btn-full {
     width: 100%;
-    padding: 10px;
-    font-size: 15px;
+    padding: 9px;
+    font-size: 14px;
 }
 
 .auth-btn-google {
-    background: #fff;
-    color: #333;
-    border: 1px solid #ddd;
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
 }
 
 .auth-btn-google:hover {
-    background: #f5f5f5;
+    background: #fff;
+    color: #000;
 }
 
 /* ─── Auth Modal ───────────────────────────── */
@@ -102,42 +105,40 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.85);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10000;
-    backdrop-filter: blur(4px);
 }
 
 .auth-modal {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 32px;
+    background: #000;
+    border: 2px solid #fff;
+    padding: 28px;
     width: 90%;
     max-width: 420px;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .auth-modal-close {
     position: absolute;
-    top: 12px;
-    right: 16px;
+    top: 8px;
+    right: 12px;
     background: none;
     border: none;
-    color: #888;
-    font-size: 28px;
+    color: #fff;
+    font-size: 24px;
     cursor: pointer;
     padding: 0;
     line-height: 1;
+    font-family: inherit;
 }
 
 .auth-modal-close:hover {
-    color: #fff;
+    color: #ffff00;
 }
 
 .auth-title {
@@ -149,38 +150,37 @@
 
 .auth-label {
     display: block;
-    color: #ccc;
-    font-size: 14px;
-    margin-bottom: 14px;
+    color: #fff;
+    font-size: 13px;
+    margin-bottom: 12px;
 }
 
 .auth-input {
     display: block;
     width: 100%;
-    padding: 10px 12px;
-    margin-top: 6px;
-    background: #111;
-    border: 1px solid #444;
-    border-radius: 4px;
+    padding: 8px 10px;
+    margin-top: 5px;
+    background: #000;
+    border: 2px solid #fff;
+    border-radius: 0;
     color: #fff;
-    font-size: 15px;
+    font-size: 14px;
     font-family: inherit;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.15s;
 }
 
 .auth-input:focus {
-    border-color: #2db4d2;
+    border-color: #ffff00;
 }
 
 .auth-error {
-    background: rgba(255, 70, 70, 0.15);
-    border: 1px solid rgba(255, 70, 70, 0.3);
-    color: #ff6b6b;
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    margin-bottom: 14px;
+    background: #000;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 8px 10px;
+    font-size: 13px;
+    margin-bottom: 12px;
     display: none;
 }
 
@@ -197,15 +197,15 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: #333;
+    background: #fff;
 }
 
 .auth-divider span {
-    background: #1a1a1a;
-    color: #666;
-    padding: 0 12px;
+    background: #000;
+    color: #aaa;
+    padding: 0 10px;
     position: relative;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .auth-switch {
@@ -216,7 +216,7 @@
 }
 
 .auth-switch a {
-    color: #2db4d2;
+    color: #ffff00;
     text-decoration: none;
 }
 
@@ -227,13 +227,12 @@
 /* ─── Publish notice & textarea ────────────── */
 
 .publish-notice {
-    color: #888;
+    color: #aaa;
     font-size: 13px;
-    margin: 12px 0;
-    padding: 10px;
-    background: rgba(45, 180, 210, 0.1);
-    border: 1px solid rgba(45, 180, 210, 0.2);
-    border-radius: 4px;
+    margin: 10px 0;
+    padding: 8px 10px;
+    background: #000;
+    border: 2px solid #fff;
 }
 
 .auth-textarea {
@@ -251,26 +250,26 @@
 }
 
 .saves-filter-btn {
-    background: #222;
-    color: #aaa;
-    border: 1px solid #444;
-    padding: 5px 12px;
-    font-size: 13px;
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 4px 10px;
+    font-size: 12px;
     font-family: inherit;
     cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.2s;
+    border-radius: 0;
+    transition: background 0.15s, color 0.15s;
 }
 
 .saves-filter-btn:hover {
-    background: #333;
-    color: #fff;
+    background: #fff;
+    color: #000;
 }
 
 .saves-filter-btn.active {
-    background: #2db4d2;
+    background: #ffff00;
     color: #000;
-    border-color: #2db4d2;
+    border-color: #ffff00;
 }
 
 .saves-list {
@@ -283,27 +282,26 @@
 .saves-error {
     text-align: center;
     padding: 24px;
-    color: #888;
-    font-size: 14px;
+    color: #aaa;
+    font-size: 13px;
 }
 
 .saves-error {
-    color: #ff6b6b;
+    color: #fff;
 }
 
 .save-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px;
-    border: 1px solid #333;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    transition: background 0.2s;
+    padding: 10px;
+    border: 2px solid #fff;
+    margin-bottom: 6px;
+    transition: border-color 0.15s;
 }
 
 .save-item:hover {
-    background: #222;
+    border-color: #ffff00;
 }
 
 .save-item-info {
@@ -333,33 +331,35 @@
 }
 
 .save-action-btn {
-    background: #333;
-    color: #ccc;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 4px;
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    min-width: 32px;
+    height: 28px;
+    padding: 0 6px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
+    font-family: inherit;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+    transition: background 0.15s, color 0.15s;
 }
 
 .save-action-btn:hover {
-    background: #444;
-    color: #fff;
-}
-
-.save-load-btn:hover {
-    background: #2db4d2;
+    background: #fff;
     color: #000;
 }
 
+.save-load-btn:hover {
+    background: #ffff00;
+    color: #000;
+    border-color: #ffff00;
+}
+
 .save-delete-btn:hover {
-    background: #e74c3c;
-    color: #fff;
+    background: #fff;
+    color: #000;
 }
 
 /* ─── Cloud Save Button (in editor) ────────── */
@@ -367,57 +367,61 @@
 .cloud-save-btn {
     display: inline-block;
     padding: .5em 1em;
-    border: 2px solid #2db4d2;
-    color: #2db4d2;
+    border: 2px solid #fff;
+    color: #fff;
     cursor: pointer;
     margin-top: 1em;
     margin-left: 10px;
     text-align: center;
-    transition: all 0.2s;
+    background: #000;
+    transition: background 0.15s, color 0.15s;
 }
 
 .cloud-save-btn:hover {
-    background: #2db4d2;
+    background: #fff;
     color: #000;
 }
 
 .cloud-load-btn {
     display: inline-block;
     padding: .5em 1em;
-    border: 2px solid #27ae60;
-    color: #27ae60;
+    border: 2px solid #ffff00;
+    color: #ffff00;
     cursor: pointer;
     margin-top: 1em;
     margin-left: 10px;
     text-align: center;
-    transition: all 0.2s;
+    background: #000;
+    transition: background 0.15s, color 0.15s;
 }
 
 .cloud-load-btn:hover {
-    background: #27ae60;
+    background: #ffff00;
     color: #000;
 }
 
 .cloud-publish-btn {
     display: inline-block;
     padding: .5em 1em;
-    border: 2px solid #e67e22;
-    color: #e67e22;
+    border: 2px solid #fff;
+    color: #fff;
     cursor: pointer;
     margin-top: 1em;
     margin-left: 10px;
     text-align: center;
-    transition: all 0.2s;
+    background: #000;
+    transition: background 0.15s, color 0.15s;
 }
 
 .cloud-publish-btn:hover {
-    background: #e67e22;
+    background: #fff;
     color: #000;
 }
 
 .save-publish-btn:hover {
-    background: #e67e22;
+    background: #ffff00;
     color: #000;
+    border-color: #ffff00;
 }
 
 /* ─── Toast notification ───────────────────── */
@@ -427,12 +431,11 @@
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
-    background: #2db4d2;
-    color: #000;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: bold;
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 10px 22px;
+    font-size: 13px;
     font-family: inherit;
     z-index: 20000;
     opacity: 0;
@@ -449,9 +452,9 @@
 
 @media (max-width: 600px) {
     .auth-modal {
-        padding: 20px;
-        margin: 10px;
-        width: calc(100% - 20px);
+        padding: 16px;
+        margin: 8px;
+        width: calc(100% - 16px);
     }
 
     #authBar-inner {
@@ -478,16 +481,16 @@
 /* ─── User Avatar ──────────────────────────── */
 
 .user-avatar {
-    border-radius: 50%;
+    border-radius: 0;
     object-fit: cover;
     flex-shrink: 0;
 }
 
 .user-avatar-letter {
-    background: #1a2a3a;
-    color: #2db4d2;
+    background: #000;
+    color: #fff;
     text-align: center;
-    border: 1px solid #2db4d233;
+    border: 2px solid #fff;
     font-weight: 700;
     display: inline-flex;
     align-items: center;
@@ -497,32 +500,28 @@
 /* ─── Supporter ────────────────────────────── */
 
 .supporter-avatar {
-    border: 2px solid #ffcc00 !important;
-    box-shadow: 0 0 8px rgba(255, 204, 0, 0.4), 0 0 16px rgba(255, 204, 0, 0.15);
+    border: 2px solid #ffff00 !important;
 }
 
 .supporter-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #ffcc00, #ff9900);
-    color: #000;
+    background: #000;
+    color: #ffff00;
     font-size: 10px;
     font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 3px;
-    letter-spacing: 0.5px;
+    padding: 1px 6px;
+    border: 1px solid #ffff00;
     vertical-align: middle;
     line-height: 1.4;
-    text-shadow: none;
     white-space: nowrap;
 }
 
 .supporter-status-bar {
-    background: linear-gradient(135deg, rgba(255,204,0,0.12), rgba(255,153,0,0.08));
-    border: 1px solid rgba(255, 204, 0, 0.3);
-    border-radius: 6px;
-    padding: 10px 14px;
-    margin-bottom: 16px;
-    color: #ffcc00;
+    background: #000;
+    border: 2px solid #ffff00;
+    padding: 8px 12px;
+    margin-bottom: 14px;
+    color: #ffff00;
     font-size: 13px;
     text-align: center;
 }
@@ -534,21 +533,20 @@
 
 .supporter-promo-link {
     display: inline-block;
-    padding: 8px 20px;
-    border: 1px solid #ffcc00;
-    border-radius: 4px;
-    color: #ffcc00 !important;
+    padding: 7px 18px;
+    border: 2px solid #ffff00;
+    color: #ffff00 !important;
     font-size: 13px;
     font-family: inherit;
     text-decoration: none !important;
-    transition: all 0.25s;
+    background: #000;
+    transition: background 0.15s, color 0.15s;
     letter-spacing: 0.5px;
 }
 
 .supporter-promo-link:hover {
-    background: #ffcc00;
+    background: #ffff00;
     color: #000 !important;
-    box-shadow: 0 0 16px rgba(255, 204, 0, 0.4);
 }
 
 .comment-author-supporter {
@@ -580,21 +578,22 @@
     position: absolute;
     bottom: -2px;
     right: -2px;
-    background: #2db4d2;
-    color: #000;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
+    background: #000;
+    color: #fff;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 13px;
-    transition: background .2s;
+    font-size: 12px;
+    transition: background .15s, color .15s;
 }
 
 .profile-avatar-edit:hover {
-    background: #3ac5e3;
+    background: #fff;
+    color: #000;
 }
 
 .profile-info {
@@ -631,9 +630,9 @@
 }
 
 .comments-title {
-    font-size: 18px;
-    margin: 0 0 14px;
-    color: #ffcc00;
+    font-size: 17px;
+    margin: 0 0 12px;
+    color: #ffff00;
     letter-spacing: 1px;
 }
 
@@ -686,9 +685,9 @@
 }
 
 .comment-author {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    color: #2db4d2;
+    color: #fff;
 }
 
 .comment-date {
@@ -726,19 +725,19 @@
 
 .comment-input {
     flex: 1;
-    background: #111;
-    border: 1px solid #333;
+    background: #000;
+    border: 2px solid #fff;
     color: #fff;
     font-family: inherit;
-    font-size: 14px;
-    padding: 8px 10px;
+    font-size: 13px;
+    padding: 7px 9px;
     resize: none;
-    border-radius: 4px;
+    border-radius: 0;
+    outline: none;
 }
 
 .comment-input:focus {
-    border-color: #2db4d2;
-    outline: none;
+    border-color: #ffff00;
 }
 
 .comment-submit {

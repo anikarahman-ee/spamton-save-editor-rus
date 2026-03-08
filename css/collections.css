@@ -7,7 +7,7 @@
 
 .col-header {
     padding: 40px 0 30px;
-    border-bottom: 1px solid #1a1a1a;
+    border-bottom: 2px solid #fff;
     margin-bottom: 30px;
 }
 
@@ -19,7 +19,7 @@
 
 .col-page-subtitle {
     font-size: 14px;
-    color: #888;
+    color: #aaa;
     margin: 0 0 20px;
 }
 
@@ -31,9 +31,10 @@
 }
 
 .lib-back-link {
-    color: #2db4d2 !important;
+    color: #fff !important;
     font-size: 14px;
     margin-right: 8px;
+    border-bottom: 1px solid #fff;
 }
 
 /* ─── Grid ─────────────────────────────────── */
@@ -45,15 +46,15 @@
 
 /* ─── Cards ────────────────────────────────── */
 .col-card {
-    background: #111;
-    border: 1px solid #222;
+    background: #000;
+    border: 2px solid #fff;
     padding: 18px;
-    transition: all .2s;
+    transition: border-color .2s;
 }
 
 .col-card:hover {
-    border-color: #2db4d2;
-    background: #161616;
+    border-color: #ffff00;
+    background: #000;
 }
 
 .col-card-header {
@@ -75,7 +76,7 @@
 
 .col-card-desc {
     font-size: 13px;
-    color: #888;
+    color: #aaa;
     margin-bottom: 10px;
     line-height: 1.4;
     max-height: 40px;
@@ -86,7 +87,7 @@
     display: flex;
     gap: 14px;
     font-size: 11px;
-    color: #555;
+    color: #aaa;
     margin-bottom: 14px;
 }
 
@@ -107,13 +108,13 @@
 }
 
 .col-detail-desc {
-    color: #888;
+    color: #aaa;
     font-size: 14px;
     margin: 0 0 6px;
 }
 
 .col-detail-meta {
-    color: #555;
+    color: #aaa;
     font-size: 12px;
 }
 
@@ -127,34 +128,34 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    background: #111;
-    border: 1px solid #1a1a1a;
+    background: #000;
+    border: 2px solid #fff;
     padding: 12px 16px;
     transition: border-color .2s;
 }
 
 .col-save-item:hover {
-    border-color: #333;
+    border-color: #ffff00;
 }
 
 .col-save-ch {
-    background: #1a1a2e;
-    color: #2db4d2;
+    background: #000;
+    color: #ffff00;
     padding: 2px 8px;
     font-size: 11px;
     letter-spacing: 1px;
-    border: 1px solid #2db4d233;
+    border: 1px solid #ffff00;
 }
 
 .col-save-name {
     flex: 1;
     font-size: 15px;
-    color: #ccc;
+    color: #fff;
 }
 
 .col-save-author {
     font-size: 12px;
-    color: #555;
+    color: #aaa;
 }
 
 /* ─── Add to Collection Modal items ────────── */
@@ -168,20 +169,21 @@
     align-items: center;
     gap: 10px;
     padding: 10px 12px;
-    border: 1px solid #222;
+    border: 2px solid #fff;
     margin-bottom: 6px;
     cursor: pointer;
-    transition: all .2s;
+    transition: border-color .2s, background .2s;
 }
 
 .col-add-item:hover {
-    border-color: #2db4d2;
-    background: #1a1a1a;
+    border-color: #ffff00;
+    background: #000;
 }
 
 .col-add-item-active {
-    border-color: #2db4d2;
-    background: #0d2a30;
+    border-color: #ffff00;
+    background: #000;
+    color: #ffff00;
 }
 
 .col-add-icon {
@@ -197,7 +199,7 @@
 
 .col-add-count {
     font-size: 11px;
-    color: #555;
+    color: #aaa;
 }
 
 /* ─── Responsive ───────────────────────────── */
