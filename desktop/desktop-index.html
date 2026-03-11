@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Редактор сохранений Deltarune - Десктопная версия</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/enhancements.css">
+    <link rel="stylesheet" href="desktop-styles.css">
+    <style>
+        @font-face {
+            font-family: 'DeterminationCyrillic';
+            src: url('fonts/determinationmonorusbylyajk.otf');
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0b0b12;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-family: 'DeterminationCyrillic', 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .desktop-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid #9b59f4;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .desktop-title {
+            font-size: 32px;
+            color: #9b59f4;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(155, 89, 244, 0.5);
+        }
+
+        .desktop-subtitle {
+            color: #aaa;
+            margin: 5px 0 0;
+        }
+
+        .main-content {
+            display: flex;
+            height: calc(100vh - 120px);
+        }
+
+        .sidebar {
+            width: 350px;
+            background: #16213e;
+            border-right: 2px solid #9b59f4;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-title {
+            font-size: 18px;
+            color: #9b59f4;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #9b59f4;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            background: #9b59f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #7a3fd4;
+            box-shadow: 0 0 15px rgba(155, 89, 244, 0.5);
+        }
+
+        .btn-secondary {
+            background: #2a2a3e;
+        }
+
+        .btn-secondary:hover {
+            background: #3a3a5e;
+        }
+
+        .save-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .save-item {
+            background: #1a1a2e;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .save-item:hover {
+            border-color: #9b59f4;
+            box-shadow: 0 0 10px rgba(155, 89, 244, 0.3);
+        }
+
+        .save-item.active {
+            border-color: #9b59f4;
+            background: #2a2a5e;
+        }
+
+        .save-name {
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .save-info {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .editor-area {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .chapter-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .chapter-btn {
+            padding: 20px;
+            background: #2a2a3e;
+            border: 2px solid #444;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .chapter-btn:hover {
+            border-color: #9b59f4;
+            box-shadow: 0 0 15px rgba(155, 89, 244, 0.3);
+        }
+
+        .chapter-btn.active {
+            border-color: #9b59f4;
+            background: #3a3a5e;
+        }
+
+        .chapter-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #9b59f4;
+        }
+
+        .chapter-name {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        .editor-frame {
+            width: 100%;
+            height: calc(100vh - 300px);
+            border: 2px solid #9b59f4;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .status-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #1a1a2e;
+            border-top: 2px solid #9b59f4;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-text {
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        .no-saves-message {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="desktop-header">
+        <h1 class="desktop-title">[SPAMTON] SAVE EDITOR</h1>
+        <p class="desktop-subtitle">Десктопная версия с автопоиском</p>
+    </div>
+
+    <div class="main-content">
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Действия</h3>
+                <button class="btn" id="btnRefreshSaves">🔄 Обновить список сейвов</button>
+                <button class="btn btn-secondary" id="btnOpenFolder">📁 Открыть папку с сейвами</button>
+                <button class="btn btn-secondary" id="btnSelectFile">📂 Выбрать файл вручную</button>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Найденные сохранения</h3>
+                <ul class="save-list" id="saveList">
+                    <li class="no-saves-message">
+                        Нажмите "Обновить список" для поиска сейвов
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="editor-area">
+            <div class="chapter-selector">
+                <div class="chapter-btn" data-chapter="1">
+                    <div class="chapter-number">01</div>
+                    <div class="chapter-name">Глава 1</div>
+                </div>
+                <div class="chapter-btn" data-chapter="2">
+                    <div class="chapter-number">02</div>
+                    <div class="chapter-name">Глава 2</div>
+                </div>
+                <div class="chapter-btn" data-chapter="3">
+                    <div class="chapter-number">03</div>
+                    <div class="chapter-name">Глава 3</div>
+                </div>
+                <div class="chapter-btn" data-chapter="4">
+                    <div class="chapter-number">04</div>
+                    <div class="chapter-name">Глава 4</div>
+                </div>
+            </div>
+
+            <iframe id="editorFrame" class="editor-frame" style="display:none;"></iframe>
+            
+            <div id="welcomeMessage" style="text-align:center; padding: 60px 20px; color: #888;">
+                <h2 style="color: #9b59f4; font-size: 32px;">Добро пожаловать!</h2>
+                <p style="font-size: 18px; margin-top: 20px;">
+                    Выберите главу и сохранение слева для начала редактирования
+                </p>
+                <p style="margin-top: 40px; font-size: 14px;">
+                    Этот редактор автоматически находит и изменяет сейвы Deltarune<br>
+                    на вашем компьютере без необходимости вручную загружать файлы
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <div class="status-text" id="statusText">
+            Готов к работе
+        </div>
+        <div class="status-text" id="currentSavePath"></div>
+    </div>
+
+    <script src="js/deltaruneChapters.js"></script>
+    <script src="desktop-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "name": "deltarune-save-editor-desktop",
+  "version": "1.0.0",
+  "description": "Десктопный редактор сохранений Deltarune с автопоиском файлов",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win"
+  },
+  "keywords": ["deltarune", "save-editor", "electron"],
+  "author": "SpaceAndrey",
+  "license": "CC-BY-NC-4.0",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "build": {
+    "appId": "com.spaceandrey.deltarune-save-editor",
+    "productName": "Deltarune Save Editor",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "**/*",
+      "!node_modules${/*}",
+      "!build${/*}"
+    ],
+    "win": {
+      "target": ["nsis", "portable"],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
